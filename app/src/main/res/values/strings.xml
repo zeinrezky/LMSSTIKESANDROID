@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">LMSSTIKES</string>
+    <string name="email">Email</string>
+    <string name="pass">Password</string>
+    <string name="login">Login</string>
+    <string name="stikes">STIKES RS HUSADA</string>
+    <string name="stikes_1">Mobile Learning For Students</string>
+    <string name="menu_1">Whats On</string>
+    <string name="menu_2">Schedule</string>
+    <string name="menu_3">All Menu</string>
+    <string name="student_id">ID</string>
+    <string name="student_name">Name</string>
+    <string name="gpa">Grade Point Average</string>
+    <string name="schedule">Schedule</string>
+    <string name="exam">Exam</string>
 </resources>
