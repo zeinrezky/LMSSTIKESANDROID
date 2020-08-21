@@ -159,7 +159,7 @@ class UtilityHelper {
 
         @SuppressLint("SimpleDateFormat")
         fun getSdfDayMonthYear(date: String?): String {
-            val stringToDate = SimpleDateFormat("yyyy-MM-dd").parse(date)
+            val stringToDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date)
             return if (stringToDate != null) SimpleDateFormat("dd MMMM yyyy").format(stringToDate) else ""
         }
 

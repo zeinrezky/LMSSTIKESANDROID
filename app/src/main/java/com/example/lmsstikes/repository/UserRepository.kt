@@ -1,9 +1,6 @@
 package com.example.lmsstikes.repository
 
-import com.example.lmsstikes.model.Login
-import com.example.lmsstikes.model.ResponseError
-import com.example.lmsstikes.model.ResponseSuccess
-import com.example.lmsstikes.model.User
+import com.example.lmsstikes.model.*
 import com.haroldadmin.cnradapter.NetworkResponse
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -15,6 +12,9 @@ interface UserService {
 
     @GET("consumer/logout")
     suspend fun logout(): NetworkResponse<ResponseSuccess<Nothing>, ResponseError>
+
+    @GET("home")
+    suspend fun home(): NetworkResponse<ResponseSuccess<Dashboard>, ResponseError>
 }
 
 open class UserRepository(private val userService: UserService) {
@@ -25,5 +25,8 @@ open class UserRepository(private val userService: UserService) {
 
     suspend fun logout(): NetworkResponse<ResponseSuccess<Nothing>, ResponseError> {
         return userService.logout()
+    }
+    suspend fun home(): NetworkResponse<ResponseSuccess<Dashboard>, ResponseError> {
+        return userService.home()
     }
 }

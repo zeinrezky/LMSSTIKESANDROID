@@ -1,7 +1,9 @@
 package com.example.lmsstikes.di
 
 import android.content.Context
+import com.example.lmsstikes.repository.UserService
 import com.example.lmsstikes.util.CacheInterceptor
+import com.example.lmsstikes.util.Constant
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
@@ -19,6 +21,7 @@ import java.util.concurrent.TimeUnit
 
 val NetworkModule = module {
     single { createOkHttpClient(get()) }
+    single { createWebService<UserService>(get()) }
 }
 
 fun createOkHttpClient(applicationContext: Context): OkHttpClient {
@@ -38,7 +41,7 @@ fun createOkHttpClient(applicationContext: Context): OkHttpClient {
         .addInterceptor(httpLoggingInterceptor)
         .addInterceptor(cacheInterceptor)
         .cache(cache)
-        .connectionSpecs(listOf(ConnectionSpec.COMPATIBLE_TLS))
+        .connectionSpecs(listOf(ConnectionSpec.CLEARTEXT, ConnectionSpec.MODERN_TLS))
         .build()
 }
 
@@ -53,7 +56,7 @@ inline fun <reified T> createWebService(okHttpClient: OkHttpClient): T {
         .create()
 
     val retrofit = Retrofit.Builder()
-        .baseUrl("")
+        .baseUrl(Constant.BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
