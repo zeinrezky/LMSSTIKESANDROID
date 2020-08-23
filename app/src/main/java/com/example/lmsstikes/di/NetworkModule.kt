@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.lmsstikes.repository.UserService
 import com.example.lmsstikes.util.CacheInterceptor
 import com.example.lmsstikes.util.Constant
+import com.example.lmsstikes.util.HeaderInterceptor
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
@@ -29,6 +30,7 @@ fun createOkHttpClient(applicationContext: Context): OkHttpClient {
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
     val cacheInterceptor = CacheInterceptor()
+    val headerInterceptor = HeaderInterceptor()
 
     val httpCacheDirectory = File(applicationContext.cacheDir, "http-cache")
     val cacheSize = 10 * 1024 * 1024 // 10 MiB
@@ -40,6 +42,7 @@ fun createOkHttpClient(applicationContext: Context): OkHttpClient {
         .writeTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor)
         .addInterceptor(cacheInterceptor)
+        .addInterceptor(headerInterceptor)
         .cache(cache)
         .connectionSpecs(listOf(ConnectionSpec.CLEARTEXT, ConnectionSpec.MODERN_TLS))
         .build()

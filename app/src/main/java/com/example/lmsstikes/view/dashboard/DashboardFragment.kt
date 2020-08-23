@@ -5,24 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.lmsstikes.R
 import com.example.lmsstikes.adapter.*
-import com.example.lmsstikes.databinding.FragmentHomeBinding
+import com.example.lmsstikes.databinding.FragmentDashboardBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Dashboard
 import com.example.lmsstikes.view.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.koin.android.ext.android.inject
 
-class DashboardFragment : BaseFragment(){
+class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener{
 
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentDashboardBinding
     private val viewModel by inject<DashboardViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false)
         return binding.root
     }
 
@@ -62,12 +64,31 @@ class DashboardFragment : BaseFragment(){
             listAbout.observe(viewLifecycleOwner, Observer {
                 setListAbout(it)
             })
+            clickViewAllKnowledge.observe(viewLifecycleOwner, Observer {
+                addFragment(KnowledgeFragment.newInstance())
+            })
+            clickViewAllWhatsOn.observe(viewLifecycleOwner, Observer {
+                addFragment(WhatsOnFragment.newInstance())
+            })
+            img.observe(viewLifecycleOwner, Observer {
+                context?.let { it1 -> UtilityHelper.setImage(it1, it, profile_image) }
+            })
         }
         setView()
     }
 
+    private fun addFragment(fragment: Fragment) {
+        activity!!.supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
+            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun setView(){
         viewModel.getList()
+        setToolbar(getString(R.string.dashboard))
     }
 
     private fun setListAnnouncement(list: ArrayList<Dashboard.Announcement>) {
@@ -77,19 +98,19 @@ class DashboardFragment : BaseFragment(){
         }
     }
     private fun setListKnowledge(list: ArrayList<Dashboard.Knowledge>) {
-        rv_knowledge.layoutManager = LinearLayoutManager(context)
+        rv_knowledge.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         rv_knowledge.adapter = activity?.let {
             KnowledgeAdapter(it, list)
         }
     }
     private fun setListWhatsOn(list: ArrayList<Dashboard.WhatsOn>) {
-        rv_knowledge.layoutManager = LinearLayoutManager(context)
-        rv_knowledge.adapter = activity?.let {
-            WhatsOnAdapter(it, list)
+        rv_whats_on.layoutManager = LinearLayoutManager(context)
+        rv_whats_on.adapter = activity?.let {
+            WhatsOnAdapter(it, list, this)
         }
     }
     private fun setListCampusDir(list: ArrayList<Dashboard.CampusDir>) {
-        rv_campus_dir.layoutManager = LinearLayoutManager(context)
+        rv_campus_dir.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         rv_campus_dir.adapter = activity?.let {
             CampusDirAdapter(it, list)
         }
@@ -104,5 +125,9 @@ class DashboardFragment : BaseFragment(){
     companion object {
         @JvmStatic
         fun newInstance() = DashboardFragment()
+    }
+
+    override fun onItemClicked(data: Dashboard.WhatsOn) {
+        addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
     }
 }

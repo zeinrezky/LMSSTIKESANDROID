@@ -13,6 +13,12 @@ class DashboardViewModel(private val repository: UserRepository) : BaseViewModel
 
     /** DashboardFragment */
     val gpa = MutableLiveData<String>()
+    val id = MutableLiveData<String>()
+    val name = MutableLiveData<String>()
+    val img = MutableLiveData<String>()
+
+    val clickViewAllKnowledge = SingleLiveEvent<Unit>()
+    val clickViewAllWhatsOn = SingleLiveEvent<Unit>()
     val clickGpa = SingleLiveEvent<Unit>()
 
     val listAnnouncement = MutableLiveData<ArrayList<Dashboard.Announcement>>()
@@ -24,7 +30,7 @@ class DashboardViewModel(private val repository: UserRepository) : BaseViewModel
     fun getList() {
         isLoading.value = true
         viewModelScope.launch {
-            when (val response = repository.home()) {
+            when (val response = repository.home(2, 2, 2, 2)) {
                 is NetworkResponse.Success -> {
                     isLoading.value = false
                     listAnnouncement.value = response.body.data.announcement
@@ -32,6 +38,10 @@ class DashboardViewModel(private val repository: UserRepository) : BaseViewModel
                     listWhatsOn.value = response.body.data.whats_on
                     listCampusDir.value = response.body.data.campus_dir
                     listAbout.value = response.body.data.about
+                    id.value = response.body.data.profile.id
+                    name.value = response.body.data.profile.name
+                    gpa.value = response.body.data.profile.gpa
+                    img.value = response.body.data.profile.img
                 }
                 is NetworkResponse.ServerError -> {
                     isLoading.value = false
@@ -48,5 +58,17 @@ class DashboardViewModel(private val repository: UserRepository) : BaseViewModel
     fun onClickGpa() {
         clickGpa.call()
     }
+    fun onClickViewAllKnowledge() {
+        clickViewAllKnowledge.call()
+    }
+    fun onClickViewAllWhatsOn() {
+        clickViewAllWhatsOn.call()
+    }
+
+    /** DetailFragment */
+    val title = MutableLiveData<String>()
+    val date = MutableLiveData<String>()
+    val content = MutableLiveData<String>()
+    val image = MutableLiveData<String>()
 
 }

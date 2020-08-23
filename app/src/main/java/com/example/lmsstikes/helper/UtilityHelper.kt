@@ -55,52 +55,6 @@ class UtilityHelper {
             }
         }
 
-        fun getColor(context: Context?, id: Int): Int? {
-            return if (Build.VERSION.SDK_INT >= 23) {
-                context?.let { c ->
-                    ContextCompat.getColor(c, id)
-                }
-            } else context?.resources?.getColor(id)
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getCodeReg(date: Date?): String {
-            return if (date != null) SimpleDateFormat("S").format(date) + "" + SimpleDateFormat("mm").format(
-                date
-            )
-            else ""
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getSdfTime(date: Date?): String {
-            return if (date != null) SimpleDateFormat("HH:mm").format(date)
-            else ""
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getSdfDateStr(date: Date?): String {
-            return if (date != null) SimpleDateFormat("yyyy-MM-dd").format(date)
-            else ""
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getSdfTimeStr(date: Date?): String {
-            return if (date != null) SimpleDateFormat("HH:mm:ss").format(date)
-            else ""
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getCurrentHour(date: Date?): String {
-            return if (date != null) SimpleDateFormat("HH").format(date)
-            else ""
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getCurrentMinute(date: Date?): String {
-            return if (date != null) SimpleDateFormat("mm").format(date)
-            else ""
-        }
-
         fun alertDialogNotCancelable(
             context: Context?,
             text: String,
@@ -115,14 +69,6 @@ class UtilityHelper {
             }
         }
 
-        fun byteToStr(value: Byte): String {
-            return value.toString()
-        }
-
-        fun floatToRp(value: Float): String {
-            return "Rp " + NumberFormat.getInstance().format(value.toDouble())
-        }
-
         fun rpFormatter(value: Int): String {
             val localeID = Locale("in", "ID")
             val formatRupiah = NumberFormat.getCurrencyInstance(localeID)
@@ -131,56 +77,10 @@ class UtilityHelper {
                 .replace(",00", "")
         }
 
-        fun rpFormatterWithoutRp(value: Int): String {
-            val localeID = Locale("in", "ID")
-            val formatRupiah = NumberFormat.getCurrencyInstance(localeID)
-            return formatRupiah.format(value.toDouble())
-                .replace("Rp", "")
-                .replace(",00", "")
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getSdfDayDate(date: String?): String {
-            val stringToDate = SimpleDateFormat("yyyy-MM-dd").parse(date)
-            return if (stringToDate != null) SimpleDateFormat("dd MMM yyyy").format(stringToDate) else ""
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getSdfDayMonth(date: String?): String {
-            val stringToDate = SimpleDateFormat("yyyy-MM-dd").parse(date)
-            return if (stringToDate != null) SimpleDateFormat("dd MMM").format(stringToDate) else ""
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getSdfDMY(date: String?): String {
-            val stringToDate = SimpleDateFormat("yyyy-MM-dd").parse(date)
-            return if (date != null) SimpleDateFormat("dd/MM/yyyy").format(stringToDate) else ""
-        }
-
         @SuppressLint("SimpleDateFormat")
         fun getSdfDayMonthYear(date: String?): String {
             val stringToDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date)
             return if (stringToDate != null) SimpleDateFormat("dd MMMM yyyy").format(stringToDate) else ""
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getSdfDM(date: String?): String {
-            val stringToDate = SimpleDateFormat("yyyy-MM-dd").parse(date)
-            return if (date != null) SimpleDateFormat("dd/MM").format(stringToDate) else ""
-        }
-
-        @SuppressLint("SimpleDateFormat")
-        fun getSdfTime(date: String?): String {
-            val stringToDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date)
-            return if (stringToDate != null) SimpleDateFormat("EEEE, HH:mm").format(stringToDate) else ""
-        }
-
-        fun isYesterday(date: Date): Boolean {
-            return DateUtils.isToday(date.time + DateUtils.DAY_IN_MILLIS)
-        }
-
-        fun isTomorrow(date: Date): Boolean {
-            return DateUtils.isToday(date.time - DateUtils.DAY_IN_MILLIS)
         }
 
         fun snackbarLong(view: View, text: String) {

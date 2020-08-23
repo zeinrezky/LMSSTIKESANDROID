@@ -11,11 +11,15 @@ import com.example.lmsstikes.R
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Dashboard
 
-class WhatsOnAdapter(context : Context, list: ArrayList<Dashboard.WhatsOn>)
+class WhatsOnAdapter(context : Context, list: ArrayList<Dashboard.WhatsOn>, private val listener: Listener)
     : RecyclerView.Adapter<WhatsOnAdapter.WhatsOnViewHolder>() {
 
     private val contexts = context
     private val itemList = list
+
+    interface Listener{
+        fun onItemClicked(data: Dashboard.WhatsOn)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WhatsOnViewHolder {
         val view = LayoutInflater.from(contexts).inflate(R.layout.item_whats_on, parent,false)
@@ -31,6 +35,9 @@ class WhatsOnAdapter(context : Context, list: ArrayList<Dashboard.WhatsOn>)
         UtilityHelper.setImage(contexts, itemList[position].image, holder.image)
         holder.title.text = itemList[position].title
         holder.date.text = UtilityHelper.getSdfDayMonthYear(itemList[position].date)
+        holder.itemView.setOnClickListener {
+            listener.onItemClicked(itemList[position])
+        }
     }
 
     inner class WhatsOnViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.lmsstikes.R
+import kotlinx.android.synthetic.main.toolbar.*
 
 open class BaseFragment : Fragment() {
 
@@ -16,6 +17,10 @@ open class BaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initDialog()
+    }
+
+    fun setToolbar(title: String) {
+        toolbar_title.text = title
     }
 
     private fun initDialog() {

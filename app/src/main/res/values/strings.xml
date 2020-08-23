@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">LMSSTIKES</string>
     <string name="email">Email</string>
+    <string name="username">Username</string>
     <string name="pass">Password</string>
     <string name="login">Login</string>
     <string name="stikes">STIKES RS HUSADA</string>
@@ -11,6 +12,7 @@
     <string name="student_id">ID</string>
     <string name="student_name">Name</string>
     <string name="gpa">Grade Point Average</string>
+    <string name="dashboard">Dashboard</string>
     <string name="schedule">Schedule</string>
     <string name="announcement">Announcement</string>
     <string name="knowledge">Knowledge</string>
@@ -20,6 +22,7 @@
     <string name="view_all">View All</string>
     <string name="exam">Exam</string>
     <string name="error_network">Connection Problem</string>
+    <string name="detail">Detail</string>
 
 
 </resources>

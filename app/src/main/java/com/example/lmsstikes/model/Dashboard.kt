@@ -3,6 +3,8 @@ package com.example.lmsstikes.model
 import com.google.gson.annotations.SerializedName
 
 data class Dashboard (
+    @SerializedName("profile")
+    var profile: Profile,
     @SerializedName("knowledge")
     var knowledge: ArrayList<Knowledge>,
     @SerializedName("announcement")
@@ -16,7 +18,7 @@ data class Dashboard (
 ){
     data class Knowledge (
         @SerializedName("id_knowledge")
-        val id: String,
+        val id: Int,
         @SerializedName("img")
         val image: String,
         @SerializedName("title")
@@ -28,7 +30,7 @@ data class Dashboard (
     )
     data class Announcement (
         @SerializedName("id_announcement")
-        val id: String,
+        val id: Int,
         @SerializedName("img")
         val image: String,
         @SerializedName("title")
@@ -42,7 +44,7 @@ data class Dashboard (
     )
     data class WhatsOn (
         @SerializedName("id_whatson")
-        val id: String,
+        val id: Int,
         @SerializedName("img")
         val image: String,
         @SerializedName("title")
@@ -54,7 +56,7 @@ data class Dashboard (
     )
     data class CampusDir (
         @SerializedName("id_campus")
-        val id: String,
+        val id: Int,
         @SerializedName("img")
         val image: String,
         @SerializedName("title")
@@ -68,7 +70,7 @@ data class Dashboard (
     )
     data class About (
         @SerializedName("id_campus")
-        val id: String,
+        val id: Int,
         @SerializedName("img")
         val image: String,
         @SerializedName("title")
