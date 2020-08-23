@@ -23,6 +23,6 @@
     <string name="exam">Exam</string>
     <string name="error_network">Connection Problem</string>
     <string name="detail">Detail</string>
-
+    <string name="period">Schedule Period</string>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.example.lmsstikes.view.login
 
-import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.lmsstikes.model.Login
@@ -10,7 +9,6 @@ import com.example.lmsstikes.util.SingleLiveEvent
 import com.example.lmsstikes.view.base.BaseViewModel
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
-import java.util.*
 
 class LoginViewModel(private val userRepository: UserRepository) : BaseViewModel(){
 

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.lmsstikes.R
 import com.example.lmsstikes.view.dashboard.DashboardFragment
+import com.example.lmsstikes.view.schedule.TabFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.page_2 -> {
-                val fragment = DashboardFragment()
+                val fragment = TabFragment.newInstance()
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -33,11 +34,10 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
-    @SuppressLint("PrivateResource")
     private fun addFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
-            .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
             .replace(R.id.content, fragment, fragment.javaClass.simpleName)
             .commit()
     }
