@@ -16,5 +16,7 @@ data class Session (
     @SerializedName("type")
     val type: String,
     @SerializedName("date_end")
-    val date_end: String
+    val date_end: String,
+    @SerializedName("topic")
+    var topic: ArrayList<Topic>?
 )

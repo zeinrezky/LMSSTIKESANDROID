@@ -11,15 +11,10 @@ import kotlinx.coroutines.launch
 
 class ScheduleViewModel(private val repository: UserRepository) : BaseViewModel() {
 
-    /** DashboardFragment */
-    val gpa = MutableLiveData<String>()
-    val id = MutableLiveData<String>()
-    val name = MutableLiveData<String>()
-    val img = MutableLiveData<String>()
+    /** ScheduleFragment */
+    val period = MutableLiveData<String>()
 
-    val clickViewAllKnowledge = SingleLiveEvent<Unit>()
-    val clickViewAllWhatsOn = SingleLiveEvent<Unit>()
-    val clickGpa = SingleLiveEvent<Unit>()
+    val clickPeriod = SingleLiveEvent<Unit>()
 
     val listSchedule = MutableLiveData<ArrayList<Schedule>>()
     val listCourse = MutableLiveData<ArrayList<Course>>()
@@ -106,20 +101,14 @@ class ScheduleViewModel(private val repository: UserRepository) : BaseViewModel(
         }
     }
 
-    fun onClickGpa() {
-        clickGpa.call()
-    }
-    fun onClickViewAllKnowledge() {
-        clickViewAllKnowledge.call()
-    }
-    fun onClickViewAllWhatsOn() {
-        clickViewAllWhatsOn.call()
+    fun onClickPeriod() {
+        clickPeriod.call()
     }
 
-    /** DetailFragment */
-    val title = MutableLiveData<String>()
-    val date = MutableLiveData<String>()
-    val content = MutableLiveData<String>()
-    val image = MutableLiveData<String>()
+    /** Course */
+    val courseName = MutableLiveData<String>()
+    val courseCode = MutableLiveData<String>()
+    val courseType = MutableLiveData<String>()
+    val courseClass = MutableLiveData<String>()
 
 }

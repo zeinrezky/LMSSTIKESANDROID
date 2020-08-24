@@ -24,5 +24,10 @@
     <string name="error_network">Connection Problem</string>
     <string name="detail">Detail</string>
     <string name="period">Schedule Period</string>
+    <string name="course">Course</string>
+    <string name="course_code">Course Code</string>
+    <string name="type">Type</string>
+    <string name="course_class">Class</string>
+    <string name="session">Session</string>
 
 </resources>

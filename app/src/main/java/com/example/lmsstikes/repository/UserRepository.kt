@@ -29,7 +29,7 @@ interface UserService {
                         @Query("month") month: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError>
 
     @GET("topic")
-    suspend fun topic(@Query("id_topic") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Topic>>, ResponseError>
+    suspend fun topic(@Query("id_session") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Topic>>, ResponseError>
 }
 
 open class UserRepository(private val userService: UserService) {

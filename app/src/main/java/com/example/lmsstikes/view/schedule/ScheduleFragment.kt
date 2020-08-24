@@ -53,7 +53,7 @@ class ScheduleFragment: BaseFragment(){
                 }
             })
             listSchedule.observe(viewLifecycleOwner, Observer {
-                showDialog(it)
+//                showDialog(it)
             })
         }
         setView()
@@ -76,7 +76,7 @@ class ScheduleFragment: BaseFragment(){
         }
         listView.adapter = ListScheduleAdapter(list)
         listView.setOnItemClickListener { parent, view, position, id ->
-            Log.d("click", list[position].desc)
+            dialog.dismiss()
         }
 
         val lp = WindowManager.LayoutParams()
