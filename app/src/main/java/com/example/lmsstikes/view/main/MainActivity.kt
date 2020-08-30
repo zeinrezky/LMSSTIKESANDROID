@@ -1,13 +1,13 @@
 package com.example.lmsstikes.view.main
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.lmsstikes.R
 import com.example.lmsstikes.view.dashboard.DashboardFragment
-import com.example.lmsstikes.view.schedule.TabFragment
+import com.example.lmsstikes.view.menu.AllMenuFragment
+import com.example.lmsstikes.view.menu.TabFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.page_3 -> {
-                val fragment = DashboardFragment()
+                val fragment = AllMenuFragment.newInstance()
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }

@@ -1,4 +1,4 @@
-package com.example.lmsstikes.view.schedule
+package com.example.lmsstikes.view.menu
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,7 +9,7 @@ import com.example.lmsstikes.view.base.BaseViewModel
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.launch
 
-class ScheduleViewModel(private val repository: UserRepository) : BaseViewModel() {
+class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
 
     /** ScheduleFragment */
     val period = MutableLiveData<String>()
@@ -20,6 +20,7 @@ class ScheduleViewModel(private val repository: UserRepository) : BaseViewModel(
     val listCourse = MutableLiveData<ArrayList<Course>>()
     val listSession = MutableLiveData<ArrayList<Session>>()
     val listTopic = MutableLiveData<ArrayList<Topic>>()
+    val listThread = MutableLiveData<ArrayList<Thread.ThreadList>>()
 
     fun getListSchedule() {
         isLoading.value = true
@@ -101,6 +102,26 @@ class ScheduleViewModel(private val repository: UserRepository) : BaseViewModel(
         }
     }
 
+    fun getListThread(id_session: Int) {
+        isLoading.value = true
+        viewModelScope.launch {
+            when (val response = repository.thread(id_session)) {
+                is NetworkResponse.Success -> {
+                    isLoading.value = false
+                    listThread.value = response.body.data.data
+                }
+                is NetworkResponse.ServerError -> {
+                    isLoading.value = false
+                    snackbarMessage.value = response.body?.message
+                }
+                is NetworkResponse.NetworkError -> {
+                    isLoading.value = false
+                    networkError.value = response.error.message.toString()
+                }
+            }
+        }
+    }
+
     fun onClickPeriod() {
         clickPeriod.call()
     }
@@ -110,5 +131,47 @@ class ScheduleViewModel(private val repository: UserRepository) : BaseViewModel(
     val courseCode = MutableLiveData<String>()
     val courseType = MutableLiveData<String>()
     val courseClass = MutableLiveData<String>()
+
+    val sessionName = MutableLiveData<String>()
+
+    val clickSchedule = SingleLiveEvent<Unit>()
+    val clickCourse = SingleLiveEvent<Unit>()
+    val clickForum = SingleLiveEvent<Unit>()
+    val clickAttendance = SingleLiveEvent<Unit>()
+    val clickScore = SingleLiveEvent<Unit>()
+
+
+    fun onClickSchedule() {
+        clickSchedule.call()
+    }
+    fun onClickCourse() {
+        clickCourse.call()
+    }
+    fun onClickForum() {
+        clickForum.call()
+    }
+    fun onClickAttendance() {
+        clickAttendance.call()
+    }
+    fun onClickScore() {
+        clickScore.call()
+    }
+
+    /** Thread */
+    val userName = MutableLiveData<String>()
+    val userType = MutableLiveData<String>()
+    val datePost = MutableLiveData<String>()
+    val threadTitle = MutableLiveData<String>()
+    val threadContent = MutableLiveData<String>()
+    val clickQuote = SingleLiveEvent<Unit>()
+    val clickReply = SingleLiveEvent<Unit>()
+
+    fun onClickQuote() {
+        clickQuote.call()
+    }
+    fun onClickReply() {
+        clickReply.call()
+    }
+
 
 }

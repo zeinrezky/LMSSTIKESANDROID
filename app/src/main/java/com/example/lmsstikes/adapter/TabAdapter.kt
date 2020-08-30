@@ -3,9 +3,8 @@ package com.example.lmsstikes.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.lmsstikes.view.dashboard.DashboardFragment
-import com.example.lmsstikes.view.schedule.ExamFragment
-import com.example.lmsstikes.view.schedule.ScheduleFragment
+import com.example.lmsstikes.view.menu.ExamFragment
+import com.example.lmsstikes.view.menu.ScheduleFragment
 
 class TabAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
 

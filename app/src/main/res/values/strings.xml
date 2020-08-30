@@ -29,5 +29,21 @@
     <string name="type">Type</string>
     <string name="course_class">Class</string>
     <string name="session">Session</string>
-
+    <string name="latest_post">Latest Post</string>
+    <string name="indicator">Schedule Indicators</string>
+    <string name="video">Video Conference</string>
+    <string name="event">Events</string>
+    <string name="onsite">Onsite</string>
+    <string name="new_thread">New Thread</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
+    <string name="type_subject">Type the subject</string>
+    <string name="type_message">Type a message</string>
+    <string name="attendance">Attendance</string>
+    <string name="score">Score</string>
+    <string name="forum">Forum</string>
+    <string name="quote">Quote</string>
+    <string name="reply">Reply</string>
+    <string name="div"> | </string>
+    <string name="thread">Thread</string>
 </resources>

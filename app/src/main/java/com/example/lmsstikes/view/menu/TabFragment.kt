@@ -1,4 +1,4 @@
-package com.example.lmsstikes.view.schedule
+package com.example.lmsstikes.view.menu
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,37 +1,33 @@
-package com.example.lmsstikes.view.schedule
+package com.example.lmsstikes.view.menu
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
-import com.example.lmsstikes.adapter.SessionAdapter
-import com.example.lmsstikes.databinding.FragmentSessionBinding
+import com.example.lmsstikes.adapter.ForumSessionAdapter
+import com.example.lmsstikes.databinding.FragmentForumSessionBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Session
-import com.example.lmsstikes.model.Topic
 import com.example.lmsstikes.view.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_session.*
-import kotlinx.android.synthetic.main.fragment_session.view_parent
+import kotlinx.android.synthetic.main.fragment_forum_session.*
 import org.koin.android.ext.android.inject
 
-class SessionFragment : BaseFragment() {
+class ForumSessionFragment : BaseFragment(), ForumSessionAdapter.Listener {
 
-    private lateinit var binding: FragmentSessionBinding
-    private val viewModel by inject<ScheduleViewModel>()
-    private var arrayListSession = arrayListOf<Session>()
-    private var index = 0
+    private lateinit var binding: FragmentForumSessionBinding
+    private val viewModel by inject<MenuViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_session, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_forum_session, container, false)
         return binding.root
     }
 
@@ -60,18 +56,7 @@ class SessionFragment : BaseFragment() {
                 }
             })
             listSession.observe(viewLifecycleOwner, Observer {
-                arrayListSession = it
-                setList()
-            })
-            listTopic.observe(viewLifecycleOwner, Observer {
-                for (id in arrayListSession.indices){
-                    for (id_session in it.indices){
-                        if (arrayListSession[id].id == it[id_session].id_session.toInt())
-                            arrayListSession[id].topic = it
-                    }
-                }
-                setListSession()
-
+                setListSession(it)
             })
         }
         setView()
@@ -85,18 +70,13 @@ class SessionFragment : BaseFragment() {
         viewModel.courseType.value = arguments?.getString(ARG_TYPE)
         viewModel.courseClass.value = arguments?.getString(ARG_CLASS)
     }
-    private fun setList(){
-        for (id in arrayListSession.indices){
-            viewModel.getListTopic(arrayListSession[id].id)
-        }
-    }
 
-    private fun setListSession() {
 
-        Log.d("session", arrayListSession.toString())
+    private fun setListSession(list: ArrayList<Session>) {
+
         rv_session.layoutManager = LinearLayoutManager(context)
         rv_session.adapter = activity?.let {
-            SessionAdapter(it, arrayListSession)
+            ForumSessionAdapter(it, list, this)
         }
     }
 
@@ -116,8 +96,8 @@ class SessionFragment : BaseFragment() {
             code: String,
             type: String,
             courseClass: String
-        ): SessionFragment {
-            val fragment = SessionFragment()
+        ): ForumSessionFragment {
+            val fragment = ForumSessionFragment()
 
             val bundle = Bundle().apply {
                 putInt(ARG_ID, id)
@@ -132,6 +112,19 @@ class SessionFragment : BaseFragment() {
 
             return fragment
         }
+    }
+
+    private fun addFragment(fragment: Fragment) {
+        activity!!.supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
+            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onItemClicked(data: Session) {
+        addFragment(ThreadFragment.newInstance(data.id, arguments?.getString(ARG_NAME)!!, data.name))
     }
 
 }

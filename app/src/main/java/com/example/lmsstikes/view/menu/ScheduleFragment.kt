@@ -1,30 +1,24 @@
-package com.example.lmsstikes.view.schedule
+package com.example.lmsstikes.view.menu
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
 import com.example.lmsstikes.adapter.ListScheduleAdapter
 import com.example.lmsstikes.databinding.FragmentScheduleBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.view.base.BaseFragment
-import com.example.lmsstikes.view.dashboard.WhatsOnFragment
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import org.koin.android.ext.android.inject
 
 class ScheduleFragment: BaseFragment(){
 
     private lateinit var binding: FragmentScheduleBinding
-    private val viewModel by inject<ScheduleViewModel>()
+    private val viewModel by inject<MenuViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_schedule, container, false)

@@ -1,4 +1,4 @@
-package com.example.lmsstikes.view.schedule
+package com.example.lmsstikes.view.menu
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,23 +11,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
 import com.example.lmsstikes.adapter.CourseAdapter
 import com.example.lmsstikes.adapter.ListScheduleAdapter
-import com.example.lmsstikes.databinding.FragmentExamBinding
+import com.example.lmsstikes.databinding.FragmentForumBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Course
 import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.view.base.BaseFragment
-import com.example.lmsstikes.view.dashboard.DetailFragment
-import kotlinx.android.synthetic.main.fragment_exam.*
-import kotlinx.android.synthetic.main.fragment_exam.view_parent
+import kotlinx.android.synthetic.main.fragment_forum.*
 import org.koin.android.ext.android.inject
 
-class ExamFragment: BaseFragment(), CourseAdapter.Listener{
+class ForumFragment: BaseFragment(), CourseAdapter.Listener{
 
-    private lateinit var binding: FragmentExamBinding
-    private val viewModel by inject<ScheduleViewModel>()
+    private lateinit var binding: FragmentForumBinding
+    private val viewModel by inject<MenuViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exam, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_forum, container, false)
         return binding.root
     }
 
@@ -104,7 +102,7 @@ class ExamFragment: BaseFragment(), CourseAdapter.Listener{
     }
     companion object {
         @JvmStatic
-        fun newInstance() = ExamFragment()
+        fun newInstance() = ForumFragment()
     }
 
     private fun addFragment(fragment: Fragment) {
@@ -117,7 +115,7 @@ class ExamFragment: BaseFragment(), CourseAdapter.Listener{
     }
 
     override fun onItemClicked(data: Course) {
-        addFragment(SessionFragment.newInstance(data.id, 3, data.name, data.code, data.type, data.course_class))
+        addFragment(ForumSessionFragment.newInstance(data.id, 3, data.name, data.code, data.type, data.course_class))
     }
 
 }

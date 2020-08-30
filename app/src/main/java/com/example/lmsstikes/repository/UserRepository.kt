@@ -2,7 +2,6 @@ package com.example.lmsstikes.repository
 
 import com.example.lmsstikes.model.*
 import com.haroldadmin.cnradapter.NetworkResponse
-import okhttp3.MultipartBody
 import retrofit2.http.*
 
 interface UserService {
@@ -30,6 +29,8 @@ interface UserService {
 
     @GET("topic")
     suspend fun topic(@Query("id_session") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Topic>>, ResponseError>
+    @GET("thread/list")
+    suspend fun thread(@Query("id_session") id: Int): NetworkResponse<ResponseSuccess<Thread>, ResponseError>
 }
 
 open class UserRepository(private val userService: UserService) {
@@ -55,5 +56,8 @@ open class UserRepository(private val userService: UserService) {
     }
     suspend fun topic(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Topic>>, ResponseError> {
         return userService.topic(id)
+    }
+    suspend fun thread(id: Int): NetworkResponse<ResponseSuccess<Thread>, ResponseError> {
+        return userService.thread(id)
     }
 }
