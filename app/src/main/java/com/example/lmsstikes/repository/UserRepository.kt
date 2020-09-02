@@ -31,6 +31,13 @@ interface UserService {
     suspend fun topic(@Query("id_session") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Topic>>, ResponseError>
     @GET("thread/list")
     suspend fun thread(@Query("id_session") id: Int): NetworkResponse<ResponseSuccess<Thread>, ResponseError>
+    @POST("thread/create")
+    suspend fun threadCreate(@Body thread: Thread.Create): NetworkResponse<ResponseSuccess<Thread.ThreadList>, ResponseError>
+
+    @GET("score/list")
+    suspend fun score(@Query("id_schedule") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Score>>, ResponseError>
+    @GET("attendance/list")
+    suspend fun attendance(@Query("id_schedule") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Attendance>>, ResponseError>
 }
 
 open class UserRepository(private val userService: UserService) {
@@ -59,5 +66,14 @@ open class UserRepository(private val userService: UserService) {
     }
     suspend fun thread(id: Int): NetworkResponse<ResponseSuccess<Thread>, ResponseError> {
         return userService.thread(id)
+    }
+    suspend fun threadCreate(thread: Thread.Create): NetworkResponse<ResponseSuccess<Thread.ThreadList>, ResponseError> {
+        return userService.threadCreate(thread)
+    }
+    suspend fun score(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Score>>, ResponseError> {
+        return userService.score(id)
+    }
+    suspend fun attendance(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Attendance>>, ResponseError> {
+        return userService.attendance(id)
     }
 }

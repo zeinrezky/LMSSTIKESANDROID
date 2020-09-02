@@ -46,4 +46,16 @@
     <string name="reply">Reply</string>
     <string name="div"> | </string>
     <string name="thread">Thread</string>
+    <string name="com">Com</string>
+    <string name="total_session">Total Session</string>
+    <string name="max_absence">Max Absence</string>
+    <string name="session_done">Session Done</string>
+    <string name="total_absence">Total Absence</string>
+    <string name="final_exam">Final Exam</string>
+    <string name="assignment">Assignment</string>
+    <string name="forum_discussion">Forum Discussion</string>
+    <string name="vc_attendance">VC Attendance</string>
+    <string name="quiz">Quiz</string>
+    <string name="final_score">Final Score</string>
+    <string name="grade">Grade</string>
 </resources>

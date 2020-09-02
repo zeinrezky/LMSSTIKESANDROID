@@ -57,9 +57,9 @@ class ThreadViewFragment: BaseFragment(){
     }
 
     private fun setView(){
-        viewModel.userName.value = "Dummy"
-        viewModel.userType.value = "Dummy"
-        viewModel.datePost.value = arguments?.getString(ARG_DATE)
+        viewModel.userName.value = arguments?.getString(ARG_NAME)
+        viewModel.userType.value = arguments?.getString(ARG_NAME)
+        viewModel.datePost.value = UtilityHelper.getSdfDayMonthYearTime(arguments?.getString(ARG_DATE))
         viewModel.threadTitle.value = arguments?.getString(ARG_TITLE)
         viewModel.threadContent.value = arguments?.getString(ARG_CONTENT)
 
@@ -70,6 +70,8 @@ class ThreadViewFragment: BaseFragment(){
     companion object {
 
         const val ARG_ID = "id"
+        const val ARG_NAME = "name"
+        const val ARG_TYPE = "type"
         const val ARG_CONTENT = "content"
         const val ARG_TITLE = "title"
         const val ARG_DATE = "date"
@@ -81,6 +83,8 @@ class ThreadViewFragment: BaseFragment(){
 
             val bundle = Bundle().apply {
                 putInt(ARG_ID, data.id_session)
+                putString(ARG_NAME, data.poster_name)
+                putString(ARG_TYPE, data.poster_name)
                 putString(ARG_CONTENT, data.content)
                 putString(ARG_TITLE, data.title)
                 putString(ARG_DATE, data.date_post)

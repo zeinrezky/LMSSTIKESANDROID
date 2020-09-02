@@ -9,8 +9,10 @@ data class Profile (
     var name: String,
     @SerializedName("img")
     var img: String,
-    @SerializedName("id")
-    var id: String,
+    @SerializedName("id_user")
+    var id_user: Int,
+    @SerializedName("user_code")
+    var user_code: String,
     @SerializedName("role")
     var role: String,
     @SerializedName("gpa")

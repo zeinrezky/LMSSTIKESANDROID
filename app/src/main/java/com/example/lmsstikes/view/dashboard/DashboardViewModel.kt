@@ -38,7 +38,7 @@ class DashboardViewModel(private val repository: UserRepository) : BaseViewModel
                     listWhatsOn.value = response.body.data.whats_on
                     listCampusDir.value = response.body.data.campus_dir
                     listAbout.value = response.body.data.about
-                    id.value = response.body.data.profile.id
+                    id.value = response.body.data.profile.user_code
                     name.value = response.body.data.profile.name
                     gpa.value = response.body.data.profile.gpa
                     img.value = response.body.data.profile.img

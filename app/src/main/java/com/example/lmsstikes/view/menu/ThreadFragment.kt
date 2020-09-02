@@ -1,20 +1,29 @@
 package com.example.lmsstikes.view.menu
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.ListView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
+import com.example.lmsstikes.adapter.ListScheduleAdapter
 import com.example.lmsstikes.adapter.ThreadAdapter
 import com.example.lmsstikes.databinding.FragmentThreadBinding
 import com.example.lmsstikes.helper.UtilityHelper
+import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.model.Thread
+import com.example.lmsstikes.util.AppPreference
 import com.example.lmsstikes.view.base.BaseFragment
 import com.example.lmsstikes.view.dashboard.DetailFragment
 import kotlinx.android.synthetic.main.fragment_thread.*
 import org.koin.android.ext.android.inject
+import org.w3c.dom.Text
 
 class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
 
@@ -50,6 +59,12 @@ class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
             listThread.observe(viewLifecycleOwner, Observer {
                 setListThread(it)
             })
+            clickCreateThread.observe(viewLifecycleOwner, Observer {
+                showDialog()
+            })
+            threadData.observe(viewLifecycleOwner, Observer {
+//                addFragment(ThreadViewFragment.newInstance(it))
+            })
 
         }
         setView()
@@ -66,6 +81,45 @@ class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
         rv_thread.adapter = activity?.let {
             ThreadAdapter(it, list, this)
         }
+    }
+
+    private fun showDialog() {
+        val dialog = context?.let { Dialog(it) }
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.setContentView(R.layout.dialog_new_thread)
+
+        val close = dialog?.findViewById(R.id.close) as ImageView
+        val done = dialog.findViewById(R.id.done) as ImageView
+        val sessionName = dialog.findViewById(R.id.session_name) as TextView
+        val title = dialog.findViewById(R.id.input_subject) as EditText
+        val message = dialog.findViewById(R.id.input_message) as EditText
+
+        sessionName.text = arguments?.getString(ARG_SESSION_NAME)
+
+        close.setOnClickListener {
+            dialog.dismiss()
+        }
+        done.setOnClickListener {
+            viewModel.createThread(Thread.Create(
+                AppPreference.getLoginData().id_user,
+                arguments!!.getInt(ARG_ID),
+                0,
+                0,
+                title.text.toString(),
+                message.text.toString(),
+                "OPEN",
+                "NEW THREAD"))
+            dialog.dismiss()
+        }
+
+        val lp = WindowManager.LayoutParams()
+        lp.copyFrom(dialog.window?.attributes)
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
+        lp.gravity = Gravity.CENTER
+
+        dialog.window?.attributes = lp
+        dialog.show()
     }
 
     companion object {

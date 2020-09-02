@@ -40,6 +40,27 @@ data class Thread (
         @SerializedName("status")
         val status: String,
         @SerializedName("type")
+        val type: String,
+        @SerializedName("poster_name")
+        val poster_name: String
+    )
+
+    data class Create (
+        @SerializedName("id_poster")
+        var id_poster: Int,
+        @SerializedName("id_session")
+        var id_session: Int,
+        @SerializedName("id_parent")
+        var id_parent: Int,
+        @SerializedName("id_reply_to")
+        var id_reply_to: Int,
+        @SerializedName("title")
+        val title: String,
+        @SerializedName("content")
+        val content: String,
+        @SerializedName("status")
+        val status: String,
+        @SerializedName("type")
         val type: String
     )
 }

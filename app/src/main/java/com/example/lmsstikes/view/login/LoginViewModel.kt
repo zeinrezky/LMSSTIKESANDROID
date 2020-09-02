@@ -49,7 +49,7 @@ class LoginViewModel(private val userRepository: UserRepository) : BaseViewModel
                 is NetworkResponse.Success -> {
                     isLoading.value = false
                     if (response.body.code == 200){
-                        AppPreference.putToken(response.body.data.token)
+                        AppPreference.putLoginData(response.body.data)
                         loginSuccess.call()
                     }
                     else

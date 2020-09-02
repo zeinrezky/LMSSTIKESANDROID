@@ -40,41 +40,14 @@
                     android:background="@drawable/white_rounded"
                     android:text="@={vm.period}"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/space_x1"
-                    android:layout_margin="@dimen/space_x1"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="@string/latest_post"/>
-
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_latest"
+                    android:id="@+id/rv_attendance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_x2"
                     android:layout_marginEnd="@dimen/space_x2"
                     tools:itemCount="1"
-                    tools:listitem="@layout/item_course"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/space_x1"
-                    android:layout_margin="@dimen/space_x1"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:text="@string/course"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_course"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_x2"
-                    android:layout_marginEnd="@dimen/space_x2"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/item_course"/>
+                    tools:listitem="@layout/item_attendance"/>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
