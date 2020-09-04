@@ -63,6 +63,7 @@ class ThreadViewFragment: BaseFragment(){
         viewModel.threadTitle.value = arguments?.getString(ARG_TITLE)
         viewModel.threadContent.value = arguments?.getString(ARG_CONTENT)
 
+        setNavigation()
         setToolbar(arguments?.getString(ARG_TITLE)!!)
 
     }
@@ -94,15 +95,6 @@ class ThreadViewFragment: BaseFragment(){
 
             return fragment
         }
-    }
-
-    private fun addFragment(fragment: Fragment) {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
-            .addToBackStack(null)
-            .commit()
     }
 
 }

@@ -64,6 +64,8 @@ class ScoreFragment: BaseFragment(){
     }
 
     private fun setView(){
+        setToolbar(getString(R.string.score))
+        setNavigation()
         viewModel.getListSchedule()
     }
     private fun setListScore(list: ArrayList<Score>) {

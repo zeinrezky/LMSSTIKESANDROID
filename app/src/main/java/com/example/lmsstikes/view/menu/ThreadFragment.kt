@@ -71,6 +71,8 @@ class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
     }
 
     private fun setView(){
+        setToolbar(getString(R.string.thread))
+        setNavigation()
         viewModel.getListThread(arguments!!.getInt(ARG_ID))
         viewModel.courseName.value = arguments?.getString(ARG_COURSE_NAME)
         viewModel.sessionName.value = arguments?.getString(ARG_SESSION_NAME)
@@ -142,15 +144,6 @@ class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
 
             return fragment
         }
-    }
-
-    private fun addFragment(fragment: Fragment) {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
-            .addToBackStack(null)
-            .commit()
     }
 
     override fun onItemClicked(data: Thread.ThreadList) {

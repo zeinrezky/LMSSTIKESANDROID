@@ -11,11 +11,15 @@ import com.example.lmsstikes.R
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Dashboard
 
-class KnowledgeAdapter(context : Context, list: ArrayList<Dashboard.Knowledge>)
+class KnowledgeAdapter(context : Context, list: ArrayList<Dashboard.Knowledge>, private val listener: Listener)
     : RecyclerView.Adapter<KnowledgeAdapter.KnowledgeViewHolder>() {
 
     private val contexts = context
     private val itemList = list
+
+    interface Listener{
+        fun onItemClicked(data: Dashboard.Knowledge)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KnowledgeViewHolder {
         val view = LayoutInflater.from(contexts).inflate(R.layout.item_knowledge, parent,false)
@@ -31,6 +35,9 @@ class KnowledgeAdapter(context : Context, list: ArrayList<Dashboard.Knowledge>)
         UtilityHelper.setImage(contexts, itemList[position].image, holder.image)
         holder.title.text = itemList[position].title
         holder.date.text = UtilityHelper.getSdfDayMonthYear(itemList[position].date)
+        holder.itemView.setOnClickListener {
+            listener.onItemClicked(itemList[position])
+        }
     }
 
     inner class KnowledgeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

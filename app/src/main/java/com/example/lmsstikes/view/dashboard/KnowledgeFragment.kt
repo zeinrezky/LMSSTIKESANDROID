@@ -16,7 +16,7 @@ import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_knowledge.*
 import org.koin.android.ext.android.inject
 
-class KnowledgeFragment : BaseFragment(){
+class KnowledgeFragment : BaseFragment(), KnowledgeAdapter.Listener{
 
     private lateinit var binding: FragmentKnowledgeBinding
     private val viewModel by inject<DashboardViewModel>()
@@ -57,17 +57,22 @@ class KnowledgeFragment : BaseFragment(){
     private fun setView(){
         viewModel.getList()
         setToolbar(getString(R.string.knowledge))
+        setNavigation()
     }
 
     private fun setListKnowledge(list: ArrayList<Dashboard.Knowledge>) {
         rv_knowledge.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         rv_knowledge.adapter = activity?.let {
-            KnowledgeAdapter(it, list)
+            KnowledgeAdapter(it, list, this)
         }
     }
 
     companion object {
         @JvmStatic
         fun newInstance() = KnowledgeFragment()
+    }
+
+    override fun onItemClicked(data: Dashboard.Knowledge) {
+        addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
     }
 }

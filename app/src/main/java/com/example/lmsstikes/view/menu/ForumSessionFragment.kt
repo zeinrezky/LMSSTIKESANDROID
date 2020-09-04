@@ -63,7 +63,8 @@ class ForumSessionFragment : BaseFragment(), ForumSessionAdapter.Listener {
     }
 
     private fun setView() {
-
+        setToolbar(getString(R.string.session))
+        setNavigation()
         viewModel.getListSession(arguments!!.getInt(ARG_ID), arguments!!.getInt(ARG_MONTH))
         viewModel.courseName.value = arguments?.getString(ARG_NAME)
         viewModel.courseCode.value = arguments?.getString(ARG_CODE)
@@ -112,15 +113,6 @@ class ForumSessionFragment : BaseFragment(), ForumSessionAdapter.Listener {
 
             return fragment
         }
-    }
-
-    private fun addFragment(fragment: Fragment) {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
-            .addToBackStack(null)
-            .commit()
     }
 
     override fun onItemClicked(data: Session) {

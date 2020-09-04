@@ -14,6 +14,8 @@ import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import org.koin.android.ext.android.inject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ScheduleFragment: BaseFragment(){
 
@@ -38,7 +40,7 @@ class ScheduleFragment: BaseFragment(){
                 }
             })
             networkError.observe(viewLifecycleOwner, Observer {
-                com.example.lmsstikes.helper.UtilityHelper.snackbarLong(view_parent, getString(com.example.lmsstikes.R.string.error_network))
+                UtilityHelper.snackbarLong(view_parent, getString(com.example.lmsstikes.R.string.error_network))
             })
             isLoading.observe(viewLifecycleOwner, Observer { bool ->
                 bool.let { loading ->
@@ -49,39 +51,37 @@ class ScheduleFragment: BaseFragment(){
             listSchedule.observe(viewLifecycleOwner, Observer {
 //                showDialog(it)
             })
+            clickInfo.observe(viewLifecycleOwner, Observer {
+                showDialog()
+            })
         }
         setView()
     }
 
     private fun setView(){
-        viewModel.getListSchedule()
+//        viewModel.getListSchedule()
+        calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
+            viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
+        }
     }
 
-    private fun showDialog(list: ArrayList<Schedule>) {
+    private fun showDialog() {
         val dialog = context?.let { Dialog(it) }
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog?.setContentView(R.layout.dialog_schedule)
-
-        val listView = dialog?.findViewById(R.id.list_schedule) as ListView
-
-        val listSchedule = arrayListOf<String>()
-        for (id in list.indices){
-            listSchedule.add(list[id].name)
-        }
-        listView.adapter = ListScheduleAdapter(list)
-        listView.setOnItemClickListener { parent, view, position, id ->
-            dialog.dismiss()
-        }
+        dialog?.setContentView(R.layout.dialog_schedule_indicator)
 
         val lp = WindowManager.LayoutParams()
-        lp.copyFrom(dialog.window?.attributes)
+        lp.copyFrom(dialog?.window?.attributes)
         lp.width = WindowManager.LayoutParams.MATCH_PARENT
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT
         lp.gravity = Gravity.CENTER
 
-        dialog.window?.attributes = lp
-        dialog.show()
+        dialog?.window?.attributes = lp
+        dialog?.show()
     }
+
     companion object {
         @JvmStatic
         fun newInstance() = ScheduleFragment()

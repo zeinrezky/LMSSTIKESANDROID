@@ -65,6 +65,8 @@ class ForumFragment: BaseFragment(), CourseAdapter.Listener{
     }
 
     private fun setView(){
+        setToolbar(getString(R.string.forum))
+        setNavigation()
         viewModel.getListSchedule()
     }
     private fun setListCourse(list: ArrayList<Course>) {
@@ -103,15 +105,6 @@ class ForumFragment: BaseFragment(), CourseAdapter.Listener{
     companion object {
         @JvmStatic
         fun newInstance() = ForumFragment()
-    }
-
-    private fun addFragment(fragment: Fragment) {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
-            .addToBackStack(null)
-            .commit()
     }
 
     override fun onItemClicked(data: Course) {

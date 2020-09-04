@@ -88,6 +88,11 @@ class UtilityHelper {
             return if (stringToDate != null) SimpleDateFormat("dd MMMM yyyy, HH:mm").format(stringToDate) else ""
         }
 
+        fun getSdfDMY(date: String?): String {
+            val stringToDate = SimpleDateFormat("yyyy-MM-dd").parse(date)
+            return if (stringToDate != null) SimpleDateFormat("dd MMMM yyyy").format(stringToDate) else ""
+        }
+
         fun snackbarLong(view: View, text: String) {
             val snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
                 .setAction("OK", View.OnClickListener { })

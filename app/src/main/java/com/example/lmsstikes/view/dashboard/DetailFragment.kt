@@ -56,6 +56,7 @@ class DetailFragment : BaseFragment(){
 
         context?.let { UtilityHelper.setImage(it, viewModel.image.value.toString(), image) }
         setToolbar(getString(R.string.detail))
+        setNavigation()
     }
 
     companion object {

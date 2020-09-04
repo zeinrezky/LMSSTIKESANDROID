@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,10 +46,10 @@ class SessionAdapter(context : Context, list: ArrayList<Session>)
         holder.itemView.setOnClickListener {
             if (holder.rvTopic.visibility == View.GONE) {
                 holder.rvTopic.visibility = View.VISIBLE
-//                holder.imgExpand.rotation = 90F
+                holder.dropDown.rotation = 90F
             } else {
                 holder.rvTopic.visibility = View.GONE
-//                holder.imgExpand.rotation = 270F
+                holder.dropDown.rotation = 270F
             }
         }
     }
@@ -60,6 +61,8 @@ class SessionAdapter(context : Context, list: ArrayList<Session>)
         val endDate: TextView = itemView.findViewById(R.id.end_date)
         val name: TextView = itemView.findViewById(R.id.name)
         val rvTopic: RecyclerView = itemView.findViewById(R.id.rv_topic)
+        val dropDown: ImageView = itemView.findViewById(R.id.dropdown)
+
 
     }
 

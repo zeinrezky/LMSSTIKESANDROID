@@ -1,33 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
-android:layout_height="wrap_content" android:layout_marginBottom="8dp"
-android:orientation="vertical"
-android:background="@drawable/blue_rounded"
-xmlns:android="http://schemas.android.com/apk/res/android">
-<TextView
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="@string/announcement"
-    android:padding="8dp"
-    android:textStyle="bold"
-    android:textSize="12sp"
-    android:textColor="@android:color/white"/>
-<TextView
-    android:id="@+id/title"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/gpa"
-    android:padding="8dp"
-    android:textStyle="bold"
-    android:textSize="16sp"
-    android:textColor="@android:color/white"/>
-<TextView
-    android:id="@+id/date"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/announcement"
-    android:padding="8dp"
-    android:textStyle="bold"
-    android:textSize="12sp"
-    android:textColor="@android:color/white"/>
-</LinearLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="@dimen/space_x1"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_rounded"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/announcement"
+            android:padding="8dp"
+            android:layout_marginStart="@dimen/space_x1"
+            android:layout_marginTop="@dimen/space_x1"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gpa"
+            android:padding="8dp"
+            android:layout_marginStart="@dimen/space_x1"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/announcement"
+            android:layout_marginStart="@dimen/space_x1"
+            android:layout_marginBottom="@dimen/space_x1"
+            android:padding="8dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

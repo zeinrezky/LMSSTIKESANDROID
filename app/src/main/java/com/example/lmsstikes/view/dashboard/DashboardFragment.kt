@@ -18,7 +18,7 @@ import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.koin.android.ext.android.inject
 
-class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener{
+class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdapter.Listener{
 
     private lateinit var binding: FragmentDashboardBinding
     private val viewModel by inject<DashboardViewModel>()
@@ -77,14 +77,6 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener{
         setView()
     }
 
-    private fun addFragment(fragment: Fragment) {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
-            .addToBackStack(null)
-            .commit()
-    }
 
     private fun setView(){
         viewModel.getList()
@@ -100,7 +92,7 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener{
     private fun setListKnowledge(list: ArrayList<Dashboard.Knowledge>) {
         rv_knowledge.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         rv_knowledge.adapter = activity?.let {
-            KnowledgeAdapter(it, list)
+            KnowledgeAdapter(it, list, this)
         }
     }
     private fun setListWhatsOn(list: ArrayList<Dashboard.WhatsOn>) {
@@ -128,6 +120,10 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener{
     }
 
     override fun onItemClicked(data: Dashboard.WhatsOn) {
+        addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
+    }
+
+    override fun onItemClicked(data: Dashboard.Knowledge) {
         addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
     }
 }

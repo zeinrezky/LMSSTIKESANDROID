@@ -64,6 +64,8 @@ class AttendanceFragment: BaseFragment(){
     }
 
     private fun setView(){
+        setToolbar(getString(R.string.attendance))
+        setNavigation()
         viewModel.getListSchedule()
     }
     private fun setListAttendance(list: ArrayList<Attendance>) {

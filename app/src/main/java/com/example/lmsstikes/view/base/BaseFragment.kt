@@ -23,6 +23,21 @@ open class BaseFragment : Fragment() {
         toolbar_title.text = title
     }
 
+    fun setNavigation(){
+        toolbar_back.setOnClickListener {
+            activity!!.supportFragmentManager.popBackStack()
+        }
+    }
+
+    fun addFragment(fragment: Fragment) {
+        activity!!.supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
+            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun initDialog() {
         dialog = Dialog(context!!)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

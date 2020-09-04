@@ -26,8 +26,8 @@ class TabFragment: BaseFragment(){
 
     private fun setView(){
         setToolbar(getString(R.string.schedule))
-        viewpager_main.adapter = TabAdapter(activity!!.supportFragmentManager)
-        tabs_main.setupWithViewPager(viewpager_main)
+        viewPager.adapter = TabAdapter(childFragmentManager)
+        tabLayout.setupWithViewPager(viewPager)
     }
 
     companion object {

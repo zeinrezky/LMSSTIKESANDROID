@@ -240,5 +240,10 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
         clickCreateThread.call()
     }
 
+    val clickInfo = SingleLiveEvent<Unit>()
+    val date = MutableLiveData<String>()
 
+    fun onClickInfo() {
+        clickInfo.call()
+    }
 }

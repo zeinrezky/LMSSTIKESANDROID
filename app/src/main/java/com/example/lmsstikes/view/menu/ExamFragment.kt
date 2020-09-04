@@ -2,10 +2,10 @@ package com.example.lmsstikes.view.menu
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import android.widget.ListView
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
@@ -17,13 +17,13 @@ import com.example.lmsstikes.model.Course
 import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_exam.*
-import kotlinx.android.synthetic.main.fragment_exam.view_parent
 import org.koin.android.ext.android.inject
 
 class ExamFragment: BaseFragment(), CourseAdapter.Listener{
 
     private lateinit var binding: FragmentExamBinding
     private val viewModel by inject<MenuViewModel>()
+    var isShown = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exam, container, false)
@@ -62,7 +62,6 @@ class ExamFragment: BaseFragment(), CourseAdapter.Listener{
             })
 
         }
-        setView()
     }
 
     private fun setView(){
@@ -106,17 +105,19 @@ class ExamFragment: BaseFragment(), CourseAdapter.Listener{
         fun newInstance() = ExamFragment()
     }
 
-    private fun addFragment(fragment: Fragment) {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
-            .addToBackStack(null)
-            .commit()
-    }
-
     override fun onItemClicked(data: Course) {
         addFragment(SessionFragment.newInstance(data.id, 3, data.name, data.code, data.type, data.course_class))
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            if (!isShown) {
+                setView()
+                isShown = true
+            }
+        }
+
     }
 
 }

@@ -64,15 +64,6 @@ class AllMenuFragment : BaseFragment(){
         }
     }
 
-    private fun addFragment(fragment: Fragment) {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
-            .addToBackStack(null)
-            .commit()
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() = AllMenuFragment()

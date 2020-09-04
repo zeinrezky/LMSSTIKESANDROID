@@ -58,6 +58,8 @@ class WhatsOnFragment : BaseFragment(), WhatsOnAdapter.Listener{
     private fun setView(){
         viewModel.getList()
         setToolbar(getString(R.string.whatson))
+        setNavigation()
+
     }
 
     private fun setListWhatsOn(list: ArrayList<Dashboard.WhatsOn>) {
@@ -73,6 +75,6 @@ class WhatsOnFragment : BaseFragment(), WhatsOnAdapter.Listener{
     }
 
     override fun onItemClicked(data: Dashboard.WhatsOn) {
-        TODO("Not yet implemented")
+        addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
     }
 }

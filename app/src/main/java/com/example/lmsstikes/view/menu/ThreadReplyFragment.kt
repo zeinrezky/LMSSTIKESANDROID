@@ -58,6 +58,8 @@ class ThreadReplyFragment: BaseFragment(){
     }
 
     private fun setView(){
+        setToolbar(getString(R.string.thread))
+        setNavigation()
         viewModel.getListThread(arguments!!.getInt(ARG_ID))
     }
     private fun setListThread(list: ArrayList<Thread.ThreadList>) {
@@ -83,15 +85,6 @@ class ThreadReplyFragment: BaseFragment(){
 
             return fragment
         }
-    }
-
-    private fun addFragment(fragment: Fragment) {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.fragment_fade_enter, R.anim.fragment_fade_exit)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
-            .addToBackStack(null)
-            .commit()
     }
 
 }

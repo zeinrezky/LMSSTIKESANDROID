@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/space_x10"
-    android:background="@drawable/splash_screen_background">
+    android:background="@drawable/background_gradient_2">
     <ImageView
         android:id="@+id/toolbar_back"
         android:layout_width="@dimen/space_x6"
