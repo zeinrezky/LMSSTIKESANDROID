@@ -64,6 +64,8 @@
         android:id="@+id/input_subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:padding="@dimen/space_x2"
         android:layout_marginStart="@dimen/space_x2"
         android:layout_marginEnd="@dimen/space_x2"
         android:hint="@string/type_subject"/>
@@ -78,6 +80,8 @@
         android:id="@+id/input_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:padding="@dimen/space_x2"
         android:layout_marginStart="@dimen/space_x2"
         android:layout_marginEnd="@dimen/space_x2"
         android:hint="@string/type_message"/>

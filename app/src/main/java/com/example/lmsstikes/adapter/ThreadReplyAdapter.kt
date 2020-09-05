@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
+import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Thread
 
 class ThreadReplyAdapter(context : Context, list: ArrayList<Thread.ThreadList>)
@@ -28,8 +29,8 @@ class ThreadReplyAdapter(context : Context, list: ArrayList<Thread.ThreadList>)
     override fun onBindViewHolder(holder: ThreadReplyViewHolder, position: Int) {
 
         holder.content.text = itemList[position].content
-        holder.datePost.text = itemList[position].date_post
-        holder.userName.text = itemList[position].id_poster.toString()
+        holder.datePost.text = UtilityHelper.getSdfDayMonthYearTime(itemList[position].date_post)
+        holder.userName.text = itemList[position].poster_name
 
     }
 

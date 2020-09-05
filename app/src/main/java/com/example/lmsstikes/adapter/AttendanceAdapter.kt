@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +37,8 @@ class AttendanceAdapter(context : Context, list: ArrayList<Attendance>)
         holder.maxAbsence.text = itemList[position].max_absence.toString()
         holder.totalAbsence.text = itemList[position].total_absence.toString()
         holder.sessionDone.text = itemList[position].session_done.toString()
-
+        holder.attendance.text = itemList[position].attendance.toString() + "%"
+        holder.indicator.progress = itemList[position].attendance
         holder.itemView.setOnClickListener {
             if (holder.view.visibility == View.GONE) {
                 holder.view.visibility = View.VISIBLE
@@ -58,6 +60,8 @@ class AttendanceAdapter(context : Context, list: ArrayList<Attendance>)
         val totalAbsence: TextView = itemView.findViewById(R.id.total_absence)
         val sessionDone: TextView = itemView.findViewById(R.id.session_done)
         val view: ConstraintLayout = itemView.findViewById(R.id.view)
+        val indicator: ProgressBar = itemView.findViewById(R.id.indicator)
+        val attendance: TextView = itemView.findViewById(R.id.attendance)
 
     }
 

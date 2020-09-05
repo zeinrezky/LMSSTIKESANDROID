@@ -4,9 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
+import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Thread
 
 class ThreadAdapter(context : Context, list: ArrayList<Thread.ThreadList>, private val listener: Listener)
@@ -31,8 +33,11 @@ class ThreadAdapter(context : Context, list: ArrayList<Thread.ThreadList>, priva
     override fun onBindViewHolder(holder: ThreadViewHolder, position: Int) {
 
         holder.title.text = itemList[position].title
-        holder.date.text = itemList[position].date_post
-        holder.by.text = itemList[position].id_poster.toString()
+        holder.date.text = UtilityHelper.getSdfDayMonthYearTime(itemList[position].date_post)
+        holder.by.text = itemList[position].poster_name
+
+        if (itemList[position].status == "LOCKED")
+            holder.lock.visibility = View.VISIBLE
 
         holder.itemView.setOnClickListener {
             listener.onItemClicked(itemList[position])
@@ -43,6 +48,7 @@ class ThreadAdapter(context : Context, list: ArrayList<Thread.ThreadList>, priva
         val title: TextView = itemView.findViewById(R.id.title)
         val date: TextView = itemView.findViewById(R.id.date)
         val by: TextView = itemView.findViewById(R.id.by)
+        val lock: ImageView = itemView.findViewById(R.id.lock)
 
     }
 

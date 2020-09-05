@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/space_x2"
     app:cardCornerRadius="@dimen/space_x1"
     app:cardUseCompatPadding="true">
 
@@ -16,7 +15,7 @@
             android:id="@+id/course_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_gradient_2"
+            android:background="@drawable/blue_rounded"
             android:padding="@dimen/space_x2"
             android:text="@string/course"
             android:textColor="@android:color/white"

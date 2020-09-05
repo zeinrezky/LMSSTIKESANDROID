@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/space_x2"
     app:cardCornerRadius="@dimen/space_x1"
     app:cardUseCompatPadding="true">
 
@@ -16,7 +15,7 @@
             android:id="@+id/course_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_gradient_2"
+            android:background="@drawable/blue_rounded"
             android:padding="@dimen/space_x2"
             android:text="@string/course"
             android:textColor="@android:color/white"
@@ -177,9 +176,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/done" />
 
+            <TextView
+                android:id="@+id/attendance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_x1"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/indicator"
+                app:layout_constraintBottom_toBottomOf="@id/indicator"
+                app:layout_constraintEnd_toEndOf="@id/indicator"
+                app:layout_constraintTop_toTopOf="@id/indicator" />
+
             <ProgressBar
+                android:id="@+id/indicator"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                style="?android:progressBarStyleHorizontal"
+                android:progress="80"
+                android:max="100"
+                android:progressDrawable="@drawable/circle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/code" />
         </androidx.constraintlayout.widget.ConstraintLayout>

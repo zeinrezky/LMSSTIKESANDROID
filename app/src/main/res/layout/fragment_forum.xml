@@ -49,7 +49,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/space_x1"
-                    android:layout_margin="@dimen/space_x1"
+                    android:layout_marginStart="@dimen/space_x2"
+                    android:layout_marginEnd="@dimen/space_x2"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:text="@string/latest_post"/>
@@ -67,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/space_x1"
-                    android:layout_margin="@dimen/space_x1"
+                    android:layout_marginStart="@dimen/space_x2"
+                    android:layout_marginEnd="@dimen/space_x2"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:text="@string/course"/>

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
+import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Session
 import com.example.lmsstikes.model.Topic
 
@@ -34,8 +35,8 @@ class SessionAdapter(context : Context, list: ArrayList<Session>)
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
 
         holder.id.text = itemList[position].id.toString()
-        holder.startDate.text = itemList[position].date_start
-        holder.endDate.text = itemList[position].date_end
+        holder.startDate.text = UtilityHelper.getSdfDMY(itemList[position].date_start)
+        holder.endDate.text = UtilityHelper.getSdfDMY(itemList[position].date_end)
         holder.type.text = itemList[position].type
         holder.name.text = itemList[position].name
 
@@ -46,10 +47,10 @@ class SessionAdapter(context : Context, list: ArrayList<Session>)
         holder.itemView.setOnClickListener {
             if (holder.rvTopic.visibility == View.GONE) {
                 holder.rvTopic.visibility = View.VISIBLE
-                holder.dropDown.rotation = 90F
+                holder.dropDown.rotation = 180F
             } else {
                 holder.rvTopic.visibility = View.GONE
-                holder.dropDown.rotation = 270F
+                holder.dropDown.rotation = 0F
             }
         }
     }

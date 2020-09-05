@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
+import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Session
 
 class ForumSessionAdapter(context : Context, list: ArrayList<Session>, private val listener: Listener)
@@ -30,8 +31,8 @@ class ForumSessionAdapter(context : Context, list: ArrayList<Session>, private v
 
     override fun onBindViewHolder(holder: ForumSessionViewHolder, position: Int) {
 
-        holder.startDate.text = itemList[position].date_start
-        holder.endDate.text = itemList[position].date_end
+        holder.startDate.text = UtilityHelper.getSdfDMY(itemList[position].date_start)
+        holder.endDate.text = UtilityHelper.getSdfDMY(itemList[position].date_end)
         holder.name.text = itemList[position].name
 
         holder.itemView.setOnClickListener {

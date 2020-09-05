@@ -19,129 +19,136 @@
         android:background="@color/cardview_dark_background"
         tools:ignore="PrivateResource">
 
-        <ImageView
-            android:id="@+id/ic_schedule"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:background="@drawable/circle_blue"
-            android:padding="@dimen/space_x1"
-            android:src="@drawable/ic_menu"
-            android:onClick="@{()->vm.onClickSchedule()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ic_course"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/menu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/space_x1"
-            android:text="@string/schedule"
-            android:onClick="@{()->vm.onClickSchedule()}"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/ic_course"
+            android:layout_marginTop="@dimen/space_x16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_schedule" />
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/ic_schedule"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/circle_blue"
+                android:padding="@dimen/space_x1"
+                android:src="@drawable/ic_menu"
+                android:onClick="@{()->vm.onClickSchedule()}"
+                app:layout_constraintEnd_toStartOf="@id/ic_course"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ic_course"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:background="@drawable/circle_blue"
-            android:padding="@dimen/space_x1"
-            android:src="@drawable/ic_menu"
-            android:onClick="@{()->vm.onClickCourse()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/text_schedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_x1"
+                android:text="@string/schedule"
+                android:onClick="@{()->vm.onClickSchedule()}"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/ic_course"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ic_schedule" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/space_x1"
-            android:text="@string/course"
-            android:onClick="@{()->vm.onClickCourse()}"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_course" />
+            <ImageView
+                android:id="@+id/ic_course"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/circle_blue"
+                android:padding="@dimen/space_x1"
+                android:src="@drawable/ic_menu"
+                android:onClick="@{()->vm.onClickCourse()}"
+                app:layout_constraintEnd_toStartOf="@id/ic_forum"
+                app:layout_constraintStart_toEndOf="@id/ic_schedule"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ic_forum"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:background="@drawable/circle_blue"
-            android:padding="@dimen/space_x1"
-            android:src="@drawable/ic_menu"
-            android:onClick="@{()->vm.onClickForum()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ic_course"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_x1"
+                android:text="@string/course"
+                android:onClick="@{()->vm.onClickCourse()}"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/ic_forum"
+                app:layout_constraintStart_toEndOf="@id/ic_schedule"
+                app:layout_constraintTop_toBottomOf="@id/ic_course" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/space_x1"
-            android:text="@string/forum"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:onClick="@{()->vm.onClickForum()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ic_course"
-            app:layout_constraintTop_toBottomOf="@id/ic_forum" />
+            <ImageView
+                android:id="@+id/ic_forum"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/circle_blue"
+                android:padding="@dimen/space_x1"
+                android:src="@drawable/ic_menu"
+                android:onClick="@{()->vm.onClickForum()}"
+                app:layout_constraintEnd_toStartOf="@id/ic_attendance"
+                app:layout_constraintStart_toEndOf="@id/ic_course"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ic_attendance"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:background="@drawable/circle_blue"
-            android:padding="@dimen/space_x1"
-            android:src="@drawable/ic_menu"
-            android:onClick="@{()->vm.onClickAttendance()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ic_score"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_schedule" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_x1"
+                android:text="@string/forum"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:onClick="@{()->vm.onClickForum()}"
+                app:layout_constraintEnd_toStartOf="@id/ic_attendance"
+                app:layout_constraintStart_toEndOf="@id/ic_course"
+                app:layout_constraintTop_toBottomOf="@id/ic_forum" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/space_x1"
-            android:text="@string/attendance"
-            android:onClick="@{()->vm.onClickAttendance()}"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/ic_course"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_attendance" />
+            <ImageView
+                android:id="@+id/ic_attendance"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/circle_blue"
+                android:padding="@dimen/space_x1"
+                android:src="@drawable/ic_menu"
+                android:onClick="@{()->vm.onClickAttendance()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ic_forum"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ic_score"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:background="@drawable/circle_blue"
-            android:padding="@dimen/space_x1"
-            android:onClick="@{()->vm.onClickScore()}"
-            android:src="@drawable/ic_menu"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_course" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_x1"
+                android:text="@string/attendance"
+                android:onClick="@{()->vm.onClickAttendance()}"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ic_forum"
+                app:layout_constraintTop_toBottomOf="@id/ic_attendance" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/space_x1"
-            android:text="@string/score"
-            android:onClick="@{()->vm.onClickScore()}"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ic_score" />
+            <ImageView
+                android:id="@+id/ic_score"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/circle_blue"
+                android:padding="@dimen/space_x1"
+                android:layout_margin="@dimen/space_x1"
+                android:onClick="@{()->vm.onClickScore()}"
+                android:src="@drawable/ic_menu"
+                app:layout_constraintTop_toBottomOf="@id/text_schedule"
+                app:layout_constraintStart_toStartOf="@id/ic_schedule"
+                app:layout_constraintEnd_toEndOf="@id/ic_schedule"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_x1"
+                android:text="@string/score"
+                android:onClick="@{()->vm.onClickScore()}"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/ic_schedule"
+                app:layout_constraintStart_toStartOf="@id/ic_schedule"
+                app:layout_constraintTop_toBottomOf="@id/ic_score" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

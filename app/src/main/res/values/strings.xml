@@ -44,7 +44,7 @@
     <string name="forum">Forum</string>
     <string name="quote">Quote</string>
     <string name="reply">Reply</string>
-    <string name="div"> | </string>
+    <string name="div">|</string>
     <string name="thread">Thread</string>
     <string name="com">Com</string>
     <string name="total_session">Total Session</string>

@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:textSize="12sp"
             android:text="@string/session"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +24,7 @@
             android:id="@+id/desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:padding="8dp"
             android:text="@string/course"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -31,10 +32,22 @@
             app:layout_constraintTop_toBottomOf="@id/subtitle" />
 
         <ImageView
+            android:id="@+id/link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_x1"
+            android:src="@drawable/ic_youtube"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/attachment"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:id="@+id/attachment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/space_x1"
+            android:visibility="gone"
             android:src="@drawable/ic_download"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

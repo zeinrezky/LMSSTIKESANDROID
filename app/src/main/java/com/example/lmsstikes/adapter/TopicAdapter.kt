@@ -1,14 +1,18 @@
 package com.example.lmsstikes.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
 import com.example.lmsstikes.model.Topic
+
 
 class TopicAdapter(context : Context, list: ArrayList<Topic>)
     : RecyclerView.Adapter<TopicAdapter.TopicViewHolder>() {
@@ -30,8 +34,22 @@ class TopicAdapter(context : Context, list: ArrayList<Topic>)
         holder.subtitle.text = itemList[position].subtitle
         holder.desc.text = itemList[position].desc
 
-        holder.attachment.setOnClickListener {
-            print(itemList[position].attachment)
+        if (itemList[position].attachment != null){
+            holder.attachment.visibility = View.VISIBLE
+            holder.attachment.setOnClickListener {
+                val browserIntent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse(itemList[position].attachment))
+                contexts.startActivity(browserIntent)
+            }
+        }
+
+        if (itemList[position].link != null){
+            holder.link.visibility = View.VISIBLE
+            holder.link.setOnClickListener {
+                val browserIntent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse(itemList[position].link))
+                contexts.startActivity(browserIntent)
+            }
         }
     }
 
@@ -39,6 +57,8 @@ class TopicAdapter(context : Context, list: ArrayList<Topic>)
         val subtitle: TextView = itemView.findViewById(R.id.subtitle)
         val desc: TextView = itemView.findViewById(R.id.desc)
         val attachment: ImageView = itemView.findViewById(R.id.attachment)
+        val link: ImageView = itemView.findViewById(R.id.link)
+
 
     }
 
