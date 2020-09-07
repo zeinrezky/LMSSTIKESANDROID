@@ -20,7 +20,9 @@
             android:text="@string/course"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/ic_drop_down"
+            app:drawableTint="@android:color/white" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/view"

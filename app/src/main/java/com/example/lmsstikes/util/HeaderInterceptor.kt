@@ -10,7 +10,7 @@ class HeaderInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val original: Request = chain.request()
         val request: Request = original.newBuilder()
-            .header("token", AppPreference.getLoginData().token)
+            .header("token", AppPreference.getToken())
             .build()
         return chain.proceed(request)
     }

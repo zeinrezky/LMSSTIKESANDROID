@@ -11,11 +11,13 @@ class AppPreference {
         private const val a_login_data = "a_login_data"
         private const val a_first_time = "a_first_time"
         private const val a_login = "a_login"
+        private const val a_token = "a_login"
 
         fun deleteAll() {
             Hawk.delete(a_login_data)
             Hawk.delete(a_first_time)
             Hawk.delete(a_login)
+            Hawk.delete(a_token)
         }
 
         fun putLoginData(value: Profile) {
@@ -41,6 +43,14 @@ class AppPreference {
 
         fun isLogin(): Boolean {
             return (Hawk.get(a_login, false))
+        }
+
+        fun putToken(value: String) {
+            Hawk.put(a_token, value)
+        }
+
+        fun getToken(): String {
+            return (Hawk.get(a_token, ""))
         }
     }
 }
