@@ -73,10 +73,11 @@
                 app:layout_constraintTop_toBottomOf="@id/user_name"/>
             <ImageView
                 android:id="@+id/btn_remove"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="@dimen/space_x3"
+                android:layout_height="@dimen/space_x3"
                 android:layout_margin="@dimen/space_x1"
                 android:src="@drawable/ic_delete"
+                android:onClick="@{()->vm.onClickRemove()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 

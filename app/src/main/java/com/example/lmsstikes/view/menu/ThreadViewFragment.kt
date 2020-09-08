@@ -50,6 +50,10 @@ class ThreadViewFragment: BaseFragment(){
                 addFragment(ThreadReplyFragment.newInstance(arguments?.getInt(ARG_ID)!!))
             })
             clickQuote.observe(viewLifecycleOwner, Observer {
+
+            })
+            clickRemove.observe(viewLifecycleOwner, Observer {
+                viewModel.deleteThread(Thread.Delete(arguments?.getInt(ARG_ID_THREAD)!!))
             })
 
         }
@@ -58,10 +62,12 @@ class ThreadViewFragment: BaseFragment(){
 
     private fun setView(){
         viewModel.userName.value = arguments?.getString(ARG_NAME)
-        viewModel.userType.value = arguments?.getString(ARG_NAME)
+        viewModel.userType.value = arguments?.getString(ARG_TYPE)
         viewModel.datePost.value = UtilityHelper.getSdfDayMonthYearTime(arguments?.getString(ARG_DATE))
         viewModel.threadTitle.value = arguments?.getString(ARG_TITLE)
         viewModel.threadContent.value = arguments?.getString(ARG_CONTENT)
+
+        UtilityHelper.setImage(context!!, arguments?.getString(ARG_IMG)!!, avatar)
 
         setNavigation()
         setToolbar(arguments?.getString(ARG_TITLE)!!)
@@ -71,12 +77,13 @@ class ThreadViewFragment: BaseFragment(){
     companion object {
 
         const val ARG_ID = "id"
+        const val ARG_ID_THREAD = "id_thread"
         const val ARG_NAME = "name"
         const val ARG_TYPE = "type"
         const val ARG_CONTENT = "content"
         const val ARG_TITLE = "title"
         const val ARG_DATE = "date"
-
+        const val ARG_IMG = "img"
 
 
         fun newInstance(data: Thread.ThreadList): ThreadViewFragment {
@@ -84,11 +91,13 @@ class ThreadViewFragment: BaseFragment(){
 
             val bundle = Bundle().apply {
                 putInt(ARG_ID, data.id_session)
+                putInt(ARG_ID_THREAD, data.id_thread)
                 putString(ARG_NAME, data.poster_name)
-                putString(ARG_TYPE, data.poster_name)
+                putString(ARG_TYPE, data.role)
                 putString(ARG_CONTENT, data.content)
                 putString(ARG_TITLE, data.title)
                 putString(ARG_DATE, data.date_post)
+                putString(ARG_IMG, data.img)
             }
 
             fragment.arguments = bundle

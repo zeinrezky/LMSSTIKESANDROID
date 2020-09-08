@@ -42,7 +42,11 @@ data class Thread (
         @SerializedName("type")
         val type: String,
         @SerializedName("poster_name")
-        val poster_name: String
+        val poster_name: String,
+        @SerializedName("role")
+        val role: String,
+        @SerializedName("img")
+        val img: String
     )
 
     data class Create (
@@ -62,5 +66,10 @@ data class Thread (
         val status: String,
         @SerializedName("type")
         val type: String
+    )
+
+    data class Delete (
+        @SerializedName("id")
+        var id: Int
     )
 }

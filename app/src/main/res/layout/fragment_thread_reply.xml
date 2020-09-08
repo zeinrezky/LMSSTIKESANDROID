@@ -28,13 +28,15 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_thread_reply"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="0dp"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/message"
                 tools:itemCount="6"
                 tools:listitem="@layout/item_thread_reply"/>
 
             <EditText
+                android:id="@+id/message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/space_x2"
@@ -42,14 +44,15 @@
                 android:textSize="12sp"
                 android:hint="@string/type_message"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_send"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_send"/>
             <ImageView
                 android:id="@+id/btn_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/space_x1_half"
                 android:src="@drawable/ic_send"
+                android:onClick="@{()->vm.onClickSend()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

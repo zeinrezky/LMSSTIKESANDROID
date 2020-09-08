@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
-import com.example.lmsstikes.adapter.ThreadAdapter
 import com.example.lmsstikes.adapter.ThreadReplyAdapter
 import com.example.lmsstikes.databinding.FragmentThreadReplyBinding
 import com.example.lmsstikes.helper.UtilityHelper
@@ -18,7 +16,7 @@ import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_thread_reply.*
 import org.koin.android.ext.android.inject
 
-class ThreadReplyFragment: BaseFragment(){
+class ThreadReplyFragment: BaseFragment(), ThreadReplyAdapter.Listener{
 
     private lateinit var binding: FragmentThreadReplyBinding
     private val viewModel by inject<MenuViewModel>()
@@ -52,6 +50,9 @@ class ThreadReplyFragment: BaseFragment(){
             listThread.observe(viewLifecycleOwner, Observer {
                 setListThread(it)
             })
+            clickSend.observe(viewLifecycleOwner, Observer {
+
+            })
 
         }
         setView()
@@ -65,7 +66,7 @@ class ThreadReplyFragment: BaseFragment(){
     private fun setListThread(list: ArrayList<Thread.ThreadList>) {
         rv_thread_reply.layoutManager = LinearLayoutManager(context)
         rv_thread_reply.adapter = activity?.let {
-            ThreadReplyAdapter(it, list)
+            ThreadReplyAdapter(it, list, this)
         }
     }
 
@@ -85,6 +86,14 @@ class ThreadReplyFragment: BaseFragment(){
 
             return fragment
         }
+    }
+
+    override fun onBtnRemoveClick(id: Int) {
+        viewModel.deleteThread(Thread.Delete(id))
+    }
+
+    override fun onQuoteClick(content: String) {
+        TODO("Not yet implemented")
     }
 
 }

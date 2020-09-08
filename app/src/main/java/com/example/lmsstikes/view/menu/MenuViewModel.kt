@@ -145,6 +145,26 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
         }
     }
 
+    fun deleteThread(thread: Thread.Delete) {
+        isLoading.value = true
+        viewModelScope.launch {
+            when (val response = repository.threadDelete(thread)) {
+                is NetworkResponse.Success -> {
+                    isLoading.value = false
+                    snackbarMessage.value = response.body.message
+                }
+                is NetworkResponse.ServerError -> {
+                    isLoading.value = false
+                    snackbarMessage.value = response.body?.message
+                }
+                is NetworkResponse.NetworkError -> {
+                    isLoading.value = false
+                    networkError.value = response.error.message.toString()
+                }
+            }
+        }
+    }
+
     fun getListScore(id_schedule: Int) {
         isLoading.value = true
         viewModelScope.launch {
@@ -229,6 +249,8 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
     val clickQuote = SingleLiveEvent<Unit>()
     val clickReply = SingleLiveEvent<Unit>()
     val clickCreateThread = SingleLiveEvent<Unit>()
+    val clickSend = SingleLiveEvent<Unit>()
+    val clickRemove = SingleLiveEvent<Unit>()
     val threadData = MutableLiveData<Thread.ThreadList>()
 
     fun onClickQuote() {
@@ -240,7 +262,12 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
     fun onClickCreateThread(){
         clickCreateThread.call()
     }
-
+    fun onClickSend(){
+        clickSend.call()
+    }
+    fun onClickRemove() {
+        clickRemove.call()
+    }
     val clickInfo = SingleLiveEvent<Unit>()
     val date = MutableLiveData<String>()
 

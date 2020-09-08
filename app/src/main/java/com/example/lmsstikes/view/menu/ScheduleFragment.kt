@@ -2,17 +2,24 @@ package com.example.lmsstikes.view.menu
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
 import com.example.lmsstikes.adapter.ListScheduleAdapter
+import com.example.lmsstikes.adapter.SessionAdapter
+import com.example.lmsstikes.adapter.SessionScheduleAdapter
 import com.example.lmsstikes.databinding.FragmentScheduleBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Schedule
+import com.example.lmsstikes.model.Session
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_schedule.*
+import kotlinx.android.synthetic.main.fragment_schedule.view_parent
+import kotlinx.android.synthetic.main.fragment_session.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
@@ -49,9 +56,10 @@ class ScheduleFragment: BaseFragment(){
                     else { hideWaitingDialog() }
                 }
             })
-            listSchedule.observe(viewLifecycleOwner, Observer {
-//                showDialog(it)
+            listSession.observe(viewLifecycleOwner, Observer {
+                setListSession(it)
             })
+
             clickInfo.observe(viewLifecycleOwner, Observer {
                 showDialog()
             })
@@ -65,13 +73,22 @@ class ScheduleFragment: BaseFragment(){
     }
 
     private fun setView(){
-//        viewModel.getListSchedule()
         setToolbar(getString(R.string.schedule))
         setNavigation()
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
             val sdf = SimpleDateFormat("yyyy-MM-dd")
             val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
             viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
+            info.visibility = View.VISIBLE
+            viewModel.getListSession(1, 3)
+        }
+    }
+
+    private fun setListSession(list: ArrayList<Session>) {
+
+        rv_schedule.layoutManager = LinearLayoutManager(context)
+        rv_schedule.adapter = activity?.let {
+            SessionScheduleAdapter(it, list)
         }
     }
 
