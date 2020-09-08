@@ -47,7 +47,10 @@ class ThreadViewFragment: BaseFragment(){
                 }
             })
             clickReply.observe(viewLifecycleOwner, Observer {
-                addFragment(ThreadReplyFragment.newInstance(arguments?.getInt(ARG_ID)!!))
+                addFragment(ThreadReplyFragment.newInstance(
+                    arguments?.getInt(ARG_ID)!!,
+                    arguments?.getInt(ARG_ID_THREAD)!!,
+                    arguments?.getString(ARG_TITLE)!!))
             })
             clickQuote.observe(viewLifecycleOwner, Observer {
 

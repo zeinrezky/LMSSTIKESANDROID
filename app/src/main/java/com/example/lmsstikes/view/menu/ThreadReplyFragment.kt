@@ -12,6 +12,7 @@ import com.example.lmsstikes.adapter.ThreadReplyAdapter
 import com.example.lmsstikes.databinding.FragmentThreadReplyBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Thread
+import com.example.lmsstikes.util.AppPreference
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_thread_reply.*
 import org.koin.android.ext.android.inject
@@ -51,7 +52,16 @@ class ThreadReplyFragment: BaseFragment(), ThreadReplyAdapter.Listener{
                 setListThread(it)
             })
             clickSend.observe(viewLifecycleOwner, Observer {
-
+                viewModel.createThread(Thread.Create(
+                    AppPreference.getLoginData().id_user,
+                    arguments?.getInt(ARG_ID)!!,
+                    arguments?.getInt(ARG_ID_THREAD)!!,
+                    arguments?.getInt(ARG_ID_THREAD)!!,
+                    arguments?.getString(ARG_TITLE)!!,
+                    message.text.toString(),
+                    "OPEN",
+                    "REPLY THREAD"))
+                message.setText("")
             })
 
         }
@@ -73,13 +83,18 @@ class ThreadReplyFragment: BaseFragment(), ThreadReplyAdapter.Listener{
     companion object {
 
         const val ARG_ID = "id"
+        const val ARG_ID_THREAD = "id_thread"
+        const val ARG_TITLE = "title"
 
 
-        fun newInstance(id: Int): ThreadReplyFragment {
+        fun newInstance(id: Int, id_thread: Int, title: String): ThreadReplyFragment {
             val fragment = ThreadReplyFragment()
 
             val bundle = Bundle().apply {
                 putInt(ARG_ID, id)
+                putInt(ARG_ID_THREAD, id_thread)
+                putString(ARG_TITLE, title)
+
             }
 
             fragment.arguments = bundle
@@ -93,7 +108,7 @@ class ThreadReplyFragment: BaseFragment(), ThreadReplyAdapter.Listener{
     }
 
     override fun onQuoteClick(content: String) {
-        TODO("Not yet implemented")
+        message.setText(content)
     }
 
 }
