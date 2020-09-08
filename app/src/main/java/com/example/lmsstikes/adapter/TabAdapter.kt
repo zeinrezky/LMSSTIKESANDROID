@@ -9,8 +9,8 @@ import com.example.lmsstikes.view.menu.ScheduleFragment
 class TabAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
 
     private val pages = listOf(
-        ScheduleFragment.newInstance(),
-        ExamFragment.newInstance()
+        ScheduleFragment.newInstance(false),
+        ExamFragment.newInstance(false)
     )
 
     override fun getItem(position: Int): Fragment {

@@ -131,6 +131,7 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
                 is NetworkResponse.Success -> {
                     isLoading.value = false
                     threadData.value = response.body.data!!
+                    getListThread(response.body.data.id_session)
                 }
                 is NetworkResponse.ServerError -> {
                     isLoading.value = false

@@ -33,8 +33,9 @@
                     android:id="@+id/rv_knowledge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    tools:itemCount="1"
+                    android:padding="@dimen/space_x1"
+                    android:layout_margin="@dimen/space_x1"
+                    tools:itemCount="2"
                     tools:listitem="@layout/item_knowledge" />
 
             </LinearLayout>

@@ -46,10 +46,10 @@ class AllMenuFragment : BaseFragment(){
                 }
             })
             clickSchedule.observe(viewLifecycleOwner, Observer {
-                addFragment(ScheduleFragment.newInstance())
+                addFragment(ScheduleFragment.newInstance(true))
             })
             clickCourse.observe(viewLifecycleOwner, Observer {
-                addFragment(ExamFragment.newInstance())
+                addFragment(ExamFragment.newInstance(true))
             })
             clickForum.observe(viewLifecycleOwner, Observer {
                 addFragment(ForumFragment.newInstance())

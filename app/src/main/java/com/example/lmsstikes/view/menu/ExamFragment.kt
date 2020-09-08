@@ -16,14 +16,16 @@ import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Course
 import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.view.base.BaseFragment
+import com.example.lmsstikes.view.dashboard.DetailFragment
 import kotlinx.android.synthetic.main.fragment_exam.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 
 class ExamFragment: BaseFragment(), CourseAdapter.Listener{
 
     private lateinit var binding: FragmentExamBinding
     private val viewModel by inject<MenuViewModel>()
-    var isShown = false
+    private var isShown = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exam, container, false)
@@ -62,9 +64,20 @@ class ExamFragment: BaseFragment(), CourseAdapter.Listener{
             })
 
         }
+
+        if (arguments?.getBoolean(ARG_IS_TOOLBAR_VISIBLE)!!){
+            setView()
+            isShown = true
+            toolbar.visibility = View.VISIBLE
+        } else {
+            toolbar.visibility = View.GONE
+        }
+
     }
 
     private fun setView(){
+        setToolbar(getString(R.string.course))
+        setNavigation()
         viewModel.getListSchedule()
     }
     private fun setListCourse(list: ArrayList<Course>) {
@@ -101,8 +114,20 @@ class ExamFragment: BaseFragment(), CourseAdapter.Listener{
         dialog.show()
     }
     companion object {
-        @JvmStatic
-        fun newInstance() = ExamFragment()
+        const val ARG_IS_TOOLBAR_VISIBLE = "toolbar"
+
+
+        fun newInstance(isVisible: Boolean): ExamFragment {
+            val fragment = ExamFragment()
+
+            val bundle = Bundle().apply {
+                putBoolean(ARG_IS_TOOLBAR_VISIBLE, isVisible)
+            }
+
+            fragment.arguments = bundle
+
+            return fragment
+        }
     }
 
     override fun onItemClicked(data: Course) {

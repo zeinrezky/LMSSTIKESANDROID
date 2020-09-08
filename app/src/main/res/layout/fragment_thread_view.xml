@@ -30,7 +30,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="@dimen/space_x1"
-                android:src="@drawable/logo"
+                android:src="@drawable/blank"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
             <TextView
@@ -56,7 +56,8 @@
                 android:id="@+id/div"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/space_x1"
+                android:paddingTop="@dimen/space_x1"
+                android:paddingBottom="@dimen/space_x1"
                 android:textSize="12sp"
                 android:text="@string/div"
                 app:layout_constraintStart_toEndOf="@id/user_type"

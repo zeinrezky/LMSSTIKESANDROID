@@ -13,6 +13,7 @@ import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_schedule.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -55,11 +56,18 @@ class ScheduleFragment: BaseFragment(){
                 showDialog()
             })
         }
+        if (arguments?.getBoolean(ExamFragment.ARG_IS_TOOLBAR_VISIBLE)!!){
+            toolbar.visibility = View.VISIBLE
+        } else {
+            toolbar.visibility = View.GONE
+        }
         setView()
     }
 
     private fun setView(){
 //        viewModel.getListSchedule()
+        setToolbar(getString(R.string.schedule))
+        setNavigation()
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
             val sdf = SimpleDateFormat("yyyy-MM-dd")
             val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
@@ -83,8 +91,20 @@ class ScheduleFragment: BaseFragment(){
     }
 
     companion object {
-        @JvmStatic
-        fun newInstance() = ScheduleFragment()
+        const val ARG_IS_TOOLBAR_VISIBLE = "toolbar"
+
+
+        fun newInstance(isVisible: Boolean): ScheduleFragment {
+            val fragment = ScheduleFragment()
+
+            val bundle = Bundle().apply {
+                putBoolean(ARG_IS_TOOLBAR_VISIBLE, isVisible)
+            }
+
+            fragment.arguments = bundle
+
+            return fragment
+        }
     }
 
 }

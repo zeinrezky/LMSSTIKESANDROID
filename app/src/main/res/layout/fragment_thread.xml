@@ -27,11 +27,12 @@
                 android:id="@+id/toolbar_back"
                 android:layout_width="@dimen/space_x6"
                 android:layout_height="@dimen/space_x10"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="@dimen/space_x3"
-                android:paddingStart="@dimen/space_x2"
-                android:paddingEnd="@dimen/space_x2"
-                android:src="@drawable/back_arrow_white" />
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_nav_left"
+                android:paddingStart="@dimen/space_x1"
+                android:paddingEnd="@dimen/space_x1"
+                app:tint="@android:color/white" />
 
             <TextView
                 android:id="@+id/toolbar_title"
