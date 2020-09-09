@@ -25,12 +25,17 @@ import kotlinx.android.synthetic.main.fragment_thread.*
 import org.koin.android.ext.android.inject
 import org.w3c.dom.Text
 
-class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
+class ThreadFragment : BaseFragment(), ThreadAdapter.Listener {
 
     private lateinit var binding: FragmentThreadBinding
     private val viewModel by inject<MenuViewModel>()
+    private lateinit var dialog: Dialog
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_thread, container, false)
         return binding.root
     }
@@ -40,7 +45,7 @@ class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
         binding.vm = viewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
 
-        with(viewModel){
+        with(viewModel) {
             snackbarMessage.observe(viewLifecycleOwner, Observer {
                 when (it) {
                     is Int -> UtilityHelper.snackbarLong(view_parent, getString(it))
@@ -52,9 +57,16 @@ class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
             })
             isLoading.observe(viewLifecycleOwner, Observer { bool ->
                 bool.let { loading ->
-                    if(loading){ showWaitingDialog() }
-                    else { hideWaitingDialog() }
+                    if (loading) {
+                        showWaitingDialog()
+                    } else {
+                        hideWaitingDialog()
+                    }
                 }
+            })
+            responseSuccess.observe(viewLifecycleOwner, Observer {
+                rv_thread.adapter?.notifyDataSetChanged()
+                dialog.dismiss()
             })
             listThread.observe(viewLifecycleOwner, Observer {
                 setListThread(it)
@@ -70,7 +82,7 @@ class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
         setView()
     }
 
-    private fun setView(){
+    private fun setView() {
         setToolbar(getString(R.string.thread))
         setNavigation()
         viewModel.getListThread(arguments!!.getInt(ARG_ID))
@@ -78,19 +90,27 @@ class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
         viewModel.sessionName.value = arguments?.getString(ARG_SESSION_NAME)
         setToolbar(getString(R.string.thread))
     }
+
     private fun setListThread(list: ArrayList<Thread.ThreadList>) {
+
+        val newThreadList = arrayListOf<Thread.ThreadList>()
+        for (id in list.indices){
+            if (list[id].type == "NEW THREAD")
+                newThreadList.add(list[id])
+        }
         rv_thread.layoutManager = LinearLayoutManager(context)
         rv_thread.adapter = activity?.let {
-            ThreadAdapter(it, list, this)
+            ThreadAdapter(it, newThreadList, this)
         }
     }
 
     private fun showDialog() {
-        val dialog = context?.let { Dialog(it) }
-        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog?.setContentView(R.layout.dialog_new_thread)
 
-        val close = dialog?.findViewById(R.id.close) as ImageView
+        dialog = Dialog(context!!)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_new_thread)
+
+        val close = dialog.findViewById(R.id.close) as ImageView
         val done = dialog.findViewById(R.id.done) as ImageView
         val sessionName = dialog.findViewById(R.id.session_name) as TextView
         val title = dialog.findViewById(R.id.input_subject) as EditText
@@ -102,16 +122,19 @@ class ThreadFragment: BaseFragment(), ThreadAdapter.Listener{
             dialog.dismiss()
         }
         done.setOnClickListener {
-            viewModel.createThread(Thread.Create(
-                AppPreference.getLoginData().id_user,
-                arguments!!.getInt(ARG_ID),
-                0,
-                0,
-                title.text.toString(),
-                message.text.toString(),
-                "OPEN",
-                "NEW THREAD"))
-            dialog.dismiss()
+            viewModel.createThread(
+                Thread.Create(
+                    AppPreference.getLoginData().id_user,
+                    arguments!!.getInt(ARG_ID),
+                    0,
+                    0,
+                    title.text.toString(),
+                    message.text.toString(),
+                    "OPEN",
+                    "NEW THREAD",
+                    ""
+                )
+            )
         }
 
         val lp = WindowManager.LayoutParams()

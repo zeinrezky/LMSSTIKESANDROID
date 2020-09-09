@@ -1,6 +1,7 @@
 package com.example.lmsstikes.util
 
 import com.example.lmsstikes.model.Profile
+import com.example.lmsstikes.model.Thread
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.orhanobut.hawk.Hawk
@@ -12,12 +13,14 @@ class AppPreference {
         private const val a_first_time = "a_first_time"
         private const val a_login = "a_login"
         private const val a_token = "a_login"
+        private const val a_thread = "a_thread"
 
         fun deleteAll() {
             Hawk.delete(a_login_data)
             Hawk.delete(a_first_time)
             Hawk.delete(a_login)
             Hawk.delete(a_token)
+            Hawk.delete(a_thread)
         }
 
         fun putLoginData(value: Profile) {
@@ -51,6 +54,15 @@ class AppPreference {
 
         fun getToken(): String {
             return (Hawk.get(a_token, ""))
+        }
+
+        fun putThreadData(value: Thread.ThreadList) {
+            Hawk.put(a_thread, Gson().toJson(value))
+        }
+
+        fun getThreadData(): Thread.ThreadList {
+            val type = object : TypeToken<Thread.ThreadList>() {}.type
+            return Gson().fromJson<Thread.ThreadList>(Hawk.get(a_thread, ""), type)
         }
     }
 }

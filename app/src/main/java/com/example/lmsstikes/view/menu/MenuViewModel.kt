@@ -64,10 +64,10 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
         }
     }
 
-    fun getListSession(id_course: Int, month: Int) {
+    fun getListSession(id_course: Int) {
         isLoading.value = true
         viewModelScope.launch {
-            when (val response = repository.session(id_course, month)) {
+            when (val response = repository.session(id_course)) {
                 is NetworkResponse.Success -> {
                     isLoading.value = false
                     listSession.value = response.body.data!!
@@ -83,6 +83,27 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
             }
         }
     }
+
+    fun getListSessionSchedule(date: Int, month: Int, year: Int) {
+        isLoading.value = true
+        viewModelScope.launch {
+            when (val response = repository.sessionSchedule(date, month, year)) {
+                is NetworkResponse.Success -> {
+                    isLoading.value = false
+                    listSession.value = response.body.data!!
+                }
+                is NetworkResponse.ServerError -> {
+                    isLoading.value = false
+                    snackbarMessage.value = response.body?.message
+                }
+                is NetworkResponse.NetworkError -> {
+                    isLoading.value = false
+                    networkError.value = response.error.message.toString()
+                }
+            }
+        }
+    }
+
 
     fun getListTopic(id_session: Int) {
         isLoading.value = true
@@ -132,6 +153,7 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
                     isLoading.value = false
                     threadData.value = response.body.data!!
                     getListThread(response.body.data.id_session)
+                    responseSuccess.call()
                 }
                 is NetworkResponse.ServerError -> {
                     isLoading.value = false
@@ -152,6 +174,7 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
                 is NetworkResponse.Success -> {
                     isLoading.value = false
                     snackbarMessage.value = response.body.message
+                    responseSuccess.call()
                 }
                 is NetworkResponse.ServerError -> {
                     isLoading.value = false
@@ -251,6 +274,8 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
     val clickCreateThread = SingleLiveEvent<Unit>()
     val clickSend = SingleLiveEvent<Unit>()
     val clickRemove = SingleLiveEvent<Unit>()
+    val clickClose = SingleLiveEvent<Unit>()
+    val responseSuccess = SingleLiveEvent<Unit>()
     val threadData = MutableLiveData<Thread.ThreadList>()
 
     fun onClickQuote() {
@@ -267,6 +292,9 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
     }
     fun onClickRemove() {
         clickRemove.call()
+    }
+    fun onClickClose() {
+        clickClose.call()
     }
     val clickInfo = SingleLiveEvent<Unit>()
     val date = MutableLiveData<String>()

@@ -55,7 +55,7 @@ class KnowledgeFragment : BaseFragment(), KnowledgeAdapter.Listener{
     }
 
     private fun setView(){
-        viewModel.getList()
+        viewModel.getListKnowledge()
         setToolbar(getString(R.string.knowledge))
         setNavigation()
     }

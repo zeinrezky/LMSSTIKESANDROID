@@ -27,7 +27,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_x1">
 
             <TextView
                 android:id="@+id/course_code"
@@ -59,8 +60,8 @@
                 android:text="@string/course_code"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/course_class"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/course_code"
+                app:layout_constraintStart_toStartOf="@id/course_code"
                 app:layout_constraintTop_toBottomOf="@id/course_code" />
 
             <TextView
@@ -71,9 +72,9 @@
                 android:text="@string/course_class"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/code"
-                app:layout_constraintTop_toBottomOf="@id/course_code" />
+                app:layout_constraintEnd_toEndOf="@id/c_class"
+                app:layout_constraintStart_toStartOf="@id/c_class"
+                app:layout_constraintTop_toBottomOf="@id/c_class" />
 
 
             <TextView
@@ -83,8 +84,8 @@
                 android:layout_margin="@dimen/space_x1"
                 android:text="@string/final_exam"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@id/max"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/course_code"
+                app:layout_constraintStart_toStartOf="@id/course_code"
                 app:layout_constraintTop_toBottomOf="@id/code" />
 
             <TextView
@@ -94,9 +95,9 @@
                 android:layout_margin="@dimen/space_x1"
                 android:text="@string/assignment"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/absence"
-                app:layout_constraintTop_toBottomOf="@id/code" />
+                app:layout_constraintEnd_toEndOf="@id/c_class"
+                app:layout_constraintStart_toStartOf="@id/c_class"
+                app:layout_constraintTop_toBottomOf="@id/course_class" />
 
             <TextView
                 android:id="@+id/final_exam"
@@ -106,8 +107,8 @@
                 android:text="@string/final_exam"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/assignment"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/course_code"
+                app:layout_constraintStart_toStartOf="@id/course_code"
                 app:layout_constraintTop_toBottomOf="@id/absence" />
 
             <TextView
@@ -118,8 +119,8 @@
                 android:text="@string/assignment"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/final_exam"
+                app:layout_constraintEnd_toEndOf="@id/c_class"
+                app:layout_constraintStart_toStartOf="@id/c_class"
                 app:layout_constraintTop_toBottomOf="@id/absence" />
 
             <TextView
@@ -129,8 +130,8 @@
                 android:layout_margin="@dimen/space_x1"
                 android:text="@string/forum_discussion"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@+id/vc"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/course_code"
+                app:layout_constraintStart_toStartOf="@id/course_code"
                 app:layout_constraintTop_toBottomOf="@id/final_exam" />
 
             <TextView
@@ -140,8 +141,8 @@
                 android:layout_margin="@dimen/space_x1"
                 android:text="@string/vc_attendance"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/forum"
+                app:layout_constraintEnd_toEndOf="@id/c_class"
+                app:layout_constraintStart_toStartOf="@id/c_class"
                 app:layout_constraintTop_toBottomOf="@id/final_exam" />
 
             <TextView
@@ -152,8 +153,8 @@
                 android:text="@string/session_done"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/vc_attendance"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/course_code"
+                app:layout_constraintStart_toStartOf="@id/course_code"
                 app:layout_constraintTop_toBottomOf="@id/forum" />
 
             <TextView
@@ -164,8 +165,8 @@
                 android:text="@string/total_absence"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/forum_discussion"
+                app:layout_constraintEnd_toEndOf="@id/c_class"
+                app:layout_constraintStart_toStartOf="@id/c_class"
                 app:layout_constraintTop_toBottomOf="@id/forum" />
 
             <TextView
@@ -198,8 +199,8 @@
                 android:layout_margin="@dimen/space_x1"
                 android:text="@string/final_score"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@+id/gra"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/course_code"
+                app:layout_constraintStart_toStartOf="@id/course_code"
                 app:layout_constraintTop_toBottomOf="@id/quiz" />
 
             <TextView
@@ -209,8 +210,8 @@
                 android:layout_margin="@dimen/space_x1"
                 android:text="@string/grade"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/finals"
+                app:layout_constraintEnd_toEndOf="@id/c_class"
+                app:layout_constraintStart_toStartOf="@id/c_class"
                 app:layout_constraintTop_toBottomOf="@id/quiz" />
 
             <TextView
@@ -221,8 +222,8 @@
                 android:text="@string/final_score"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/grade"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/course_code"
+                app:layout_constraintStart_toStartOf="@id/course_code"
                 app:layout_constraintTop_toBottomOf="@id/finals" />
 
             <TextView
@@ -233,8 +234,8 @@
                 android:text="@string/grade"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/final_score"
+                app:layout_constraintEnd_toEndOf="@id/c_class"
+                app:layout_constraintStart_toStartOf="@id/c_class"
                 app:layout_constraintTop_toBottomOf="@id/finals" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

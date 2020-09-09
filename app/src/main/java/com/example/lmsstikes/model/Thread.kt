@@ -30,7 +30,7 @@ data class Thread (
         @SerializedName("id_parent")
         var id_parent: Int,
         @SerializedName("id_reply_to")
-        var id_reply_tp: Int,
+        var id_reply_to: Int,
         @SerializedName("title")
         val title: String,
         @SerializedName("content")
@@ -41,6 +41,8 @@ data class Thread (
         val status: String,
         @SerializedName("type")
         val type: String,
+        @SerializedName("quote")
+        val quote: String,
         @SerializedName("poster_name")
         val poster_name: String,
         @SerializedName("role")
@@ -65,7 +67,9 @@ data class Thread (
         @SerializedName("status")
         val status: String,
         @SerializedName("type")
-        val type: String
+        val type: String,
+        @SerializedName("quote")
+        val quote: String
     )
 
     data class Delete (

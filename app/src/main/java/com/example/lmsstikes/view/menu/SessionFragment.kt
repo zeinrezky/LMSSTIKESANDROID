@@ -79,7 +79,7 @@ class SessionFragment : BaseFragment() {
 
         setToolbar(getString(R.string.session))
         setNavigation()
-        viewModel.getListSession(arguments!!.getInt(ARG_ID), arguments!!.getInt(ARG_MONTH))
+        viewModel.getListSession(arguments!!.getInt(ARG_ID))
         viewModel.courseName.value = arguments?.getString(ARG_NAME)
         viewModel.courseCode.value = arguments?.getString(ARG_CODE)
         viewModel.courseType.value = arguments?.getString(ARG_TYPE)

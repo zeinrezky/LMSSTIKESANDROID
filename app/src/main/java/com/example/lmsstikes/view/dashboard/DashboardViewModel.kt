@@ -54,6 +54,44 @@ class DashboardViewModel(private val repository: UserRepository) : BaseViewModel
             }
         }
     }
+    fun getListKnowledge() {
+        isLoading.value = true
+        viewModelScope.launch {
+            when (val response = repository.knowledge()) {
+                is NetworkResponse.Success -> {
+                    isLoading.value = false
+                    listKnowledge.value = response.body.data.data
+                }
+                is NetworkResponse.ServerError -> {
+                    isLoading.value = false
+                    snackbarMessage.value = response.body?.message
+                }
+                is NetworkResponse.NetworkError -> {
+                    isLoading.value = false
+                    networkError.value = response.error.message.toString()
+                }
+            }
+        }
+    }
+    fun getListWhatsOn() {
+        isLoading.value = true
+        viewModelScope.launch {
+            when (val response = repository.whatsOn()) {
+                is NetworkResponse.Success -> {
+                    isLoading.value = false
+                    listWhatsOn.value = response.body.data.data
+                }
+                is NetworkResponse.ServerError -> {
+                    isLoading.value = false
+                    snackbarMessage.value = response.body?.message
+                }
+                is NetworkResponse.NetworkError -> {
+                    isLoading.value = false
+                    networkError.value = response.error.message.toString()
+                }
+            }
+        }
+    }
 
     fun onClickGpa() {
         clickGpa.call()

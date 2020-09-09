@@ -17,6 +17,10 @@ interface UserService {
                      @Query("whatson") whatson: Int,
                      @Query("campus_directory") campus_dir: Int,
                      @Query("campus_about") campus_about: Int): NetworkResponse<ResponseSuccess<Dashboard>, ResponseError>
+    @GET("knowledge/list?page=1&perPage=10&sortDir=ASC&sortBy=id_knowledge")
+    suspend fun knowledge(): NetworkResponse<ResponseSuccess<Dashboard.KnowledgeList>, ResponseError>
+    @GET("whatson/list?page=1&perPage=10&sortDir=ASC&sortBy=id_whatson")
+    suspend fun whatsOn(): NetworkResponse<ResponseSuccess<Dashboard.WhatsOnList>, ResponseError>
     @GET("schedule")
     suspend fun schedule(): NetworkResponse<ResponseSuccess<ArrayList<Schedule>>, ResponseError>
 
@@ -24,9 +28,12 @@ interface UserService {
     suspend fun course(@Query("id_schedule") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Course>>, ResponseError>
 
     @GET("session")
-    suspend fun session(@Query("id_course") id: Int,
-                        @Query("month") month: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError>
+    suspend fun session(@Query("id_course") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError>
 
+    @GET("session")
+    suspend fun sessionSchedule(@Query("date") date: Int,
+                                @Query("month") month: Int,
+                                @Query("year") year: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError>
     @GET("topic")
     suspend fun topic(@Query("id_session") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Topic>>, ResponseError>
     @GET("thread/list")
@@ -53,14 +60,23 @@ open class UserRepository(private val userService: UserService) {
     suspend fun home(knowledge: Int, whatson: Int, campus_dir: Int, campus_about: Int): NetworkResponse<ResponseSuccess<Dashboard>, ResponseError> {
         return userService.home(knowledge, whatson, campus_dir, campus_about)
     }
+    suspend fun knowledge(): NetworkResponse<ResponseSuccess<Dashboard.KnowledgeList>, ResponseError> {
+        return userService.knowledge()
+    }
+    suspend fun whatsOn(): NetworkResponse<ResponseSuccess<Dashboard.WhatsOnList>, ResponseError> {
+        return userService.whatsOn()
+    }
     suspend fun schedule(): NetworkResponse<ResponseSuccess<ArrayList<Schedule>>, ResponseError> {
         return userService.schedule()
     }
     suspend fun course(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Course>>, ResponseError> {
         return userService.course(id)
     }
-    suspend fun session(id: Int, month: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError> {
-        return userService.session(id, month)
+    suspend fun session(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError> {
+        return userService.session(id)
+    }
+    suspend fun sessionSchedule(date: Int, month: Int, year: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError> {
+        return userService.sessionSchedule(date, month, year)
     }
     suspend fun topic(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Topic>>, ResponseError> {
         return userService.topic(id)

@@ -20,7 +20,7 @@ class ThreadReplyAdapter(context : Context, list: ArrayList<Thread.ThreadList>, 
 
     interface Listener{
         fun onBtnRemoveClick(id: Int)
-        fun onQuoteClick(content: String)
+        fun onQuoteClick(content: Thread.ThreadList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThreadReplyViewHolder {
@@ -43,7 +43,11 @@ class ThreadReplyAdapter(context : Context, list: ArrayList<Thread.ThreadList>, 
             listener.onBtnRemoveClick(itemList[position].id_thread)
         }
         holder.quote.setOnClickListener {
-            listener.onQuoteClick(itemList[position].content)
+            listener.onQuoteClick(itemList[position])
+        }
+        if (itemList[position].quote.isNotEmpty()){
+            holder.quoteMsg.visibility = View.VISIBLE
+            holder.quoteMsg.text = itemList[position].quote
         }
 
     }
@@ -56,6 +60,7 @@ class ThreadReplyAdapter(context : Context, list: ArrayList<Thread.ThreadList>, 
         val avatar: ImageView = itemView.findViewById(R.id.avatar)
         val btnRemove: ImageView = itemView.findViewById(R.id.btn_remove)
         val quote: TextView = itemView.findViewById(R.id.quote)
+        val quoteMsg: TextView = itemView.findViewById(R.id.quote_msg)
 
     }
 

@@ -88,6 +88,7 @@
                 android:padding="@dimen/space_x1"
                 android:textStyle="bold"
                 android:textSize="16sp"
+                android:layout_marginTop="@dimen/space_x1"
                 android:text="@={vm.threadTitle}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/avatar"/>
@@ -95,7 +96,6 @@
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="@dimen/space_x1"
                 android:background="@android:color/darker_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title"/>

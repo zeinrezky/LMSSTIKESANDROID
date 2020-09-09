@@ -17,6 +17,10 @@ data class Session (
     val type: String,
     @SerializedName("date_end")
     val date_end: String,
+    @SerializedName("time_start")
+    val time_start: String,
+    @SerializedName("time_end")
+    val time_end: String,
     @SerializedName("topic")
     var topic: ArrayList<Topic>?
 )

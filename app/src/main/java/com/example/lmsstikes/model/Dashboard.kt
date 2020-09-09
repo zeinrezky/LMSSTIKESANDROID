@@ -82,4 +82,40 @@ data class Dashboard (
         @SerializedName("date")
         val date: String
     )
+    data class WhatsOnList (
+        @SerializedName("data")
+        var data: ArrayList<WhatsOn>,
+        @SerializedName("page")
+        var page: Int,
+        @SerializedName("perPage")
+        var perPage: Int,
+        @SerializedName("sortDir")
+        var sortDir: String,
+        @SerializedName("sortBy")
+        var sortBy: String,
+        @SerializedName("search")
+        var search: String,
+        @SerializedName("total")
+        var total: Int,
+        @SerializedName("totalPage")
+        var totalPage: Int
+    )
+    data class KnowledgeList (
+        @SerializedName("data")
+        var data: ArrayList<Knowledge>,
+        @SerializedName("page")
+        var page: Int,
+        @SerializedName("perPage")
+        var perPage: Int,
+        @SerializedName("sortDir")
+        var sortDir: String,
+        @SerializedName("sortBy")
+        var sortBy: String,
+        @SerializedName("search")
+        var search: String,
+        @SerializedName("total")
+        var total: Int,
+        @SerializedName("totalPage")
+        var totalPage: Int
+    )
 }

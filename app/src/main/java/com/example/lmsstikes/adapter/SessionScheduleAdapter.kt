@@ -29,8 +29,8 @@ class SessionScheduleAdapter(context : Context, list: ArrayList<Session>)
 
     override fun onBindViewHolder(holder: SessionScheduleViewHolder, position: Int) {
 
-        holder.startDate.text = UtilityHelper.getSdfDMY(itemList[position].date_start)
-        holder.endDate.text = UtilityHelper.getSdfDMY(itemList[position].date_end)
+        holder.startDate.text = itemList[position].time_start
+        holder.endDate.text = itemList[position].time_end
         holder.type.text = itemList[position].type
         holder.name.text = itemList[position].name
 

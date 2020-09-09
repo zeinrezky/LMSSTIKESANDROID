@@ -2,24 +2,18 @@ package com.example.lmsstikes.view.menu
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
-import com.example.lmsstikes.adapter.ListScheduleAdapter
-import com.example.lmsstikes.adapter.SessionAdapter
 import com.example.lmsstikes.adapter.SessionScheduleAdapter
 import com.example.lmsstikes.databinding.FragmentScheduleBinding
 import com.example.lmsstikes.helper.UtilityHelper
-import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.model.Session
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.fragment_schedule.view_parent
-import kotlinx.android.synthetic.main.fragment_session.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
@@ -64,7 +58,7 @@ class ScheduleFragment: BaseFragment(){
                 showDialog()
             })
         }
-        if (arguments?.getBoolean(ExamFragment.ARG_IS_TOOLBAR_VISIBLE)!!){
+        if (arguments?.getBoolean(ARG_IS_TOOLBAR_VISIBLE)!!){
             toolbar.visibility = View.VISIBLE
         } else {
             toolbar.visibility = View.GONE
@@ -80,7 +74,7 @@ class ScheduleFragment: BaseFragment(){
             val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
             viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
             info.visibility = View.VISIBLE
-            viewModel.getListSession(1, 3)
+            viewModel.getListSessionSchedule(dayOfMonth, month, year - 1900)
         }
     }
 

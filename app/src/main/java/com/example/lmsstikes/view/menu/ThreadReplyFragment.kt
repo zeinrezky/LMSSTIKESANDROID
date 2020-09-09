@@ -17,13 +17,19 @@ import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_thread_reply.*
 import org.koin.android.ext.android.inject
 
-class ThreadReplyFragment: BaseFragment(), ThreadReplyAdapter.Listener{
+class ThreadReplyFragment : BaseFragment(), ThreadReplyAdapter.Listener {
 
     private lateinit var binding: FragmentThreadReplyBinding
     private val viewModel by inject<MenuViewModel>()
+    private var isQuoteVisible = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_thread_reply, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_thread_reply, container, false)
         return binding.root
     }
 
@@ -32,7 +38,7 @@ class ThreadReplyFragment: BaseFragment(), ThreadReplyAdapter.Listener{
         binding.vm = viewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
 
-        with(viewModel){
+        with(viewModel) {
             snackbarMessage.observe(viewLifecycleOwner, Observer {
                 when (it) {
                     is Int -> UtilityHelper.snackbarLong(view_parent, getString(it))
@@ -44,56 +50,105 @@ class ThreadReplyFragment: BaseFragment(), ThreadReplyAdapter.Listener{
             })
             isLoading.observe(viewLifecycleOwner, Observer { bool ->
                 bool.let { loading ->
-                    if(loading){ showWaitingDialog() }
-                    else { hideWaitingDialog() }
+                    if (loading) {
+                        showWaitingDialog()
+                    } else {
+                        hideWaitingDialog()
+                    }
                 }
             })
             listThread.observe(viewLifecycleOwner, Observer {
                 setListThread(it)
             })
-            clickSend.observe(viewLifecycleOwner, Observer {
-                viewModel.createThread(Thread.Create(
-                    AppPreference.getLoginData().id_user,
-                    arguments?.getInt(ARG_ID)!!,
-                    arguments?.getInt(ARG_ID_THREAD)!!,
-                    arguments?.getInt(ARG_ID_THREAD)!!,
-                    arguments?.getString(ARG_TITLE)!!,
-                    message.text.toString(),
-                    "OPEN",
-                    "REPLY THREAD"))
+            responseSuccess.observe(viewLifecycleOwner, Observer {
                 message.setText("")
+                layout_quote.visibility = View.GONE
+                viewModel.getListThread(AppPreference.getThreadData().id_session)
+            })
+            clickSend.observe(viewLifecycleOwner, Observer {
+                if(isQuoteVisible) {
+                    viewModel.createThread(
+                        Thread.Create(
+                            AppPreference.getLoginData().id_user,
+                            AppPreference.getThreadData().id_session,
+                            AppPreference.getThreadData().id_thread,
+                            AppPreference.getThreadData().id_thread,
+                            AppPreference.getThreadData().title,
+                            message.text.toString(),
+                            "OPEN",
+                            "REPLY THREAD",
+                            content_desc.text.toString()
+                        )
+                    )
+                }
+                else {
+                    viewModel.createThread(
+                        Thread.Create(
+                            AppPreference.getLoginData().id_user,
+                            AppPreference.getThreadData().id_session,
+                            AppPreference.getThreadData().id_thread,
+                            AppPreference.getThreadData().id_thread,
+                            AppPreference.getThreadData().title,
+                            message.text.toString(),
+                            "OPEN",
+                            "REPLY THREAD",
+                            ""
+                        )
+                    )
+                }
+
+            })
+            clickClose.observe(viewLifecycleOwner, Observer {
+                layout_quote.visibility = View.GONE
+                isQuoteVisible = false
             })
 
         }
         setView()
     }
 
-    private fun setView(){
-        setToolbar(getString(R.string.thread))
+    private fun setView() {
+        setToolbar(AppPreference.getThreadData().title)
         setNavigation()
-        viewModel.getListThread(arguments!!.getInt(ARG_ID))
+        viewModel.getListThread(AppPreference.getThreadData().id_session)
+        if (arguments?.getBoolean(ARG_IS_QUOTE)!!){
+            setQuoteView(AppPreference.getThreadData())
+        }
+
     }
+
+    private fun setQuoteView(content: Thread.ThreadList){
+        isQuoteVisible = true
+        layout_quote.visibility = View.VISIBLE
+        content_desc.text = content.content
+        usertype.text = content.role
+        datepost.text = UtilityHelper.getSdfDayMonthYearTime(content.date_post)
+        username.text = content.poster_name
+        UtilityHelper.setImage(context!!, content.img, img)
+    }
+
     private fun setListThread(list: ArrayList<Thread.ThreadList>) {
+        val replyThreadList = arrayListOf<Thread.ThreadList>()
+        for (id in list.indices){
+            if (list[id].type == "REPLY THREAD")
+                replyThreadList.add(list[id])
+        }
         rv_thread_reply.layoutManager = LinearLayoutManager(context)
         rv_thread_reply.adapter = activity?.let {
-            ThreadReplyAdapter(it, list, this)
+            ThreadReplyAdapter(it, replyThreadList, this)
         }
     }
 
     companion object {
 
-        const val ARG_ID = "id"
-        const val ARG_ID_THREAD = "id_thread"
-        const val ARG_TITLE = "title"
+        const val ARG_IS_QUOTE = "is_quote"
 
 
-        fun newInstance(id: Int, id_thread: Int, title: String): ThreadReplyFragment {
+        fun newInstance(is_quote: Boolean): ThreadReplyFragment {
             val fragment = ThreadReplyFragment()
 
             val bundle = Bundle().apply {
-                putInt(ARG_ID, id)
-                putInt(ARG_ID_THREAD, id_thread)
-                putString(ARG_TITLE, title)
+                putBoolean(ARG_IS_QUOTE, is_quote)
 
             }
 
@@ -107,8 +162,8 @@ class ThreadReplyFragment: BaseFragment(), ThreadReplyAdapter.Listener{
         viewModel.deleteThread(Thread.Delete(id))
     }
 
-    override fun onQuoteClick(content: String) {
-        message.setText(content)
+    override fun onQuoteClick(content: Thread.ThreadList) {
+        setQuoteView(content)
     }
 
 }

@@ -11,8 +11,12 @@ import com.example.lmsstikes.R
 import com.example.lmsstikes.databinding.FragmentThreadViewBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Thread
+import com.example.lmsstikes.util.AppPreference
 import com.example.lmsstikes.view.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_thread_reply.*
 import kotlinx.android.synthetic.main.fragment_thread_view.*
+import kotlinx.android.synthetic.main.fragment_thread_view.avatar
+import kotlinx.android.synthetic.main.fragment_thread_view.view_parent
 import org.koin.android.ext.android.inject
 
 class ThreadViewFragment: BaseFragment(){
@@ -46,14 +50,16 @@ class ThreadViewFragment: BaseFragment(){
                     else { hideWaitingDialog() }
                 }
             })
+            responseSuccess.observe(viewLifecycleOwner, Observer {
+                activity!!.supportFragmentManager.popBackStack()
+            })
             clickReply.observe(viewLifecycleOwner, Observer {
                 addFragment(ThreadReplyFragment.newInstance(
-                    arguments?.getInt(ARG_ID)!!,
-                    arguments?.getInt(ARG_ID_THREAD)!!,
-                    arguments?.getString(ARG_TITLE)!!))
+                    false))
             })
             clickQuote.observe(viewLifecycleOwner, Observer {
-
+                addFragment(ThreadReplyFragment.newInstance(
+                    true))
             })
             clickRemove.observe(viewLifecycleOwner, Observer {
                 viewModel.deleteThread(Thread.Delete(arguments?.getInt(ARG_ID_THREAD)!!))
@@ -91,7 +97,7 @@ class ThreadViewFragment: BaseFragment(){
 
         fun newInstance(data: Thread.ThreadList): ThreadViewFragment {
             val fragment = ThreadViewFragment()
-
+            AppPreference.putThreadData(data)
             val bundle = Bundle().apply {
                 putInt(ARG_ID, data.id_session)
                 putInt(ARG_ID_THREAD, data.id_thread)

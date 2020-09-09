@@ -56,7 +56,7 @@ class WhatsOnFragment : BaseFragment(), WhatsOnAdapter.Listener{
     }
 
     private fun setView(){
-        viewModel.getList()
+        viewModel.getListWhatsOn()
         setToolbar(getString(R.string.whatson))
         setNavigation()
 
