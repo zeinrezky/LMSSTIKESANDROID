@@ -15,9 +15,8 @@ class CacheInterceptor : Interceptor {
             .maxAge(5, TimeUnit.MINUTES) // 5 minutes cache
             .build()
         return response.newBuilder()
-            .removeHeader("Pragma")
-            .removeHeader("Cache-Control")
-            .header("Cache-Control", cacheControl.toString())
+            .removeHeader(Constant.Header.CACHE)
+            .header(Constant.Header.CACHE, cacheControl.toString())
             .build()
     }
 }

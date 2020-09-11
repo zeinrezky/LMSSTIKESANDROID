@@ -14,6 +14,8 @@ import com.example.lmsstikes.adapter.*
 import com.example.lmsstikes.databinding.FragmentDashboardBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Dashboard
+import com.example.lmsstikes.util.AppPreference
+import com.example.lmsstikes.util.Constant
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.koin.android.ext.android.inject
@@ -81,6 +83,13 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
     private fun setView(){
         viewModel.getList()
         setToolbar(getString(R.string.dashboard))
+        if (AppPreference.getLoginData().role == Constant.Role.DOSEN){
+            view_gpa.visibility = View.GONE
+            rv_announcement.visibility = View.GONE
+        } else if (AppPreference.getLoginData().role == Constant.Role.MAHASISWA){
+            view_gpa.visibility = View.VISIBLE
+            rv_announcement.visibility = View.VISIBLE
+        }
     }
 
     private fun setListAnnouncement(list: ArrayList<Dashboard.Announcement>) {

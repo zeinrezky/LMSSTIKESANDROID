@@ -13,6 +13,7 @@ import com.example.lmsstikes.databinding.FragmentThreadReplyBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Thread
 import com.example.lmsstikes.util.AppPreference
+import com.example.lmsstikes.util.Constant
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_thread_reply.*
 import org.koin.android.ext.android.inject
@@ -75,8 +76,8 @@ class ThreadReplyFragment : BaseFragment(), ThreadReplyAdapter.Listener {
                             AppPreference.getThreadData().id_thread,
                             AppPreference.getThreadData().title,
                             message.text.toString(),
-                            "OPEN",
-                            "REPLY THREAD",
+                            Constant.Thread.OPEN,
+                            Constant.Thread.REPLY,
                             content_desc.text.toString()
                         )
                     )
@@ -90,8 +91,8 @@ class ThreadReplyFragment : BaseFragment(), ThreadReplyAdapter.Listener {
                             AppPreference.getThreadData().id_thread,
                             AppPreference.getThreadData().title,
                             message.text.toString(),
-                            "OPEN",
-                            "REPLY THREAD",
+                            Constant.Thread.OPEN,
+                            Constant.Thread.REPLY,
                             ""
                         )
                     )
@@ -114,23 +115,33 @@ class ThreadReplyFragment : BaseFragment(), ThreadReplyAdapter.Listener {
         if (arguments?.getBoolean(ARG_IS_QUOTE)!!){
             setQuoteView(AppPreference.getThreadData())
         }
+        if (AppPreference.getThreadData().status == Constant.Thread.LOCKED){
+            message.visibility = View.GONE
+            btn_send.visibility = View.GONE
+        }
 
     }
 
     private fun setQuoteView(content: Thread.ThreadList){
-        isQuoteVisible = true
-        layout_quote.visibility = View.VISIBLE
-        content_desc.text = content.content
-        usertype.text = content.role
-        datepost.text = UtilityHelper.getSdfDayMonthYearTime(content.date_post)
-        username.text = content.poster_name
-        UtilityHelper.setImage(context!!, content.img, img)
+        if (AppPreference.getThreadData().status == Constant.Thread.OPEN){
+            isQuoteVisible = true
+            layout_quote.visibility = View.VISIBLE
+            content_desc.text = content.content
+            usertype.text = content.role
+            datepost.text = UtilityHelper.getSdfDayMonthYearTime(content.date_post)
+            username.text = content.poster_name
+            UtilityHelper.setImage(context!!, content.img, img)
+        } else {
+            isQuoteVisible = false
+            layout_quote.visibility = View.GONE
+        }
+
     }
 
     private fun setListThread(list: ArrayList<Thread.ThreadList>) {
         val replyThreadList = arrayListOf<Thread.ThreadList>()
         for (id in list.indices){
-            if (list[id].type == "REPLY THREAD")
+            if (list[id].type == Constant.Thread.REPLY)
                 replyThreadList.add(list[id])
         }
         rv_thread_reply.layoutManager = LinearLayoutManager(context)

@@ -19,6 +19,7 @@ import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.model.Thread
 import com.example.lmsstikes.util.AppPreference
+import com.example.lmsstikes.util.Constant
 import com.example.lmsstikes.view.base.BaseFragment
 import com.example.lmsstikes.view.dashboard.DetailFragment
 import kotlinx.android.synthetic.main.fragment_thread.*
@@ -95,7 +96,7 @@ class ThreadFragment : BaseFragment(), ThreadAdapter.Listener {
 
         val newThreadList = arrayListOf<Thread.ThreadList>()
         for (id in list.indices){
-            if (list[id].type == "NEW THREAD")
+            if (list[id].type == Constant.Thread.NEW)
                 newThreadList.add(list[id])
         }
         rv_thread.layoutManager = LinearLayoutManager(context)
@@ -130,8 +131,8 @@ class ThreadFragment : BaseFragment(), ThreadAdapter.Listener {
                     0,
                     title.text.toString(),
                     message.text.toString(),
-                    "OPEN",
-                    "NEW THREAD",
+                    Constant.Thread.OPEN,
+                    Constant.Thread.NEW,
                     ""
                 )
             )

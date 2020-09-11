@@ -93,7 +93,6 @@ class SessionFragment : BaseFragment() {
 
     private fun setListSession() {
 
-        Log.d("session", arrayListSession.toString())
         rv_session.layoutManager = LinearLayoutManager(context)
         rv_session.adapter = activity?.let {
             SessionAdapter(it, arrayListSession)

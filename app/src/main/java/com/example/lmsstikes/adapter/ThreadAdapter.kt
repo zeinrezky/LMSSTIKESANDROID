@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Thread
+import com.example.lmsstikes.util.Constant
 
 class ThreadAdapter(context : Context, list: ArrayList<Thread.ThreadList>, private val listener: Listener)
     : RecyclerView.Adapter<ThreadAdapter.ThreadViewHolder>() {
@@ -36,7 +37,7 @@ class ThreadAdapter(context : Context, list: ArrayList<Thread.ThreadList>, priva
         holder.date.text = UtilityHelper.getSdfDayMonthYearTime(itemList[position].date_post)
         holder.by.text = itemList[position].poster_name
 
-        if (itemList[position].status == "LOCKED")
+        if (itemList[position].status == Constant.Thread.LOCKED)
             holder.lock.visibility = View.VISIBLE
 
         holder.itemView.setOnClickListener {

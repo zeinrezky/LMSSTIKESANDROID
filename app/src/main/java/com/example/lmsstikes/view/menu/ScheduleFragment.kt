@@ -70,7 +70,7 @@ class ScheduleFragment: BaseFragment(){
         setToolbar(getString(R.string.schedule))
         setNavigation()
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
             val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
             viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
             info.visibility = View.VISIBLE

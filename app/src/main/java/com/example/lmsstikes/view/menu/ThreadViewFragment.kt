@@ -12,6 +12,7 @@ import com.example.lmsstikes.databinding.FragmentThreadViewBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Thread
 import com.example.lmsstikes.util.AppPreference
+import com.example.lmsstikes.util.Constant
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_thread_reply.*
 import kotlinx.android.synthetic.main.fragment_thread_view.*
@@ -64,6 +65,14 @@ class ThreadViewFragment: BaseFragment(){
             clickRemove.observe(viewLifecycleOwner, Observer {
                 viewModel.deleteThread(Thread.Delete(arguments?.getInt(ARG_ID_THREAD)!!))
             })
+            clickLock.observe(viewLifecycleOwner, Observer {
+                viewModel.updateThread(Thread.Update(
+                    arguments?.getInt(ARG_ID_THREAD)!!,
+                    arguments?.getString(ARG_TITLE)!!,
+                    arguments?.getString(ARG_CONTENT)!!,
+                    Constant.Thread.LOCKED,
+                    ""))
+            })
 
         }
         setView()
@@ -80,12 +89,24 @@ class ThreadViewFragment: BaseFragment(){
 
         setNavigation()
         setToolbar(arguments?.getString(ARG_TITLE)!!)
+        if (AppPreference.getLoginData().role == Constant.Role.DOSEN)
+            btn_lock.visibility = View.VISIBLE
+        else {
+            btn_lock.visibility = View.GONE
+        }
+
+        if (AppPreference.getLoginData().id_user == arguments?.getInt(ARG_ID_POSTER))
+            btn_remove.visibility = View.VISIBLE
+        else {
+            btn_remove.visibility = View.GONE
+        }
 
     }
 
     companion object {
 
         const val ARG_ID = "id"
+        const val ARG_ID_POSTER = "id_poster"
         const val ARG_ID_THREAD = "id_thread"
         const val ARG_NAME = "name"
         const val ARG_TYPE = "type"
@@ -93,6 +114,7 @@ class ThreadViewFragment: BaseFragment(){
         const val ARG_TITLE = "title"
         const val ARG_DATE = "date"
         const val ARG_IMG = "img"
+        const val ARG_STATUS = "status"
 
 
         fun newInstance(data: Thread.ThreadList): ThreadViewFragment {
@@ -101,12 +123,15 @@ class ThreadViewFragment: BaseFragment(){
             val bundle = Bundle().apply {
                 putInt(ARG_ID, data.id_session)
                 putInt(ARG_ID_THREAD, data.id_thread)
+                putInt(ARG_ID_POSTER, data.id_poster)
                 putString(ARG_NAME, data.poster_name)
                 putString(ARG_TYPE, data.role)
                 putString(ARG_CONTENT, data.content)
                 putString(ARG_TITLE, data.title)
                 putString(ARG_DATE, data.date_post)
                 putString(ARG_IMG, data.img)
+                putString(ARG_STATUS, data.status)
+
             }
 
             fragment.arguments = bundle

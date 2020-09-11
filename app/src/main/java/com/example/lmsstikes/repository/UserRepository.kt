@@ -42,6 +42,8 @@ interface UserService {
     suspend fun threadCreate(@Body thread: Thread.Create): NetworkResponse<ResponseSuccess<Thread.ThreadList>, ResponseError>
     @POST("thread/delete")
     suspend fun threadDelete(@Body thread: Thread.Delete): NetworkResponse<ResponseSuccess<Nothing>, ResponseError>
+    @POST("thread/update")
+    suspend fun threadUpdate(@Body thread: Thread.Update): NetworkResponse<ResponseSuccess<Nothing>, ResponseError>
     @GET("score/list")
     suspend fun score(@Query("id_schedule") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Score>>, ResponseError>
     @GET("attendance/list")
@@ -89,6 +91,9 @@ open class UserRepository(private val userService: UserService) {
     }
     suspend fun threadDelete(thread: Thread.Delete): NetworkResponse<ResponseSuccess<Nothing>, ResponseError> {
         return userService.threadDelete(thread)
+    }
+    suspend fun threadUpdate(thread: Thread.Update): NetworkResponse<ResponseSuccess<Nothing>, ResponseError> {
+        return userService.threadUpdate(thread)
     }
     suspend fun score(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Score>>, ResponseError> {
         return userService.score(id)

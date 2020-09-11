@@ -72,6 +72,19 @@ data class Thread (
         val quote: String
     )
 
+    data class Update (
+        @SerializedName("id_thread")
+        var id_thread: Int,
+        @SerializedName("title")
+        val title: String,
+        @SerializedName("content")
+        val content: String,
+        @SerializedName("status")
+        val status: String,
+        @SerializedName("quote")
+        val quote: String
+    )
+
     data class Delete (
         @SerializedName("id")
         var id: Int

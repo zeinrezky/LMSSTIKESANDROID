@@ -72,6 +72,15 @@
                 app:layout_constraintStart_toEndOf="@id/div"
                 app:layout_constraintTop_toBottomOf="@id/user_name"/>
             <ImageView
+                android:id="@+id/btn_lock"
+                android:layout_width="@dimen/space_x3"
+                android:layout_height="@dimen/space_x3"
+                android:layout_margin="@dimen/space_x1"
+                android:src="@drawable/ic_lock"
+                android:onClick="@{()->vm.onClickLock()}"
+                app:layout_constraintEnd_toStartOf="@id/btn_remove"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <ImageView
                 android:id="@+id/btn_remove"
                 android:layout_width="@dimen/space_x3"
                 android:layout_height="@dimen/space_x3"

@@ -11,6 +11,7 @@ import com.example.lmsstikes.R
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Course
 import com.example.lmsstikes.model.Thread
+import com.example.lmsstikes.util.AppPreference
 
 class ThreadReplyAdapter(context : Context, list: ArrayList<Thread.ThreadList>, private val listener: Listener)
     : RecyclerView.Adapter<ThreadReplyAdapter.ThreadReplyViewHolder>() {
@@ -39,9 +40,15 @@ class ThreadReplyAdapter(context : Context, list: ArrayList<Thread.ThreadList>, 
         holder.datePost.text = UtilityHelper.getSdfDayMonthYearTime(itemList[position].date_post)
         holder.userName.text = itemList[position].poster_name
         UtilityHelper.setImage(contexts, itemList[position].img, holder.avatar)
-        holder.btnRemove.setOnClickListener {
-            listener.onBtnRemoveClick(itemList[position].id_thread)
+        if (AppPreference.getLoginData().id_user == itemList[position].id_poster){
+            holder.btnRemove.visibility = View.VISIBLE
+            holder.btnRemove.setOnClickListener {
+                listener.onBtnRemoveClick(itemList[position].id_thread)
+            }
+        } else {
+            holder.btnRemove.visibility = View.GONE
         }
+
         holder.quote.setOnClickListener {
             listener.onQuoteClick(itemList[position])
         }
