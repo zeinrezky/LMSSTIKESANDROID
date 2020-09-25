@@ -22,6 +22,7 @@ class ScoreFragment: BaseFragment(){
 
     private lateinit var binding: FragmentScoreBinding
     private val viewModel by inject<MenuViewModel>()
+    private var isShown = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_score, container, false)
@@ -50,7 +51,13 @@ class ScoreFragment: BaseFragment(){
                 }
             })
             listSchedule.observe(viewLifecycleOwner, Observer {
-                showDialog(it)
+                if (isShown)
+                    showDialog(it)
+                else {
+                    isShown = true
+                    viewModel.period.value = it[it.lastIndex].name
+                    viewModel.getListScore(it[it.lastIndex].id)
+                }
             })
             listScore.observe(viewLifecycleOwner, Observer {
                 setListScore(it)

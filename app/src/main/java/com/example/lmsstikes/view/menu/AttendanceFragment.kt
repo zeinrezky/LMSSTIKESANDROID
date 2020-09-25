@@ -22,6 +22,7 @@ class AttendanceFragment: BaseFragment(){
 
     private lateinit var binding: FragmentAttendanceBinding
     private val viewModel by inject<MenuViewModel>()
+    private var isShown = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_attendance, container, false)
@@ -50,7 +51,13 @@ class AttendanceFragment: BaseFragment(){
                 }
             })
             listSchedule.observe(viewLifecycleOwner, Observer {
-                showDialog(it)
+                if (isShown)
+                    showDialog(it)
+                else {
+                    isShown = true
+                    viewModel.period.value = it[it.lastIndex].name
+                    viewModel.getListAttendance(it[it.lastIndex].id)
+                }
             })
             listAttendance.observe(viewLifecycleOwner, Observer {
                 setListAttendance(it)

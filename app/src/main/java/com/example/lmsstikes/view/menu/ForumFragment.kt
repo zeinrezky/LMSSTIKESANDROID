@@ -23,6 +23,7 @@ class ForumFragment: BaseFragment(), CourseAdapter.Listener{
 
     private lateinit var binding: FragmentForumBinding
     private val viewModel by inject<MenuViewModel>()
+    private var isShown = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_forum, container, false)
@@ -51,23 +52,34 @@ class ForumFragment: BaseFragment(), CourseAdapter.Listener{
                 }
             })
             listSchedule.observe(viewLifecycleOwner, Observer {
-                showDialog(it)
+                if (isShown)
+                    showDialog(it)
+                else {
+                    isShown = true
+                    viewModel.period.value = it[it.lastIndex].name
+                    viewModel.getListCourse(it[it.lastIndex].id)
+                }
             })
             listCourse.observe(viewLifecycleOwner, Observer {
                 setListCourse(it)
             })
             clickPeriod.observe(viewLifecycleOwner, Observer {
-                setView()
+                viewModel.getListSchedule()
             })
 
         }
         setView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        isShown = false
+        viewModel.getListSchedule()
+
+    }
     private fun setView(){
         setToolbar(getString(R.string.forum))
         setNavigation()
-        viewModel.getListSchedule()
     }
     private fun setListCourse(list: ArrayList<Course>) {
         rv_course.layoutManager = LinearLayoutManager(context)
@@ -108,6 +120,7 @@ class ForumFragment: BaseFragment(), CourseAdapter.Listener{
     }
 
     override fun onItemClicked(data: Course) {
+        isShown = false
         addFragment(ForumSessionFragment.newInstance(data.id, 3, data.name, data.code, data.type, data.course_class))
     }
 

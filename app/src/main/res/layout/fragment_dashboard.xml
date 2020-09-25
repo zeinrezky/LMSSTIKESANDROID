@@ -246,6 +246,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
+                    android:scrollbars="horizontal"
+                    android:fadeScrollbars="false"
+                    android:scrollbarStyle="insideInset"
                     tools:itemCount="1"
                     tools:listitem="@layout/item_campus_dir" />
 

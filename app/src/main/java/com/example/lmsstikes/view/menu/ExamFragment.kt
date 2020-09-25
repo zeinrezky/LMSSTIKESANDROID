@@ -54,20 +54,25 @@ class ExamFragment: BaseFragment(), CourseAdapter.Listener{
                 }
             })
             listSchedule.observe(viewLifecycleOwner, Observer {
-                showDialog(it)
+                if (isShown)
+                    showDialog(it)
+                else {
+                    isShown = true
+                    viewModel.period.value = it[it.lastIndex].name
+                    viewModel.getListCourse(it[it.lastIndex].id)
+                }
             })
             listCourse.observe(viewLifecycleOwner, Observer {
                 setListCourse(it)
             })
             clickPeriod.observe(viewLifecycleOwner, Observer {
-                setView()
+                viewModel.getListSchedule()
             })
 
         }
 
         if (arguments?.getBoolean(ARG_IS_TOOLBAR_VISIBLE)!!){
             setView()
-            isShown = true
             toolbar.visibility = View.VISIBLE
         } else {
             toolbar.visibility = View.GONE
@@ -75,10 +80,16 @@ class ExamFragment: BaseFragment(), CourseAdapter.Listener{
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        isShown = false
+        viewModel.getListSchedule()
+
+    }
+
     private fun setView(){
         setToolbar(getString(R.string.course))
         setNavigation()
-        viewModel.getListSchedule()
     }
     private fun setListCourse(list: ArrayList<Course>) {
         rv_course.layoutManager = LinearLayoutManager(context)
@@ -131,18 +142,8 @@ class ExamFragment: BaseFragment(), CourseAdapter.Listener{
     }
 
     override fun onItemClicked(data: Course) {
+        isShown = false
         addFragment(SessionFragment.newInstance(data.id, 3, data.name, data.code, data.type, data.course_class))
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser) {
-            if (!isShown) {
-                setView()
-                isShown = true
-            }
-        }
-
     }
 
 }
