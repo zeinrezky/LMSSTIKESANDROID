@@ -19,22 +19,17 @@ class SplashScreenActivity : AppCompatActivity() {
         findViewById<View>(android.R.id.content).systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 
-        AppPreference.putFirstTime(true)
-
         setSplashScreen()
     }
 
     private fun setSplashScreen(){
         Handler().postDelayed({
             when {
-                AppPreference.isFirstTime() -> {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }
                 AppPreference.isLogin() -> {
                     startActivity(Intent(this, MainActivity::class.java))
                 }
                 else -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, LoginActivity::class.java))
                 }
             }
             finish()

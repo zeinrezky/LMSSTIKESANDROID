@@ -266,6 +266,7 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
     val clickForum = SingleLiveEvent<Unit>()
     val clickAttendance = SingleLiveEvent<Unit>()
     val clickScore = SingleLiveEvent<Unit>()
+    val clickLogout = SingleLiveEvent<Unit>()
 
 
     fun onClickSchedule() {
@@ -282,6 +283,9 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
     }
     fun onClickScore() {
         clickScore.call()
+    }
+    fun onClickLogout() {
+        clickLogout.call()
     }
 
     /** Thread */

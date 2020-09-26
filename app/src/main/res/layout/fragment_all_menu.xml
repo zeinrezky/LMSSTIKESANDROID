@@ -151,6 +151,31 @@
                 app:layout_constraintEnd_toEndOf="@id/ic_schedule"
                 app:layout_constraintStart_toStartOf="@id/ic_schedule"
                 app:layout_constraintTop_toBottomOf="@id/ic_score" />
+
+            <ImageView
+                android:id="@+id/ic_logout"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/circle_blue"
+                android:padding="@dimen/space_x2"
+                android:src="@drawable/ic_logout"
+                app:tint="@android:color/white"
+                android:onClick="@{()->vm.onClickLogout()}"
+                app:layout_constraintTop_toBottomOf="@id/text_schedule"
+                app:layout_constraintStart_toStartOf="@id/ic_course"
+                app:layout_constraintEnd_toEndOf="@id/ic_course"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_x1"
+                android:text="@string/logout"
+                android:onClick="@{()->vm.onClickLogout()}"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/ic_course"
+                app:layout_constraintStart_toStartOf="@id/ic_course"
+                app:layout_constraintTop_toBottomOf="@id/ic_logout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

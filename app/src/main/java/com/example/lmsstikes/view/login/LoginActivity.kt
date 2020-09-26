@@ -1,11 +1,9 @@
 package com.example.lmsstikes.view.login
 
-import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.lmsstikes.R
@@ -52,13 +50,13 @@ class LoginActivity : BaseActivity() {
                 }
             })
             loginSuccess.observe(this@LoginActivity, Observer {
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                AppPreference.putLogin(true)
+                Toast.makeText(this@LoginActivity, getString(R.string.success_login), Toast.LENGTH_LONG).show()
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             })
         }
-
-//        AppPreference.putFirstTime(false)
-        viewModel.username.value = "mhs123"
-        viewModel.password.value = "123"
     }
 }
 

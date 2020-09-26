@@ -58,4 +58,12 @@
     <string name="quiz">Quiz</string>
     <string name="final_score">Final Score</string>
     <string name="grade">Grade</string>
+    <string name="logout">Logout</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="question">Do you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="success_logout">Logout Successfully</string>
+    <string name="success_login">Login Successfully</string>
+
 </resources>

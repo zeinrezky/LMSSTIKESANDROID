@@ -12,7 +12,7 @@ class AppPreference {
         private const val a_login_data = "a_login_data"
         private const val a_first_time = "a_first_time"
         private const val a_login = "a_login"
-        private const val a_token = "a_login"
+        private const val a_token = "a_token"
         private const val a_thread = "a_thread"
 
         fun deleteAll() {

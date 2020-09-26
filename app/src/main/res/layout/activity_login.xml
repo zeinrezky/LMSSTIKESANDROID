@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/logo"
-            android:layout_margin="@dimen/space_x4"
+            android:layout_marginStart="@dimen/space_x4"
+            android:layout_marginEnd="@dimen/space_x4"
             android:orientation="vertical">
 
             <EditText
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/space_x10"
+            android:layout_marginTop="@dimen/space_x5"
             android:padding="@dimen/space_x3"
             android:src="@drawable/logo_screen" />
     </RelativeLayout>
