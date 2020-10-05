@@ -86,6 +86,13 @@ class ForumFragment: BaseFragment(), CourseAdapter.Listener{
         rv_course.adapter = activity?.let {
             CourseAdapter(it, list, this)
         }
+
+        val latestCourse = arrayListOf<Course>()
+        latestCourse.add(list[list.lastIndex])
+        rv_latest.layoutManager = LinearLayoutManager(context)
+        rv_latest.adapter = activity?.let {
+            CourseAdapter(it, latestCourse, this)
+        }
     }
     private fun showDialog(list: ArrayList<Schedule>) {
         val dialog = context?.let { Dialog(it) }

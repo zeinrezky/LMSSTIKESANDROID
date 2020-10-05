@@ -1,9 +1,11 @@
 package com.example.lmsstikes.view.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,6 +19,7 @@ import com.example.lmsstikes.model.Dashboard
 import com.example.lmsstikes.util.AppPreference
 import com.example.lmsstikes.util.Constant
 import com.example.lmsstikes.view.base.BaseFragment
+import com.example.lmsstikes.view.login.LoginActivity
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.koin.android.ext.android.inject
 
@@ -72,6 +75,9 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
             clickViewAllWhatsOn.observe(viewLifecycleOwner, Observer {
                 addFragment(WhatsOnFragment.newInstance())
             })
+            clickLogout.observe(viewLifecycleOwner, Observer {
+                backToLogin()
+            })
             img.observe(viewLifecycleOwner, Observer {
                 context?.let { it1 -> UtilityHelper.setImage(it1, it, profile_image) }
             })
@@ -121,6 +127,14 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
         rv_about.adapter = activity?.let {
             AboutAdapter(it, list)
         }
+    }
+
+    private fun backToLogin() {
+        AppPreference.deleteAll()
+        val intent = Intent(context, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        activity?.finish()
     }
 
     companion object {
