@@ -18,6 +18,7 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
 
     val listSchedule = MutableLiveData<ArrayList<Schedule>>()
     val listCourse = MutableLiveData<ArrayList<Course>>()
+    val listExam = MutableLiveData<ArrayList<Exam>>()
     val listSession = MutableLiveData<ArrayList<Session>>()
     val listTopic = MutableLiveData<ArrayList<Topic>>()
     val listThread = MutableLiveData<ArrayList<Thread.ThreadList>>()
@@ -51,6 +52,26 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
                 is NetworkResponse.Success -> {
                     isLoading.value = false
                     listCourse.value = response.body.data!!
+                }
+                is NetworkResponse.ServerError -> {
+                    isLoading.value = false
+                    snackbarMessage.value = response.body?.message
+                }
+                is NetworkResponse.NetworkError -> {
+                    isLoading.value = false
+                    networkError.value = response.error.message.toString()
+                }
+            }
+        }
+    }
+
+    fun getListExam(id_schedule: Int) {
+        isLoading.value = true
+        viewModelScope.launch {
+            when (val response = repository.exam(id_schedule)) {
+                is NetworkResponse.Success -> {
+                    isLoading.value = false
+                    listExam.value = response.body.data!!
                 }
                 is NetworkResponse.ServerError -> {
                     isLoading.value = false

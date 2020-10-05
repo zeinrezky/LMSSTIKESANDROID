@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.lmsstikes.R
 import com.example.lmsstikes.databinding.FragmentAllMenuBinding
@@ -54,7 +53,7 @@ class AllMenuFragment : BaseFragment(){
                 addFragment(TabFragment.newInstance())
             })
             clickCourse.observe(viewLifecycleOwner, Observer {
-                addFragment(ExamFragment.newInstance(true))
+                addFragment(CourseFragment.newInstance(true))
             })
             clickForum.observe(viewLifecycleOwner, Observer {
                 addFragment(ForumFragment.newInstance())

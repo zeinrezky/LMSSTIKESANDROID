@@ -26,6 +26,8 @@ interface UserService {
 
     @GET("course")
     suspend fun course(@Query("id_schedule") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Course>>, ResponseError>
+    @GET("exam")
+    suspend fun exam(@Query("id_schedule") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Exam>>, ResponseError>
 
     @GET("session")
     suspend fun session(@Query("id_course") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError>
@@ -73,6 +75,9 @@ open class UserRepository(private val userService: UserService) {
     }
     suspend fun course(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Course>>, ResponseError> {
         return userService.course(id)
+    }
+    suspend fun exam(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Exam>>, ResponseError> {
+        return userService.exam(id)
     }
     suspend fun session(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError> {
         return userService.session(id)

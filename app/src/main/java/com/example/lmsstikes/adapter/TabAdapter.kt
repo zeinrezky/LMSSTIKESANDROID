@@ -3,6 +3,7 @@ package com.example.lmsstikes.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.lmsstikes.view.menu.CourseFragment
 import com.example.lmsstikes.view.menu.ExamFragment
 import com.example.lmsstikes.view.menu.ScheduleFragment
 

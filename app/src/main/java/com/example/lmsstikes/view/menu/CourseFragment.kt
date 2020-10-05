@@ -8,26 +8,25 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
-import com.example.lmsstikes.adapter.AttendanceAdapter
-import com.example.lmsstikes.adapter.ExamAdapter
+import com.example.lmsstikes.adapter.CourseAdapter
 import com.example.lmsstikes.adapter.ListScheduleAdapter
-import com.example.lmsstikes.databinding.FragmentExamBinding
+import com.example.lmsstikes.databinding.FragmentCourseBinding
 import com.example.lmsstikes.helper.UtilityHelper
-import com.example.lmsstikes.model.Exam
+import com.example.lmsstikes.model.Course
 import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.view.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_exam.*
+import kotlinx.android.synthetic.main.fragment_course.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 
-class ExamFragment: BaseFragment(){
+class CourseFragment: BaseFragment(), CourseAdapter.Listener{
 
-    private lateinit var binding: FragmentExamBinding
+    private lateinit var binding: FragmentCourseBinding
     private val viewModel by inject<MenuViewModel>()
     private var isShown = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exam, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_course, container, false)
         return binding.root
     }
 
@@ -58,35 +57,42 @@ class ExamFragment: BaseFragment(){
                 else {
                     isShown = true
                     viewModel.period.value = it[it.lastIndex].name
-                    viewModel.getListExam(it[it.lastIndex].id)
+                    viewModel.getListCourse(it[it.lastIndex].id)
                 }
             })
-            listExam.observe(viewLifecycleOwner, Observer {
-                setListExam(it)
+            listCourse.observe(viewLifecycleOwner, Observer {
+                setListCourse(it)
             })
             clickPeriod.observe(viewLifecycleOwner, Observer {
-                setView()
+                viewModel.getListSchedule()
             })
 
         }
-        if (arguments?.getBoolean(CourseFragment.ARG_IS_TOOLBAR_VISIBLE)!!){
+
+        if (arguments?.getBoolean(ARG_IS_TOOLBAR_VISIBLE)!!){
             setView()
             toolbar.visibility = View.VISIBLE
         } else {
             toolbar.visibility = View.GONE
         }
-        setView()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isShown = false
+        viewModel.getListSchedule()
+
     }
 
     private fun setView(){
-        setToolbar(getString(R.string.exam))
+        setToolbar(getString(R.string.course))
         setNavigation()
-        viewModel.getListSchedule()
     }
-    private fun setListExam(list: ArrayList<Exam>) {
-        rv_exam.layoutManager = LinearLayoutManager(context)
-        rv_exam.adapter = activity?.let {
-            ExamAdapter(it, list)
+    private fun setListCourse(list: ArrayList<Course>) {
+        rv_course.layoutManager = LinearLayoutManager(context)
+        rv_course.adapter = activity?.let {
+            CourseAdapter(it, list, this)
         }
     }
     private fun showDialog(list: ArrayList<Schedule>) {
@@ -102,7 +108,7 @@ class ExamFragment: BaseFragment(){
         }
         listView.adapter = ListScheduleAdapter(list)
         listView.setOnItemClickListener { parent, view, position, id ->
-            viewModel.getListAttendance(list[position].id)
+            viewModel.getListCourse(list[position].id)
             viewModel.period.value = list[position].name
             dialog.dismiss()
         }
@@ -120,8 +126,8 @@ class ExamFragment: BaseFragment(){
         const val ARG_IS_TOOLBAR_VISIBLE = "toolbar"
 
 
-        fun newInstance(isVisible: Boolean): ExamFragment {
-            val fragment = ExamFragment()
+        fun newInstance(isVisible: Boolean): CourseFragment {
+            val fragment = CourseFragment()
 
             val bundle = Bundle().apply {
                 putBoolean(ARG_IS_TOOLBAR_VISIBLE, isVisible)
@@ -131,6 +137,11 @@ class ExamFragment: BaseFragment(){
 
             return fragment
         }
+    }
+
+    override fun onItemClicked(data: Course) {
+        isShown = false
+        addFragment(SessionFragment.newInstance(data.id, 3, data.name, data.code, data.type, data.course_class))
     }
 
 }

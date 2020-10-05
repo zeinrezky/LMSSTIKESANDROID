@@ -65,5 +65,11 @@
     <string name="no">No</string>
     <string name="success_logout">Logout Successfully</string>
     <string name="success_login">Login Successfully</string>
+    <string name="description">Description</string>
+    <string name="download_exam">Downloading Exam Questions</string>
+    <string name="deadline">Deadline</string>
+    <string name="status">Status</string>
+    <string name="room">Room</string>
+    <string name="location">Location</string>
 
 </resources>
