@@ -49,12 +49,20 @@ class DetailFragment : BaseFragment(){
     }
 
     private fun setView(){
-        viewModel.title.value = arguments?.getString(ARG_TITLE)
-        viewModel.date.value = UtilityHelper.getSdfDayMonthYear(arguments?.getString(ARG_DATE))
-        viewModel.content.value = arguments?.getString(ARG_CONTENT)
-        viewModel.image.value = arguments?.getString(ARG_IMG)
+        if (arguments?.getString(ARG_TITLE) == "About Apps"){
+            title.visibility = View.GONE
+            date.visibility = View.GONE
+            content.visibility = View.GONE
+            about.visibility = View.VISIBLE
+        }
+        else {
+            viewModel.title.value = arguments?.getString(ARG_TITLE)
+            viewModel.date.value = UtilityHelper.getSdfDayMonthYear(arguments?.getString(ARG_DATE))
+            viewModel.content.value = arguments?.getString(ARG_CONTENT)
+            viewModel.image.value = arguments?.getString(ARG_IMG)
+            context?.let { UtilityHelper.setImage(it, viewModel.image.value.toString(), image) }
+        }
 
-        context?.let { UtilityHelper.setImage(it, viewModel.image.value.toString(), image) }
         setToolbar(getString(R.string.detail))
         setNavigation()
     }

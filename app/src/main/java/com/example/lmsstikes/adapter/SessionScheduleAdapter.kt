@@ -1,6 +1,7 @@
 package com.example.lmsstikes.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,9 +36,9 @@ class SessionScheduleAdapter(context : Context, list: ArrayList<Session>)
         holder.name.text = itemList[position].name
 
         if (itemList[position].type == "VC")
-            holder.indicator.setBackgroundColor(contexts.resources.getColor(android.R.color.holo_purple))
+            holder.indicator.setBackgroundColor(Color.parseColor("#4CAF50"))
         else if (itemList[position].type == "OL")
-            holder.indicator.setBackgroundColor(contexts.resources.getColor(android.R.color.holo_blue_light))
+            holder.indicator.setBackgroundColor(Color.parseColor("#FFEB3B"))
 
     }
 

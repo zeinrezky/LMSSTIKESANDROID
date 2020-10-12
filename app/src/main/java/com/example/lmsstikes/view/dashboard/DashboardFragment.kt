@@ -23,7 +23,7 @@ import com.example.lmsstikes.view.login.LoginActivity
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.koin.android.ext.android.inject
 
-class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdapter.Listener{
+class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdapter.Listener, AboutAdapter.Listener{
 
     private lateinit var binding: FragmentDashboardBinding
     private val viewModel by inject<DashboardViewModel>()
@@ -123,9 +123,10 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
         }
     }
     private fun setListAbout(list: ArrayList<Dashboard.About>) {
-        rv_about.layoutManager = LinearLayoutManager(context)
+        list.add(Dashboard.About(10, "", "About Apps", "Tentang Aplikasi", "ABOUT", "2020-10-02 00:00:00"))
+        rv_about.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
         rv_about.adapter = activity?.let {
-            AboutAdapter(it, list)
+            AboutAdapter(it, list, this)
         }
     }
 
@@ -147,6 +148,10 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
     }
 
     override fun onItemClicked(data: Dashboard.Knowledge) {
+        addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
+    }
+
+    override fun onItemClicked(data: Dashboard.About) {
         addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
     }
 }

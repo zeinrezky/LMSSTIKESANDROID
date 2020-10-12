@@ -11,11 +11,15 @@ import com.example.lmsstikes.R
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Dashboard
 
-class AboutAdapter(context : Context, list: ArrayList<Dashboard.About>)
+class AboutAdapter(context : Context, list: ArrayList<Dashboard.About>, private val listener: Listener)
     : RecyclerView.Adapter<AboutAdapter.AboutViewHolder>() {
 
     private val contexts = context
     private val itemList = list
+
+    interface Listener{
+        fun onItemClicked(data: Dashboard.About)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AboutViewHolder {
         val view = LayoutInflater.from(contexts).inflate(R.layout.item_about, parent,false)
@@ -30,6 +34,9 @@ class AboutAdapter(context : Context, list: ArrayList<Dashboard.About>)
 
         UtilityHelper.setImage(contexts, itemList[position].image, holder.image)
         holder.title.text = itemList[position].title
+        holder.itemView.setOnClickListener {
+            listener.onItemClicked(itemList[position])
+        }
     }
 
     inner class AboutViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
