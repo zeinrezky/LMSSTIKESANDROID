@@ -69,11 +69,21 @@ class ScheduleFragment: BaseFragment(){
     private fun setView(){
         setToolbar(getString(R.string.schedule))
         setNavigation()
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        val c = Calendar.getInstance()
+
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val currentDate: String = sdf.format(Date(year - 1900, month, day))
+        viewModel.date.value = UtilityHelper.getSdfDMY(currentDate)
+        viewModel.getListSessionSchedule(day, month, year - 1900)
+
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+
             val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
             viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
-            info.visibility = View.VISIBLE
             viewModel.getListSessionSchedule(dayOfMonth, month, year - 1900)
         }
     }

@@ -23,7 +23,7 @@ import com.example.lmsstikes.view.login.LoginActivity
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.koin.android.ext.android.inject
 
-class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdapter.Listener, AboutAdapter.Listener{
+class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdapter.Listener, AboutAdapter.Listener, AnnouncementAdapter.Listener{
 
     private lateinit var binding: FragmentDashboardBinding
     private val viewModel by inject<DashboardViewModel>()
@@ -101,7 +101,7 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
     private fun setListAnnouncement(list: ArrayList<Dashboard.Announcement>) {
         rv_announcement.layoutManager = LinearLayoutManager(context)
         rv_announcement.adapter = activity?.let {
-            AnnouncementAdapter(it, list)
+            AnnouncementAdapter(it, list, this)
         }
     }
     private fun setListKnowledge(list: ArrayList<Dashboard.Knowledge>) {
@@ -152,6 +152,10 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
     }
 
     override fun onItemClicked(data: Dashboard.About) {
+        addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
+    }
+
+    override fun onItemClicked(data: Dashboard.Announcement) {
         addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
     }
 }
