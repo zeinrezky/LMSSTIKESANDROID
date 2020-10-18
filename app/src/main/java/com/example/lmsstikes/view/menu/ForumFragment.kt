@@ -88,7 +88,8 @@ class ForumFragment: BaseFragment(), CourseAdapter.Listener{
         }
 
         val latestCourse = arrayListOf<Course>()
-        latestCourse.add(list[list.lastIndex])
+        if (list.isNullOrEmpty().not())
+            latestCourse.add(list[list.lastIndex])
         rv_latest.layoutManager = LinearLayoutManager(context)
         rv_latest.adapter = activity?.let {
             CourseAdapter(it, latestCourse, this)
