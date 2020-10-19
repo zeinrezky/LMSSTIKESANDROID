@@ -102,7 +102,7 @@ class ExamFragment: BaseFragment(){
         }
         listView.adapter = ListScheduleAdapter(list)
         listView.setOnItemClickListener { parent, view, position, id ->
-            viewModel.getListAttendance(list[position].id)
+            viewModel.getListExam(list[position].id)
             viewModel.period.value = list[position].name
             dialog.dismiss()
         }

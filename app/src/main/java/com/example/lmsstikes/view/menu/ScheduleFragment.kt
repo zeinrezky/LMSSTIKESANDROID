@@ -78,13 +78,13 @@ class ScheduleFragment: BaseFragment(){
         val day = c.get(Calendar.DAY_OF_MONTH)
         val currentDate: String = sdf.format(Date(year - 1900, month, day))
         viewModel.date.value = UtilityHelper.getSdfDMY(currentDate)
-        viewModel.getListSessionSchedule(day, month, year - 1900)
+        viewModel.getListSessionSchedule(day, month + 1, year)
 
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
 
             val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
             viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
-            viewModel.getListSessionSchedule(dayOfMonth, month, year - 1900)
+            viewModel.getListSessionSchedule(dayOfMonth, month + 1, year)
         }
     }
 

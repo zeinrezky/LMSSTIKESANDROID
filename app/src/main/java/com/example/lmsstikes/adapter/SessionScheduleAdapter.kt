@@ -35,10 +35,11 @@ class SessionScheduleAdapter(context : Context, list: ArrayList<Session>)
         holder.type.text = itemList[position].type
         holder.name.text = itemList[position].name
 
-        if (itemList[position].type == "VC")
-            holder.indicator.setBackgroundColor(Color.parseColor("#4CAF50"))
-        else if (itemList[position].type == "OL")
-            holder.indicator.setBackgroundColor(Color.parseColor("#FFEB3B"))
+        when (itemList[position].type) {
+            "VC" -> holder.indicator.setBackgroundColor(Color.parseColor("#4CAF50"))
+            "OL" -> holder.indicator.setBackgroundColor(Color.parseColor("#ff33b5e5"))
+            "EXAM" -> holder.indicator.setBackgroundColor(Color.parseColor("#ffff8800"))
+        }
 
     }
 

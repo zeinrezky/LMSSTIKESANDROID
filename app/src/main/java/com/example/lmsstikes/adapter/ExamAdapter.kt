@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
+import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Exam
 
 class ExamAdapter(context : Context, list: ArrayList<Exam>)
@@ -33,8 +34,8 @@ class ExamAdapter(context : Context, list: ArrayList<Exam>)
         holder.desc.text = itemList[position].desc
         holder.examClass.text = itemList[position].exam_class
         holder.note.text = itemList[position].note
-        holder.download.text = itemList[position].download
-        holder.deadline.text = itemList[position].deadline
+        holder.download.text = UtilityHelper.getSdfDayMonthYearTime(itemList[position].download)
+        holder.deadline.text = UtilityHelper.getSdfDayMonthYearTime(itemList[position].deadline)
         holder.status.text = itemList[position].status
         holder.room.text = itemList[position].room
         holder.location.text = itemList[position].location
