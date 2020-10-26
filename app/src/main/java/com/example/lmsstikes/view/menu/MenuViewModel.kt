@@ -283,6 +283,8 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
     val sessionName = MutableLiveData<String>()
 
     val clickSchedule = SingleLiveEvent<Unit>()
+    val clickScheduleDetail = SingleLiveEvent<Unit>()
+
     val clickCourse = SingleLiveEvent<Unit>()
     val clickForum = SingleLiveEvent<Unit>()
     val clickAttendance = SingleLiveEvent<Unit>()
@@ -292,6 +294,9 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
 
     fun onClickSchedule() {
         clickSchedule.call()
+    }
+    fun onClickScheduleDetail() {
+        clickScheduleDetail.call()
     }
     fun onClickCourse() {
         clickCourse.call()

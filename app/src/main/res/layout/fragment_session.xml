@@ -24,6 +24,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/space_x1"
             android:layout_margin="@dimen/space_x1">
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                     android:id="@+id/course_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/blue_rounded"
+                    android:background="@drawable/background_gradient_3"
                     android:padding="@dimen/space_x2"
                     android:text="@={vm.courseName}"
                     android:textColor="@android:color/white"

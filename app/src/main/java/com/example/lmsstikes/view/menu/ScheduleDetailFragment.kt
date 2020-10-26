@@ -1,7 +1,6 @@
 package com.example.lmsstikes.view.menu
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.ListView
@@ -9,26 +8,26 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
-import com.example.lmsstikes.adapter.AttendanceAdapter
-import com.example.lmsstikes.adapter.ExamAdapter
 import com.example.lmsstikes.adapter.ListScheduleAdapter
-import com.example.lmsstikes.databinding.FragmentExamBinding
+import com.example.lmsstikes.adapter.ScheduleDetailAdapter
+import com.example.lmsstikes.databinding.FragmentScheduleDetailBinding
 import com.example.lmsstikes.helper.UtilityHelper
-import com.example.lmsstikes.model.Exam
 import com.example.lmsstikes.model.Schedule
+import com.example.lmsstikes.model.Session
 import com.example.lmsstikes.view.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_exam.*
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.fragment_schedule_detail.*
 import org.koin.android.ext.android.inject
+import java.text.SimpleDateFormat
+import java.util.*
 
-class ExamFragment: BaseFragment(){
+class ScheduleDetailFragment: BaseFragment(){
 
-    private lateinit var binding: FragmentExamBinding
+    private lateinit var binding: FragmentScheduleDetailBinding
     private val viewModel by inject<MenuViewModel>()
     private var isShown = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exam, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_schedule_detail, container, false)
         return binding.root
     }
 
@@ -45,7 +44,7 @@ class ExamFragment: BaseFragment(){
                 }
             })
             networkError.observe(viewLifecycleOwner, Observer {
-                UtilityHelper.snackbarLong(view_parent, getString(R.string.error_network))
+                UtilityHelper.snackbarLong(view_parent, getString(com.example.lmsstikes.R.string.error_network))
             })
             isLoading.observe(viewLifecycleOwner, Observer { bool ->
                 bool.let { loading ->
@@ -54,42 +53,48 @@ class ExamFragment: BaseFragment(){
                 }
             })
             listSchedule.observe(viewLifecycleOwner, Observer {
-                if (isShown){
+                if (isShown)
                     showDialog(it)
-                }
                 else {
                     isShown = true
                     viewModel.period.value = it[it.lastIndex].name
-                    viewModel.getListExam(it[it.lastIndex].id)
+                    viewModel.getListSession(it[it.lastIndex].id)
                 }
             })
-            listExam.observe(viewLifecycleOwner, Observer {
-                setListExam(it)
+            listSession.observe(viewLifecycleOwner, Observer {
+                setListSession(it)
             })
             clickPeriod.observe(viewLifecycleOwner, Observer {
                 setView()
             })
-
-        }
-        if (arguments?.getBoolean(CourseFragment.ARG_IS_TOOLBAR_VISIBLE)!!){
-            toolbar.visibility = View.VISIBLE
-        } else {
-            toolbar.visibility = View.GONE
         }
         setView()
     }
 
     private fun setView(){
-        setToolbar(getString(R.string.exam))
+        setToolbar(getString(R.string.detail_schedule))
         setNavigation()
         viewModel.getListSchedule()
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        val c = Calendar.getInstance()
+
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val currentDate: String = sdf.format(Date(year - 1900, month, day))
+        viewModel.date.value = UtilityHelper.getSdfDMY(currentDate)
+        viewModel.getListSessionSchedule(day, month + 1, year)
     }
-    private fun setListExam(list: ArrayList<Exam>) {
-        rv_exam.layoutManager = LinearLayoutManager(context)
-        rv_exam.adapter = activity?.let {
-            ExamAdapter(it, list)
+
+    private fun setListSession(list: ArrayList<Session>) {
+
+        rv_schedule_detail.layoutManager = LinearLayoutManager(context)
+        rv_schedule_detail.adapter = activity?.let {
+            ScheduleDetailAdapter(it, list)
         }
     }
+
     private fun showDialog(list: ArrayList<Schedule>) {
         val dialog = context?.let { Dialog(it) }
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -117,21 +122,10 @@ class ExamFragment: BaseFragment(){
         dialog.window?.attributes = lp
         dialog.show()
     }
+
     companion object {
-        const val ARG_IS_TOOLBAR_VISIBLE = "toolbar"
-
-
-        fun newInstance(isVisible: Boolean): ExamFragment {
-            val fragment = ExamFragment()
-
-            val bundle = Bundle().apply {
-                putBoolean(ARG_IS_TOOLBAR_VISIBLE, isVisible)
-            }
-
-            fragment.arguments = bundle
-
-            return fragment
-        }
+        @JvmStatic
+        fun newInstance() = ScheduleDetailFragment()
     }
 
 }

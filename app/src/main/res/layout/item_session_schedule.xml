@@ -11,12 +11,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/space_x1">
 
-        <View
+        <ImageView
             android:id="@+id/indicator"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_margin="@dimen/space_x2"
-            android:background="@android:color/holo_purple"
+            android:background="@drawable/circle_green"
+            android:backgroundTint="@android:color/holo_purple"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
@@ -36,15 +37,21 @@ class SessionScheduleAdapter(context : Context, list: ArrayList<Session>)
         holder.name.text = itemList[position].name
 
         when (itemList[position].type) {
-            "VC" -> holder.indicator.setBackgroundColor(Color.parseColor("#4CAF50"))
-            "OL" -> holder.indicator.setBackgroundColor(Color.parseColor("#ff33b5e5"))
-            "EXAM" -> holder.indicator.setBackgroundColor(Color.parseColor("#ffff8800"))
+            "VC" -> holder.indicator.apply {
+                backgroundTintList = ContextCompat.getColorStateList(context, R.color.colorPrimary)
+            }
+            "OL" -> holder.indicator.apply {
+                backgroundTintList = ContextCompat.getColorStateList(context, R.color.colorBlue)
+            }
+            "EXAM" -> holder.indicator.apply {
+                backgroundTintList = ContextCompat.getColorStateList(context, R.color.colorOrange)
+            }
         }
 
     }
 
     inner class SessionScheduleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val indicator: View = itemView.findViewById(R.id.indicator)
+        val indicator: ImageView = itemView.findViewById(R.id.indicator)
         val type: TextView = itemView.findViewById(R.id.type)
         val startDate: TextView = itemView.findViewById(R.id.start_date)
         val endDate: TextView = itemView.findViewById(R.id.end_date)

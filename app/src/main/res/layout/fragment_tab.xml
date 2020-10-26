@@ -1,25 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include layout="@layout/toolbar_fragment" />
+    <data>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.example.lmsstikes.view.menu.MenuViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/view_parent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+        <RelativeLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabTextColor="@android:color/black"/>
+            android:layout_height="@dimen/space_x10"
+            android:background="@drawable/background_gradient_3">
 
-    </androidx.viewpager.widget.ViewPager>
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_x10"
+                android:layout_marginTop="@dimen/space_x3"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-</LinearLayout>
+            <ImageView
+                android:layout_width="@dimen/space_x6"
+                android:layout_height="@dimen/space_x10"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/space_x3"
+                android:onClick="@{()->vm.onClickScheduleDetail()}"
+                android:paddingStart="@dimen/space_x1"
+                android:paddingEnd="@dimen/space_x1"
+                android:src="@drawable/ic_list"
+                app:tint="@android:color/white" />
+        </RelativeLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                app:tabTextColor="@android:color/black" />
+
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+</layout>

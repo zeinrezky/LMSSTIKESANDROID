@@ -11,35 +11,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_gradient_3"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/note"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/space_x2"
-                android:paddingEnd="@dimen/space_x2"
-                android:paddingTop="@dimen/space_x2"
-                android:text="@string/course"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/space_x2"
-                android:paddingEnd="@dimen/space_x2"
-                android:paddingBottom="@dimen/space_x2"
-                android:paddingTop="@dimen/space_x1"
-                android:text="@string/course"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            android:padding="@dimen/space_x2"
+            android:text="@string/course"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/ic_drop_down"
+            app:drawableTint="@android:color/white" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,28 +42,28 @@
                 android:text="@string/course_code"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/class_text"
+                app:layout_constraintEnd_toStartOf="@id/type"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/class_text"
+                android:id="@+id/type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_x1"
-                android:text="@string/course_class"
+                android:text="@string/type"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/com"
+                android:id="@+id/s_classs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_x1"
-                android:text="@string/description"
+                android:text="@string/course_class"
                 android:textSize="10sp"
-                app:layout_constraintStart_toEndOf="@id/class_text"
+                app:layout_constraintStart_toEndOf="@id/type"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,19 +80,19 @@
                 app:layout_constraintTop_toBottomOf="@id/course_code" />
 
             <TextView
-                android:id="@+id/exam_class"
+                android:id="@+id/s_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/space_x1"
                 android:text="@string/course_class"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/class_text"
-                app:layout_constraintStart_toStartOf="@id/class_text"
+                app:layout_constraintEnd_toEndOf="@id/type"
+                app:layout_constraintStart_toStartOf="@id/type"
                 app:layout_constraintTop_toBottomOf="@id/course_code" />
 
             <TextView
-                android:id="@+id/desc"
+                android:id="@+id/s_class"
                 android:layout_width="@dimen/space_x12"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_x1"
@@ -118,8 +101,8 @@
                 android:maxLines="2"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/com"
-                app:layout_constraintEnd_toEndOf="@id/com"
+                app:layout_constraintStart_toStartOf="@id/s_classs"
+                app:layout_constraintEnd_toEndOf="@id/s_classs"
                 app:layout_constraintTop_toBottomOf="@id/course_code" />
             <View
                 android:id="@+id/line_h"
@@ -128,7 +111,7 @@
                 android:layout_marginTop="@dimen/space_x1"
                 android:background="@android:color/darker_gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/desc" />
+                app:layout_constraintTop_toBottomOf="@id/s_class" />
 
             <View
                 android:id="@+id/line_v"
@@ -138,91 +121,82 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/download_text"
-                app:layout_constraintBottom_toBottomOf="@id/status"/>
+                app:layout_constraintBottom_toBottomOf="@id/ic_marker"/>
 
             <TextView
                 android:id="@+id/download_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_x2"
-                android:text="@string/download_exam"
+                android:text="@string/course_schedule"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line_h" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/ic_clock"
+                android:layout_width="@dimen/space_x2"
+                android:layout_height="@dimen/space_x2"
                 android:layout_marginTop="@dimen/space_x2"
                 android:layout_marginStart="@dimen/space_x2"
-                android:text="@string/room"
-                android:textSize="12sp"
+                android:src="@drawable/ic_clock"
                 app:layout_constraintStart_toEndOf="@id/line_v"
+                app:layout_constraintTop_toBottomOf="@id/line_h"
+                app:tint="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/space_x2"
+                android:layout_marginStart="@dimen/space_half"
+                android:text="@string/course"
+                app:layout_constraintStart_toEndOf="@id/ic_clock"
                 app:layout_constraintTop_toBottomOf="@id/line_h" />
 
             <TextView
-                android:id="@+id/download"
+                android:id="@+id/end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_x1"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/space_x2"
+                android:layout_marginStart="@dimen/space_x1"
+                android:text="@string/course"
+                app:layout_constraintStart_toEndOf="@id/start_time"
+                app:layout_constraintTop_toBottomOf="@id/line_h" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_x1"
                 android:text="@string/total_session"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/indicator"
                 app:layout_constraintTop_toBottomOf="@id/download_text" />
-
-            <TextView
-                android:id="@+id/room"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <View
+                android:id="@+id/indicator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginTop="@dimen/space_x1"
-                android:layout_marginStart="@dimen/space_x2"
-                android:text="@string/max_absence"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/line_v"
-                app:layout_constraintTop_toBottomOf="@id/download_text" />
-
-            <TextView
-                android:id="@+id/deadline_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_x1"
-                android:text="@string/deadline"
-                android:textSize="12sp"
+                android:background="@drawable/circle_green"
+                android:backgroundTint="@android:color/holo_blue_light"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/download" />
+                app:layout_constraintTop_toBottomOf="@id/download_text"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_x1"
-                android:layout_marginStart="@dimen/space_x2"
-                android:text="@string/location"
-                android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@id/line_v"
-                app:layout_constraintTop_toBottomOf="@id/download" />
 
-            <TextView
-                android:id="@+id/deadline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_x1"
-                android:text="@string/session_done"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/deadline_text" />
+
 
             <ImageView
                 android:id="@+id/ic_marker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_x1"
-                android:layout_marginStart="@dimen/space_x2"
                 android:src="@drawable/ic_marker"
-                app:layout_constraintStart_toEndOf="@id/line_v"
-                app:layout_constraintTop_toBottomOf="@id/deadline_text"
+                app:layout_constraintStart_toStartOf="@id/date"
+                app:layout_constraintTop_toBottomOf="@id/date"
                 app:tint="@android:color/darker_gray" />
 
             <TextView
@@ -234,27 +208,8 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/ic_marker"
-                app:layout_constraintTop_toBottomOf="@id/deadline_text" />
+                app:layout_constraintTop_toBottomOf="@id/date" />
 
-            <TextView
-                android:id="@+id/status_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_x1"
-                android:text="@string/status"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/deadline" />
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_x1"
-                android:text="@string/status"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/status_text" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

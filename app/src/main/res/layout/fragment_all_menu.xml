@@ -30,7 +30,7 @@
                 android:id="@+id/ic_schedule"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:background="@drawable/circle_blue"
+                android:background="@drawable/circle_green"
                 android:padding="@dimen/space_x2"
                 android:src="@drawable/ic_schedule"
                 app:tint="@android:color/white"
@@ -56,7 +56,7 @@
                 android:id="@+id/ic_course"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:background="@drawable/circle_blue"
+                android:background="@drawable/circle_green"
                 android:padding="@dimen/space_x2"
                 android:src="@drawable/ic_course"
                 app:tint="@android:color/white"
@@ -81,11 +81,11 @@
                 android:id="@+id/ic_forum"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:background="@drawable/circle_blue"
+                android:background="@drawable/circle_green"
                 android:padding="@dimen/space_x2"
                 android:src="@drawable/ic_forum"
                 android:onClick="@{()->vm.onClickForum()}"
-                app:layout_constraintEnd_toStartOf="@id/ic_attendance"
+                app:layout_constraintEnd_toStartOf="@id/ic_logout"
                 app:layout_constraintStart_toEndOf="@id/ic_course"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@android:color/white" />
@@ -98,19 +98,19 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:onClick="@{()->vm.onClickForum()}"
-                app:layout_constraintEnd_toStartOf="@id/ic_attendance"
+                app:layout_constraintEnd_toStartOf="@id/ic_logout"
                 app:layout_constraintStart_toEndOf="@id/ic_course"
                 app:layout_constraintTop_toBottomOf="@id/ic_forum" />
 
             <ImageView
-                android:id="@+id/ic_attendance"
+                android:id="@+id/ic_logout"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:background="@drawable/circle_blue"
+                android:background="@drawable/circle_green"
                 android:padding="@dimen/space_x2"
-                android:src="@drawable/ic_attendance"
+                android:src="@drawable/ic_logout"
                 app:tint="@android:color/white"
-                android:onClick="@{()->vm.onClickAttendance()}"
+                android:onClick="@{()->vm.onClickLogout()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ic_forum"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -119,19 +119,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/space_x1"
-                android:text="@string/attendance"
+                android:text="@string/logout"
                 android:onClick="@{()->vm.onClickAttendance()}"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ic_forum"
-                app:layout_constraintTop_toBottomOf="@id/ic_attendance" />
+                app:layout_constraintTop_toBottomOf="@id/ic_logout" />
 
             <ImageView
                 android:id="@+id/ic_score"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:background="@drawable/circle_blue"
+                android:background="@drawable/circle_green"
                 android:padding="@dimen/space_x2"
                 android:src="@drawable/ic_score"
                 app:tint="@android:color/white"
@@ -141,6 +141,7 @@
                 app:layout_constraintEnd_toEndOf="@id/ic_schedule"/>
 
             <TextView
+                android:id="@+id/txt_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/space_x1"
@@ -153,29 +154,30 @@
                 app:layout_constraintTop_toBottomOf="@id/ic_score" />
 
             <ImageView
-                android:id="@+id/ic_logout"
+                android:id="@+id/ic_att"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:background="@drawable/circle_blue"
+                android:background="@drawable/circle_green"
                 android:padding="@dimen/space_x2"
-                android:src="@drawable/ic_logout"
+                android:src="@drawable/ic_attendance"
                 app:tint="@android:color/white"
-                android:onClick="@{()->vm.onClickLogout()}"
+                android:onClick="@{()->vm.onClickAttendance()}"
                 app:layout_constraintTop_toBottomOf="@id/text_schedule"
                 app:layout_constraintStart_toStartOf="@id/ic_course"
                 app:layout_constraintEnd_toEndOf="@id/ic_course"/>
 
             <TextView
+                android:id="@+id/txt_att"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/space_x1"
-                android:text="@string/logout"
+                android:text="@string/attendance"
                 android:onClick="@{()->vm.onClickLogout()}"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@id/ic_course"
                 app:layout_constraintStart_toStartOf="@id/ic_course"
-                app:layout_constraintTop_toBottomOf="@id/ic_logout" />
+                app:layout_constraintTop_toBottomOf="@id/ic_att" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

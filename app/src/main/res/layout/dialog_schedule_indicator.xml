@@ -28,7 +28,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="12dp"
-            android:background="#4CAF50" />
+            android:background="@drawable/circle_green" />
 
         <TextView
             android:layout_width="match_parent"
@@ -47,7 +47,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="12dp"
-            android:background="#FFEB3B" />
+            android:background="@drawable/circle_green"
+            android:backgroundTint="@color/colorYellow" />
 
         <TextView
             android:layout_width="match_parent"
@@ -66,7 +67,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="12dp"
-            android:background="@android:color/holo_blue_light" />
+            android:background="@drawable/circle_green"
+            android:backgroundTint="@color/colorBlue" />
 
         <TextView
             android:layout_width="match_parent"
@@ -85,7 +87,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="12dp"
-            android:background="@android:color/holo_orange_dark" />
+            android:background="@drawable/circle_green"
+            android:backgroundTint="@color/colorOrange" />
 
         <TextView
             android:layout_width="match_parent"

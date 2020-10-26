@@ -13,9 +13,11 @@ import com.example.lmsstikes.R
 import com.example.lmsstikes.databinding.FragmentAllMenuBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.util.AppPreference
+import com.example.lmsstikes.util.Constant
 import com.example.lmsstikes.view.base.BaseFragment
 import com.example.lmsstikes.view.login.LoginActivity
 import kotlinx.android.synthetic.main.fragment_all_menu.*
+import kotlinx.android.synthetic.main.fragment_all_menu.view_parent
 import org.koin.android.ext.android.inject
 
 class AllMenuFragment : BaseFragment(){
@@ -68,6 +70,16 @@ class AllMenuFragment : BaseFragment(){
                 showLogoutDialog()
             })
 
+        }
+        setView()
+    }
+
+    private fun setView(){
+        if (AppPreference.getLoginData().role == Constant.Role.DOSEN) {
+            ic_att.visibility = View.GONE
+            ic_score.visibility = View.GONE
+            txt_att.visibility = View.GONE
+            txt_score.visibility = View.GONE
         }
     }
 

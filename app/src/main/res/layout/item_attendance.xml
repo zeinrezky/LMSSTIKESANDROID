@@ -15,7 +15,7 @@
             android:id="@+id/course_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/blue_rounded"
+            android:background="@drawable/background_gradient_3"
             android:padding="@dimen/space_x2"
             android:text="@string/course"
             android:textColor="@android:color/white"
