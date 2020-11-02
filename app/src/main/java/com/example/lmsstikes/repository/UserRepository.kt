@@ -36,6 +36,10 @@ interface UserService {
     suspend fun sessionSchedule(@Query("date") date: Int,
                                 @Query("month") month: Int,
                                 @Query("year") year: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError>
+    @GET("session")
+    suspend fun scheduleDetail(@Query("id_course") id_course: Int,
+                                @Query("month") month: Int,
+                                @Query("year") year: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError>
     @GET("topic")
     suspend fun topic(@Query("id_session") id: Int): NetworkResponse<ResponseSuccess<ArrayList<Topic>>, ResponseError>
     @GET("thread/list")
@@ -84,6 +88,9 @@ open class UserRepository(private val userService: UserService) {
     }
     suspend fun sessionSchedule(date: Int, month: Int, year: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError> {
         return userService.sessionSchedule(date, month, year)
+    }
+    suspend fun scheduleDetail(id_course: Int, month: Int, year: Int): NetworkResponse<ResponseSuccess<ArrayList<Session>>, ResponseError> {
+        return userService.scheduleDetail(id_course, month, year)
     }
     suspend fun topic(id: Int): NetworkResponse<ResponseSuccess<ArrayList<Topic>>, ResponseError> {
         return userService.topic(id)

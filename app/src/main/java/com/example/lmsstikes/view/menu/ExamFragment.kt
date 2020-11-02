@@ -1,15 +1,14 @@
 package com.example.lmsstikes.view.menu
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import android.widget.ListView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lmsstikes.R
-import com.example.lmsstikes.adapter.AttendanceAdapter
 import com.example.lmsstikes.adapter.ExamAdapter
 import com.example.lmsstikes.adapter.ListScheduleAdapter
 import com.example.lmsstikes.databinding.FragmentExamBinding
@@ -27,7 +26,11 @@ class ExamFragment: BaseFragment(){
     private val viewModel by inject<MenuViewModel>()
     private var isShown = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exam, container, false)
         return binding.root
     }
@@ -49,15 +52,17 @@ class ExamFragment: BaseFragment(){
             })
             isLoading.observe(viewLifecycleOwner, Observer { bool ->
                 bool.let { loading ->
-                    if(loading){ showWaitingDialog() }
-                    else { hideWaitingDialog() }
+                    if (loading) {
+                        showWaitingDialog()
+                    } else {
+                        hideWaitingDialog()
+                    }
                 }
             })
             listSchedule.observe(viewLifecycleOwner, Observer {
-                if (isShown){
+                if (isShown) {
                     showDialog(it)
-                }
-                else {
+                } else {
                     isShown = true
                     viewModel.period.value = it[it.lastIndex].name
                     viewModel.getListExam(it[it.lastIndex].id)
@@ -67,19 +72,19 @@ class ExamFragment: BaseFragment(){
                 setListExam(it)
             })
             clickPeriod.observe(viewLifecycleOwner, Observer {
-                setView()
+                viewModel.getListSchedule()
             })
 
-        }
-        if (arguments?.getBoolean(CourseFragment.ARG_IS_TOOLBAR_VISIBLE)!!){
-            toolbar.visibility = View.VISIBLE
-        } else {
-            toolbar.visibility = View.GONE
         }
         setView()
     }
 
     private fun setView(){
+        if (arguments?.getBoolean(CourseFragment.ARG_IS_TOOLBAR_VISIBLE)!!){
+            toolbar.visibility = View.VISIBLE
+        } else {
+            toolbar.visibility = View.GONE
+        }
         setToolbar(getString(R.string.exam))
         setNavigation()
         viewModel.getListSchedule()
@@ -123,7 +128,6 @@ class ExamFragment: BaseFragment(){
 
         fun newInstance(isVisible: Boolean): ExamFragment {
             val fragment = ExamFragment()
-
             val bundle = Bundle().apply {
                 putBoolean(ARG_IS_TOOLBAR_VISIBLE, isVisible)
             }

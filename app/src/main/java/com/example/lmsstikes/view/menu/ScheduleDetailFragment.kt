@@ -14,6 +14,7 @@ import com.example.lmsstikes.databinding.FragmentScheduleDetailBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Schedule
 import com.example.lmsstikes.model.Session
+import com.example.lmsstikes.util.AppPreference
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_schedule_detail.*
 import org.koin.android.ext.android.inject
@@ -58,14 +59,13 @@ class ScheduleDetailFragment: BaseFragment(){
                 else {
                     isShown = true
                     viewModel.period.value = it[it.lastIndex].name
-                    viewModel.getListSession(it[it.lastIndex].id)
                 }
             })
             listSession.observe(viewLifecycleOwner, Observer {
                 setListSession(it)
             })
             clickPeriod.observe(viewLifecycleOwner, Observer {
-                setView()
+                viewModel.getListSchedule()
             })
         }
         setView()
@@ -75,20 +75,14 @@ class ScheduleDetailFragment: BaseFragment(){
         setToolbar(getString(R.string.detail_schedule))
         setNavigation()
         viewModel.getListSchedule()
-
-        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-        val c = Calendar.getInstance()
-
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-        val currentDate: String = sdf.format(Date(year - 1900, month, day))
-        viewModel.date.value = UtilityHelper.getSdfDMY(currentDate)
-        viewModel.getListSessionSchedule(day, month + 1, year)
+        viewModel.getListScheduleDetail(
+            3,
+            AppPreference.getMonth(),
+            AppPreference.getYear()
+        )
     }
 
     private fun setListSession(list: ArrayList<Session>) {
-
         rv_schedule_detail.layoutManager = LinearLayoutManager(context)
         rv_schedule_detail.adapter = activity?.let {
             ScheduleDetailAdapter(it, list)
@@ -108,7 +102,11 @@ class ScheduleDetailFragment: BaseFragment(){
         }
         listView.adapter = ListScheduleAdapter(list)
         listView.setOnItemClickListener { parent, view, position, id ->
-            viewModel.getListExam(list[position].id)
+            viewModel.getListScheduleDetail(
+                3,
+                AppPreference.getMonth(),
+                list[position].name.substring(0, 4).toInt()
+            )
             viewModel.period.value = list[position].name
             dialog.dismiss()
         }

@@ -21,6 +21,12 @@ data class Session (
     val time_start: String,
     @SerializedName("time_end")
     val time_end: String,
+    @SerializedName("link")
+    val link: String,
+    @SerializedName("class")
+    val session_class: String,
+    @SerializedName("course_code")
+    val course_code: String,
     @SerializedName("topic")
     var topic: ArrayList<Topic>?
 )

@@ -20,6 +20,7 @@ object Constant {
     object Header {
         const val TOKEN = "token"
         const val CACHE = "Cache-Control"
+        const val URL = "URL"
 
     }
 

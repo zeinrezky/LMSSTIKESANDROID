@@ -8,7 +8,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.lmsstikes.R
+import com.example.lmsstikes.util.AppPreference
+import com.example.lmsstikes.view.menu.TabFragment
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlin.concurrent.fixedRateTimer
 
 open class BaseFragment : Fragment() {
 
@@ -26,6 +29,7 @@ open class BaseFragment : Fragment() {
     fun setNavigation(){
         toolbar_back.setOnClickListener {
             activity!!.supportFragmentManager.popBackStack()
+            AppPreference.putShown(false)
         }
     }
 

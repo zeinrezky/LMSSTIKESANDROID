@@ -10,7 +10,9 @@ import com.example.lmsstikes.R
 import com.example.lmsstikes.adapter.TabAdapter
 import com.example.lmsstikes.databinding.FragmentTabBinding
 import com.example.lmsstikes.helper.UtilityHelper
+import com.example.lmsstikes.util.AppPreference
 import com.example.lmsstikes.view.base.BaseFragment
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_tab.*
 import org.koin.android.ext.android.inject
 
@@ -54,8 +56,19 @@ class TabFragment: BaseFragment(){
 
     private fun setView(){
         setToolbar(getString(R.string.schedule))
-        viewPager.adapter = TabAdapter(childFragmentManager)
-        tabLayout.setupWithViewPager(viewPager)
+        viewPager.adapter = createAdapter()
+        viewPager.isUserInputEnabled = false
+        TabLayoutMediator(tabLayout, viewPager
+        ) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Schedule"
+                else -> tab.text = "Exam"
+            }
+        }.attach()
+    }
+
+    private fun createAdapter(): TabAdapter? {
+        return activity?.let { TabAdapter(it) }
     }
 
     companion object {

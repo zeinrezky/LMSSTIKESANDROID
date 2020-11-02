@@ -125,6 +125,26 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
         }
     }
 
+    fun getListScheduleDetail(id_course: Int, month: Int, year: Int) {
+        isLoading.value = true
+        viewModelScope.launch {
+            when (val response = repository.scheduleDetail(id_course, month, year)) {
+                is NetworkResponse.Success -> {
+                    isLoading.value = false
+                    listSession.value = response.body.data!!
+                }
+                is NetworkResponse.ServerError -> {
+                    isLoading.value = false
+                    snackbarMessage.value = response.body?.message
+                }
+                is NetworkResponse.NetworkError -> {
+                    isLoading.value = false
+                    networkError.value = response.error.message.toString()
+                }
+            }
+        }
+    }
+
 
     fun getListTopic(id_session: Int) {
         isLoading.value = true

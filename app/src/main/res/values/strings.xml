@@ -73,6 +73,7 @@
     <string name="status">Status</string>
     <string name="room">Room</string>
     <string name="location">Location</string>
+    <string name="loading">Loading..</string>
     <string name="about_app">Tentang Aplikasi\nMobile Online STIKES RS Husada adalah aplikasi pembelajaran daring dikembangkan atas penelitian dan pengembangan antara Universitas Bina Nusantara dan STIKES RS Husada Jakarta\n\nTim Pengembang Aplikasi\nTim Universitas Bina Nusantara:\nDr. Viany Utami Tjhin, S.Kom., MM\nDwi Listriana Kusumastuti, S.Si., MMSI\nRegina Eka Riantini, S.Mb., M.M.\n\nTim STIKES RS Husada Jakarta:\nEllynia, SE.,MM\nTim IT STIKES RS Husada\n\nTim Designer:\nMoch. Hari Febriansyah\n
     </string>
 </resources>

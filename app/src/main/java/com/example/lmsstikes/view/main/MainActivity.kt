@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.lmsstikes.R
+import com.example.lmsstikes.util.AppPreference
 import com.example.lmsstikes.view.dashboard.DashboardFragment
 import com.example.lmsstikes.view.menu.AllMenuFragment
 import com.example.lmsstikes.view.menu.TabFragment
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             R.id.page_2 -> {
                 val fragment = TabFragment.newInstance()
                 addFragment(fragment)
+                AppPreference.putShown(false)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.page_3 -> {

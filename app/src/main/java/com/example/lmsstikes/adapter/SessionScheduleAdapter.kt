@@ -1,18 +1,16 @@
 package com.example.lmsstikes.adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
-import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Session
+import com.example.lmsstikes.util.AppPreference
 
 class SessionScheduleAdapter(context : Context, list: ArrayList<Session>)
     : RecyclerView.Adapter<SessionScheduleAdapter.SessionScheduleViewHolder>() {
@@ -36,15 +34,20 @@ class SessionScheduleAdapter(context : Context, list: ArrayList<Session>)
         holder.type.text = itemList[position].type
         holder.name.text = itemList[position].name
 
+        AppPreference.putIdCourse(itemList[position].id_course.toInt())
+
         when (itemList[position].type) {
             "VC" -> holder.indicator.apply {
                 backgroundTintList = ContextCompat.getColorStateList(context, R.color.colorPrimary)
             }
-            "OL" -> holder.indicator.apply {
+            "ONSITE" -> holder.indicator.apply {
                 backgroundTintList = ContextCompat.getColorStateList(context, R.color.colorBlue)
             }
             "EXAM" -> holder.indicator.apply {
                 backgroundTintList = ContextCompat.getColorStateList(context, R.color.colorOrange)
+            }
+            "EVENTS" -> holder.indicator.apply {
+                backgroundTintList = ContextCompat.getColorStateList(context, R.color.colorYellow)
             }
         }
 

@@ -121,7 +121,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/download_text"
-                app:layout_constraintBottom_toBottomOf="@id/ic_marker"/>
+                app:layout_constraintBottom_toBottomOf="@id/ic_icon"/>
 
             <TextView
                 android:id="@+id/download_text"
@@ -176,7 +176,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/indicator"
                 app:layout_constraintTop_toBottomOf="@id/download_text" />
-            <View
+            <ImageView
                 android:id="@+id/indicator"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
@@ -185,30 +185,15 @@
                 android:backgroundTint="@android:color/holo_blue_light"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/download_text"/>
-
-
-
-
             <ImageView
-                android:id="@+id/ic_marker"
+                android:id="@+id/ic_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_x1"
-                android:src="@drawable/ic_marker"
+                android:src="@drawable/ic_download"
                 app:layout_constraintStart_toStartOf="@id/date"
                 app:layout_constraintTop_toBottomOf="@id/date"
                 app:tint="@android:color/darker_gray" />
-
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_x1"
-                android:text="@string/total_absence"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/ic_marker"
-                app:layout_constraintTop_toBottomOf="@id/date" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

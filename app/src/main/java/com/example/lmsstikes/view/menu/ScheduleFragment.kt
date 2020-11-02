@@ -11,6 +11,7 @@ import com.example.lmsstikes.adapter.SessionScheduleAdapter
 import com.example.lmsstikes.databinding.FragmentScheduleBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Session
+import com.example.lmsstikes.util.AppPreference
 import com.example.lmsstikes.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.fragment_schedule.view_parent
@@ -58,18 +59,18 @@ class ScheduleFragment: BaseFragment(){
                 showDialog()
             })
         }
+
+        setView()
+    }
+
+    private fun setView(){
         if (arguments?.getBoolean(ARG_IS_TOOLBAR_VISIBLE)!!){
             toolbar.visibility = View.VISIBLE
         } else {
             toolbar.visibility = View.GONE
         }
-        setView()
-    }
-
-    private fun setView(){
         setToolbar(getString(R.string.schedule))
         setNavigation()
-
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
         val c = Calendar.getInstance()
 
@@ -80,11 +81,16 @@ class ScheduleFragment: BaseFragment(){
         viewModel.date.value = UtilityHelper.getSdfDMY(currentDate)
         viewModel.getListSessionSchedule(day, month + 1, year)
 
+        AppPreference.putMonth(month + 1)
+        AppPreference.putYear(year)
+
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
 
             val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
             viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
             viewModel.getListSessionSchedule(dayOfMonth, month + 1, year)
+            AppPreference.putMonth(month + 1)
+            AppPreference.putYear(year)
         }
     }
 

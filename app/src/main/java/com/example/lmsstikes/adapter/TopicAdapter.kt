@@ -11,6 +11,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
 import com.example.lmsstikes.model.Topic
+import com.example.lmsstikes.util.Constant
+import com.example.lmsstikes.view.main.WebViewActivity
 
 
 class TopicAdapter(context : Context, list: ArrayList<Topic>)
@@ -45,9 +47,9 @@ class TopicAdapter(context : Context, list: ArrayList<Topic>)
         if (itemList[position].link != null){
             holder.link.visibility = View.VISIBLE
             holder.link.setOnClickListener {
-                val browserIntent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse(itemList[position].link))
-                contexts.startActivity(browserIntent)
+                val intent = Intent(contexts, WebViewActivity::class.java)
+                intent.putExtra(Constant.Header.URL, itemList[position].link)
+                contexts.startActivity(intent)
             }
         }
     }

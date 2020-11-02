@@ -14,6 +14,12 @@ class AppPreference {
         private const val a_login = "a_login"
         private const val a_token = "a_token"
         private const val a_thread = "a_thread"
+        private const val a_shown = "a_shown"
+        private const val a_id_course = "a_id_course"
+        private const val a_month = "a_month"
+        private const val a_year = "a_year"
+
+
 
         fun deleteAll() {
             Hawk.delete(a_login_data)
@@ -21,6 +27,11 @@ class AppPreference {
             Hawk.delete(a_login)
             Hawk.delete(a_token)
             Hawk.delete(a_thread)
+            Hawk.delete(a_shown)
+            Hawk.delete(a_id_course)
+            Hawk.delete(a_month)
+            Hawk.delete(a_year)
+
         }
 
         fun putLoginData(value: Profile) {
@@ -63,6 +74,34 @@ class AppPreference {
         fun getThreadData(): Thread.ThreadList {
             val type = object : TypeToken<Thread.ThreadList>() {}.type
             return Gson().fromJson<Thread.ThreadList>(Hawk.get(a_thread, ""), type)
+        }
+        fun putShown(value: Boolean) {
+            Hawk.put(a_shown, value)
+        }
+
+        fun isShown(): Boolean {
+            return (Hawk.get(a_shown, false))
+        }
+        fun putIdCourse(value: Int) {
+            Hawk.put(a_id_course, value)
+        }
+
+        fun getIdCourse(): Int {
+            return (Hawk.get(a_id_course, 0))
+        }
+        fun putMonth(value: Int) {
+            Hawk.put(a_month, value)
+        }
+
+        fun getMonth(): Int {
+            return (Hawk.get(a_month, 0))
+        }
+        fun putYear(value: Int) {
+            Hawk.put(a_year, value)
+        }
+
+        fun getYear(): Int {
+            return (Hawk.get(a_year, 0))
         }
     }
 }

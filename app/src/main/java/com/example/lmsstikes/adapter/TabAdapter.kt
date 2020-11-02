@@ -1,31 +1,25 @@
 package com.example.lmsstikes.adapter
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import com.example.lmsstikes.view.menu.CourseFragment
+import androidx.fragment.app.*
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.lmsstikes.view.menu.ExamFragment
 import com.example.lmsstikes.view.menu.ScheduleFragment
 
-class TabAdapter(fm: FragmentManager): FragmentPagerAdapter(fm){
+internal class TabAdapter(fragmentActivity: FragmentActivity) :
+    FragmentStateAdapter(fragmentActivity) {
+    override fun createFragment(position: Int): Fragment {
 
-    private val pages = listOf(
-        ScheduleFragment.newInstance(false),
-        ExamFragment.newInstance(false)
-    )
-
-    override fun getItem(position: Int): Fragment {
-        return pages[position]
-    }
-
-    override fun getCount(): Int {
-        return pages.size
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
         return when(position){
-            0 -> "Schedule"
-            else -> "Exam"
+            0 -> ScheduleFragment.newInstance(false)
+            else -> ExamFragment.newInstance(false)
         }
+    }
+
+    override fun getItemCount(): Int {
+        return TAB_COUNT
+    }
+
+    companion object {
+        private const val TAB_COUNT = 2
     }
 }
