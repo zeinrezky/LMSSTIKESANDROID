@@ -26,7 +26,9 @@ data class Dashboard (
         @SerializedName("content")
         val content: String,
         @SerializedName("date")
-        val date: String
+        val date: String,
+        @SerializedName("link")
+        val link: String
     )
     data class Announcement (
         @SerializedName("id_announcement")

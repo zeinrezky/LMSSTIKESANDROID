@@ -1,5 +1,6 @@
 package com.example.lmsstikes.view.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,9 @@ import com.example.lmsstikes.adapter.*
 import com.example.lmsstikes.databinding.FragmentKnowledgeBinding
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Dashboard
+import com.example.lmsstikes.util.Constant
 import com.example.lmsstikes.view.base.BaseFragment
+import com.example.lmsstikes.view.main.WebViewActivity
 import kotlinx.android.synthetic.main.fragment_knowledge.*
 import org.koin.android.ext.android.inject
 
@@ -73,6 +76,8 @@ class KnowledgeFragment : BaseFragment(), KnowledgeAdapter.Listener{
     }
 
     override fun onItemClicked(data: Dashboard.Knowledge) {
-        addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
+        val intent = Intent(context, WebViewActivity::class.java)
+        intent.putExtra(Constant.Header.URL, Constant.PDF_URL + data.link)
+        context?.startActivity(intent)
     }
 }

@@ -23,7 +23,7 @@
         android:layout_marginTop="@dimen/space_x3"
         android:textSize="20sp"
         android:maxLines="1"
-        android:maxLength="36"
+        android:maxLength="32"
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:text="@string/app_name"/>

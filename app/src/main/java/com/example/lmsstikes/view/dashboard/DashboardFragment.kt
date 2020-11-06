@@ -20,6 +20,7 @@ import com.example.lmsstikes.util.AppPreference
 import com.example.lmsstikes.util.Constant
 import com.example.lmsstikes.view.base.BaseFragment
 import com.example.lmsstikes.view.login.LoginActivity
+import com.example.lmsstikes.view.main.WebViewActivity
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import org.koin.android.ext.android.inject
 
@@ -148,7 +149,9 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
     }
 
     override fun onItemClicked(data: Dashboard.Knowledge) {
-        addFragment(DetailFragment.newInstance(data.image, data.title, data.date, data.content))
+        val intent = Intent(context, WebViewActivity::class.java)
+        intent.putExtra(Constant.Header.URL, Constant.PDF_URL + data.link)
+        context?.startActivity(intent)
     }
 
     override fun onItemClicked(data: Dashboard.About) {
