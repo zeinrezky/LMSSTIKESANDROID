@@ -4,7 +4,7 @@ object Constant {
 
 
     const val BASE_URL = "http://cms.stikesrshusada.ac.id/api/"
-    const val PDF_URL = "http://docs.google.com/gview?embedded=true&url="
+    const val PDF_URL = "https://docs.google.com/viewer?embedded=true&url="
 
     object Role {
         const val DOSEN = "DOSEN"

@@ -39,7 +39,7 @@ class TopicAdapter(context : Context, list: ArrayList<Topic>)
             holder.attachment.visibility = View.VISIBLE
             holder.attachment.setOnClickListener {
                 val intent = Intent(contexts, WebViewActivity::class.java)
-                intent.putExtra(Constant.Header.URL, Constant.PDF_URL + itemList[position].link)
+                intent.putExtra(Constant.Header.URL, Constant.PDF_URL + itemList[position].attachment)
                 contexts.startActivity(intent)
             }
         }

@@ -26,6 +26,7 @@ class WebViewActivity : BaseActivity() {
         setToolbar(getString(R.string.loading))
         web_view.apply {
             settings.javaScriptEnabled = true
+            Log.d("url", intent.getStringExtra(Constant.Header.URL)!!)
             loadUrl(intent.getStringExtra(Constant.Header.URL))
             webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView, url: String) {
