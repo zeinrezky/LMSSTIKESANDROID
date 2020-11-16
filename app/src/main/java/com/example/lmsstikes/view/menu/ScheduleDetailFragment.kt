@@ -76,7 +76,6 @@ class ScheduleDetailFragment: BaseFragment(){
         setNavigation()
         viewModel.getListSchedule()
         viewModel.getListScheduleDetail(
-            3,
             AppPreference.getMonth(),
             AppPreference.getYear()
         )
@@ -103,7 +102,6 @@ class ScheduleDetailFragment: BaseFragment(){
         listView.adapter = ListScheduleAdapter(list)
         listView.setOnItemClickListener { parent, view, position, id ->
             viewModel.getListScheduleDetail(
-                3,
                 AppPreference.getMonth(),
                 list[position].name.substring(0, 4).toInt()
             )

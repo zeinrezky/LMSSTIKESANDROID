@@ -125,10 +125,10 @@ class MenuViewModel(private val repository: UserRepository) : BaseViewModel() {
         }
     }
 
-    fun getListScheduleDetail(id_course: Int, month: Int, year: Int) {
+    fun getListScheduleDetail(month: Int, year: Int) {
         isLoading.value = true
         viewModelScope.launch {
-            when (val response = repository.scheduleDetail(id_course, month, year)) {
+            when (val response = repository.scheduleDetail(month, year)) {
                 is NetworkResponse.Success -> {
                     isLoading.value = false
                     listSession.value = response.body.data!!
