@@ -3,7 +3,7 @@ package com.example.lmsstikes.util
 object Constant {
 
 
-    const val BASE_URL = "http://lms-api.backendapi.space/"
+    const val BASE_URL = "http://api.stikes-apps.space/"
     const val PDF_URL = "https://docs.google.com/viewer?embedded=true&url="
 
     object Role {
