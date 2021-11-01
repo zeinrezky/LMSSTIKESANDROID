@@ -24,6 +24,7 @@
                 android:paddingEnd="@dimen/space_x2"
                 android:paddingTop="@dimen/space_x2"
                 android:text="@string/course"
+                android:visibility="gone"
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />

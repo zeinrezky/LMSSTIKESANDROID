@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -76,8 +77,15 @@ class KnowledgeFragment : BaseFragment(), KnowledgeAdapter.Listener{
     }
 
     override fun onItemClicked(data: Dashboard.Knowledge) {
-        val intent = Intent(context, WebViewActivity::class.java)
-        intent.putExtra(Constant.Header.URL, Constant.PDF_URL + data.link)
-        context?.startActivity(intent)
+
+        if (data.link.isEmpty()){
+            Toast.makeText(context, "Konten tidak tersedia", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra(Constant.Header.URL, Constant.PDF_URL + data.link)
+            context?.startActivity(intent)
+        }
+
     }
 }
