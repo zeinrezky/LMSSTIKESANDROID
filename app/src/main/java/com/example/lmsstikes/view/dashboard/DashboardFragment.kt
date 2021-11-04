@@ -149,9 +149,14 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
     }
 
     override fun onItemClicked(data: Dashboard.Knowledge) {
-        val intent = Intent(context, WebViewActivity::class.java)
-        intent.putExtra(Constant.Header.URL, Constant.PDF_URL + data.link)
-        context?.startActivity(intent)
+        if (data.link.isEmpty()){
+            Toast.makeText(context, "Konten tidak tersedia", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra(Constant.Header.URL, Constant.PDF_URL + data.link)
+            context?.startActivity(intent)
+        }
     }
 
     override fun onItemClicked(data: Dashboard.About) {
