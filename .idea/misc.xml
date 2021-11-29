@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/activity_web_view.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/dialog_new_thread.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/dialog_schedule.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/fragment_attendance.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/fragment_course.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/fragment_knowledge.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/fragment_whats_on.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/item_about.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_announcement.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_attendance.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_campus_dir.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_course.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_exam.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_forum_session.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_knowledge.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_schedule.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_schedule_detail.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_score.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_session.xml" value="0.37182971014492755" />
+        <entry key="app/src/main/res/layout/item_session_schedule.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/item_thread_list.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/item_thread_reply.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/item_topic.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/item_whats_on.xml" value="0.37182971014492755" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
