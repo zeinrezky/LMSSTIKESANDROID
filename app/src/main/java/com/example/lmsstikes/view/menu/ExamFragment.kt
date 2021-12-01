@@ -59,13 +59,16 @@ class ExamFragment: BaseFragment(){
                     }
                 }
             })
-            listSchedule.observe(viewLifecycleOwner, Observer {
-                if (isShown) {
-                    showDialog(it)
-                } else {
+            listSchedule.observe(viewLifecycleOwner, Observer { list ->
+                val listSchedule = list.filter {
+                    it.status == "AKTIF"
+                }
+                if (isShown)
+                    showDialog(listSchedule as ArrayList<Schedule>)
+                else {
                     isShown = true
-                    viewModel.period.value = it[it.lastIndex].name
-                    viewModel.getListExam(it[it.lastIndex].id)
+                    viewModel.period.value = listSchedule[listSchedule.lastIndex].name
+                    viewModel.getListExam(listSchedule[listSchedule.lastIndex].id)
                 }
             })
             listExam.observe(viewLifecycleOwner, Observer {

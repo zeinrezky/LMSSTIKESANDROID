@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lmsstikes.R
 import com.example.lmsstikes.helper.UtilityHelper
 import com.example.lmsstikes.model.Exam
+import com.example.lmsstikes.util.AppPreference
+import com.example.lmsstikes.util.Constant
 
 class ExamAdapter(context : Context, list: ArrayList<Exam>)
     : RecyclerView.Adapter<ExamAdapter.ExamViewHolder>() {
@@ -29,12 +31,17 @@ class ExamAdapter(context : Context, list: ArrayList<Exam>)
 
         holder.code.text = itemList[position].code
         holder.name.text = itemList[position].name
-        holder.desc.text = itemList[position].desc
         holder.examClass.text = itemList[position].exam_class
         holder.note.text = itemList[position].note
         holder.download.text = UtilityHelper.getSdfDayMonthYearTime(itemList[position].download)
         holder.deadline.text = UtilityHelper.getSdfDayMonthYearTime(itemList[position].deadline)
-        holder.status.text = itemList[position].status
+        if (AppPreference.getLoginData().role == Constant.Role.DOSEN){
+            holder.status.visibility = View.GONE
+            holder.statusText.visibility = View.GONE
+        } else {
+            holder.status.text = itemList[position].status
+        }
+
         holder.room.text = itemList[position].room
         holder.location.text = itemList[position].location
 
@@ -43,7 +50,6 @@ class ExamAdapter(context : Context, list: ArrayList<Exam>)
     inner class ExamViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val code: TextView = itemView.findViewById(R.id.code)
         val name: TextView = itemView.findViewById(R.id.name)
-        val desc: TextView = itemView.findViewById(R.id.desc)
         val examClass: TextView = itemView.findViewById(R.id.exam_class)
         val note: TextView = itemView.findViewById(R.id.note)
         val download: TextView = itemView.findViewById(R.id.download)
@@ -51,6 +57,7 @@ class ExamAdapter(context : Context, list: ArrayList<Exam>)
         val status: TextView = itemView.findViewById(R.id.status)
         val room: TextView = itemView.findViewById(R.id.room)
         val location: TextView = itemView.findViewById(R.id.location)
+        val statusText: TextView = itemView.findViewById(R.id.status_text)
 
     }
 

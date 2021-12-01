@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/space_x1"
         android:layout_marginBottom="@dimen/space_x1">
 
         <ImageView
@@ -35,15 +36,15 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_x1"
             android:layout_marginTop="@dimen/space_x1_half"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:text="@string/course"
             app:layout_constraintStart_toEndOf="@id/type"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
             android:id="@+id/ic_clock"
@@ -51,7 +52,7 @@
             android:layout_height="@dimen/space_x2"
             android:src="@drawable/ic_clock"
             app:layout_constraintStart_toStartOf="@id/type"
-            app:layout_constraintTop_toBottomOf="@id/type"
+            app:layout_constraintTop_toBottomOf="@id/name"
             app:tint="@android:color/darker_gray" />
 
         <TextView
@@ -62,7 +63,7 @@
             android:layout_marginStart="@dimen/space_half"
             android:text="@string/course"
             app:layout_constraintStart_toEndOf="@id/ic_clock"
-            app:layout_constraintTop_toBottomOf="@id/type" />
+            app:layout_constraintTop_toBottomOf="@id/name" />
 
         <TextView
             android:id="@+id/end_date"
@@ -72,7 +73,7 @@
             android:layout_marginStart="@dimen/space_x1"
             android:text="@string/course"
             app:layout_constraintStart_toEndOf="@id/start_date"
-            app:layout_constraintTop_toBottomOf="@id/type" />
+            app:layout_constraintTop_toBottomOf="@id/name" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,5 +8,7 @@ data class Schedule (
     @SerializedName("name")
     val name: String,
     @SerializedName("desc")
-    val desc: String
+    val desc: String,
+    @SerializedName("status")
+    val status: String
 )

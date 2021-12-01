@@ -50,13 +50,16 @@ class ScoreFragment: BaseFragment(){
                     else { hideWaitingDialog() }
                 }
             })
-            listSchedule.observe(viewLifecycleOwner, Observer {
+            listSchedule.observe(viewLifecycleOwner, Observer { list ->
+                val listSchedule = list.filter {
+                    it.status == "AKTIF"
+                }
                 if (isShown)
-                    showDialog(it)
+                    showDialog(listSchedule as ArrayList<Schedule>)
                 else {
                     isShown = true
-                    viewModel.period.value = it[it.lastIndex].name
-                    viewModel.getListScore(it[it.lastIndex].id)
+                    viewModel.period.value = listSchedule[listSchedule.lastIndex].name
+                    viewModel.getListScore(listSchedule[listSchedule.lastIndex].id)
                 }
             })
             listScore.observe(viewLifecycleOwner, Observer {

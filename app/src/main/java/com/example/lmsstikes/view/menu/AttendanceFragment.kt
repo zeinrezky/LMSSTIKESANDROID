@@ -50,13 +50,16 @@ class AttendanceFragment: BaseFragment(){
                     else { hideWaitingDialog() }
                 }
             })
-            listSchedule.observe(viewLifecycleOwner, Observer {
+            listSchedule.observe(viewLifecycleOwner, Observer { list ->
+                val listSchedule = list.filter {
+                    it.status == "AKTIF"
+                }
                 if (isShown)
-                    showDialog(it)
+                    showDialog(listSchedule as ArrayList<Schedule>)
                 else {
                     isShown = true
-                    viewModel.period.value = it[it.lastIndex].name
-                    viewModel.getListAttendance(it[it.lastIndex].id)
+                    viewModel.period.value = listSchedule[listSchedule.lastIndex].name
+                    viewModel.getListAttendance(listSchedule[listSchedule.lastIndex].id)
                 }
             })
             listAttendance.observe(viewLifecycleOwner, Observer {

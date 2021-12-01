@@ -14,6 +14,8 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.37182971014492755" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.26811594202898553" />
         <entry key="app/src/main/res/layout/fragment_knowledge.xml" value="0.26811594202898553" />
+        <entry key="app/src/main/res/layout/fragment_schedule.xml" value="0.259963768115942" />
+        <entry key="app/src/main/res/layout/fragment_schedule_detail.xml" value="0.259963768115942" />
         <entry key="app/src/main/res/layout/fragment_whats_on.xml" value="0.26811594202898553" />
         <entry key="app/src/main/res/layout/item_about.xml" value="0.37182971014492755" />
         <entry key="app/src/main/res/layout/item_announcement.xml" value="0.37182971014492755" />

@@ -53,12 +53,19 @@ class ScheduleDetailFragment: BaseFragment(){
                     else { hideWaitingDialog() }
                 }
             })
-            listSchedule.observe(viewLifecycleOwner, Observer {
+            listSchedule.observe(viewLifecycleOwner, Observer { list ->
+                val listSchedule = list.filter {
+                    it.status == "AKTIF"
+                }
                 if (isShown)
-                    showDialog(it)
+                    showDialog(listSchedule as ArrayList<Schedule>)
                 else {
                     isShown = true
-                    viewModel.period.value = it[it.lastIndex].name
+                    viewModel.period.value = listSchedule[listSchedule.lastIndex].name
+                    viewModel.getListScheduleDetail(
+                        AppPreference.getMonth(),
+                        listSchedule[listSchedule.lastIndex].name.substring(0, 4).toInt()
+                    )
                 }
             })
             listSession.observe(viewLifecycleOwner, Observer {

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.lmsstikes.R
 import com.example.lmsstikes.adapter.*
@@ -65,7 +66,7 @@ class KnowledgeFragment : BaseFragment(), KnowledgeAdapter.Listener{
     }
 
     private fun setListKnowledge(list: ArrayList<Dashboard.Knowledge>) {
-        rv_knowledge.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        rv_knowledge.layoutManager = LinearLayoutManager(context)
         rv_knowledge.adapter = activity?.let {
             KnowledgeAdapter(it, list, this)
         }
