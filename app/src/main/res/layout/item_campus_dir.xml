@@ -30,7 +30,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:background="@color/cardview_shadow_start_color"
-            app:layout_constraintBottom_toBottomOf="@id/image"
+            app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

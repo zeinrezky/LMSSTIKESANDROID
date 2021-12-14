@@ -42,14 +42,15 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="@string/course"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/code" />
+            app:layout_constraintTop_toBottomOf="@id/code"
+            app:layout_constraintEnd_toStartOf="@id/attachment"/>
         <ImageView
             android:id="@+id/attachment"
             android:layout_width="wrap_content"
