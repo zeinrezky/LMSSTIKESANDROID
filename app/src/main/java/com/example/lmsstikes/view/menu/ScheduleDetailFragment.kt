@@ -68,7 +68,7 @@ class ScheduleDetailFragment: BaseFragment(){
                     )
                 }
             })
-            listSession.observe(viewLifecycleOwner, Observer {
+            listSessionDetail.observe(viewLifecycleOwner, Observer {
                 setListSession(it)
             })
             clickPeriod.observe(viewLifecycleOwner, Observer {

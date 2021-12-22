@@ -1,8 +1,11 @@
 package com.example.lmsstikes.view.menu
 
 import android.app.Dialog
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.*
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,17 +22,24 @@ import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.*
+import com.example.lmsstikes.util.EventDecorator
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 
 class ScheduleFragment: BaseFragment(){
 
     private lateinit var binding: FragmentScheduleBinding
     private val viewModel by inject<MenuViewModel>()
+    private val dots = mutableListOf<CalendarDay>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_schedule, container, false)
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
@@ -54,10 +64,14 @@ class ScheduleFragment: BaseFragment(){
             listSession.observe(viewLifecycleOwner, Observer {
                 setListSession(it)
             })
+            listSessionDetail.observe(viewLifecycleOwner, Observer {
+                setListSessionDetail(it)
+            })
 
             clickInfo.observe(viewLifecycleOwner, Observer {
                 showDialog()
             })
+
         }
 
         setView()
@@ -84,14 +98,44 @@ class ScheduleFragment: BaseFragment(){
         AppPreference.putMonth(month + 1)
         AppPreference.putYear(year)
 
-        calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
-
-            val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
+        calendar.setOnDateChangedListener { widget, date, selected ->
+            val selectedDate: String = sdf.format(Date(date.year - 1900, date.month, date.day))
             viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
-            viewModel.getListSessionSchedule(dayOfMonth, month + 1, year)
-            AppPreference.putMonth(month + 1)
-            AppPreference.putYear(year)
+            viewModel.getListSessionSchedule(date.day, date.month, date.year)
+            AppPreference.putMonth(date.month)
+            AppPreference.putYear(date.year)
         }
+        calendar.setOnMonthChangedListener { widget, date ->
+            AppPreference.putMonth(date.month)
+            AppPreference.putYear(date.year)
+            viewModel.getListScheduleDetail(
+                AppPreference.getMonth(),
+                AppPreference.getYear()
+            )
+        }
+
+        viewModel.getListScheduleDetail(
+            AppPreference.getMonth(),
+            AppPreference.getYear()
+        )
+
+//        calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
+//
+//            val selectedDate: String = sdf.format(Date(year - 1900, month, dayOfMonth))
+//            viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
+//            viewModel.getListSessionSchedule(dayOfMonth, month + 1, year)
+//            AppPreference.putMonth(month + 1)
+//            AppPreference.putYear(year)
+//        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setListSessionDetail(list: ArrayList<Session>) {
+        for (day in list){
+            val localDate = LocalDate.parse(day.date_start, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            dots.add(CalendarDay.from(localDate.year, localDate.monthValue, localDate.dayOfMonth))
+        }
+        calendar.addDecorator(EventDecorator(Color.parseColor("#ff33b5e5"), dots))
     }
 
     private fun setListSession(list: ArrayList<Session>) {

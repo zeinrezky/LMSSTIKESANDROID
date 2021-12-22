@@ -81,6 +81,7 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
     implementation 'jp.co.recruit_mp:LightCalendarView:1.0.1'
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
