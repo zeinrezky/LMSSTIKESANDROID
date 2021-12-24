@@ -97,7 +97,7 @@ class ScheduleFragment: BaseFragment(){
 
         AppPreference.putMonth(month + 1)
         AppPreference.putYear(year)
-
+        calendar.setDateSelected(CalendarDay.today(), true)
         calendar.setOnDateChangedListener { widget, date, selected ->
             val selectedDate: String = sdf.format(Date(date.year - 1900, date.month, date.day))
             viewModel.date.value = UtilityHelper.getSdfDMY(selectedDate)
