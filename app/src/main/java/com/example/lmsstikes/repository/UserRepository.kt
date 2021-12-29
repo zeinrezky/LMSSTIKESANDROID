@@ -16,7 +16,7 @@ interface UserService {
                      @Query("campus_about") campus_about: Int): NetworkResponse<ResponseSuccess<Dashboard>, ResponseError>
     @GET("knowledge/list?page=1&perPage=10&sortDir=ASC&sortBy=id_knowledge")
     suspend fun knowledge(): NetworkResponse<ResponseSuccess<Dashboard.KnowledgeList>, ResponseError>
-    @GET("whatson/list?page=1&perPage=10&sortDir=ASC&sortBy=id_whatson")
+    @GET("whatson/list?page=1&perPage=10&sortDir=DESC&sortBy=id_whatson")
     suspend fun whatsOn(): NetworkResponse<ResponseSuccess<Dashboard.WhatsOnList>, ResponseError>
     @GET("schedule")
     suspend fun schedule(): NetworkResponse<ResponseSuccess<ArrayList<Schedule>>, ResponseError>

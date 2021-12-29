@@ -114,7 +114,7 @@ class DashboardFragment : BaseFragment(), WhatsOnAdapter.Listener, KnowledgeAdap
     private fun setListWhatsOn(list: ArrayList<Dashboard.WhatsOn>) {
         rv_whats_on.layoutManager = LinearLayoutManager(context)
         rv_whats_on.adapter = activity?.let {
-            WhatsOnAdapter(it, list.reversed() as ArrayList<Dashboard.WhatsOn>, this)
+            WhatsOnAdapter(it, list, this)
         }
     }
     private fun setListCampusDir(list: ArrayList<Dashboard.CampusDir>) {
